@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Spinner } from "reactstrap";
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 
 export const UserContext = createContext();
@@ -24,7 +24,7 @@ export function UserProvider(props) {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, pw)
-      .then((signInResponse) => getUser(signInResponse.user.uid))
+      .then((signInResponse) => getUserById(signInResponse.user.uid))
       .then((user) => {
         sessionStorage.setItem("user", JSON.stringify(user));
         setIsLoggedIn(true);

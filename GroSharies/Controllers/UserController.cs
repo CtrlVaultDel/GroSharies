@@ -30,10 +30,8 @@ namespace GroSharies.Controllers
         [HttpPost]
         public IActionResult Register(User user)
         {
-            // All newly registered users start out as a "user" user type (i.e. they are not admins)
             _userRepository.Add(user);
-            return CreatedAtAction(
-                nameof(GetByFirebaseId), new { firebaseId = user.FirebaseId }, user);
+            return CreatedAtAction(nameof(GetByFirebaseId), new { firebaseId = user.FirebaseId }, user);
         }
     }
 }

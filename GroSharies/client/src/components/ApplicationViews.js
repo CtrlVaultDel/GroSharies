@@ -10,6 +10,7 @@ export default function ApplicationViews() {
   return (
     <main>
       <Switch>
+
         <Route path="/login">
           <Login />
         </Route>
@@ -19,7 +20,7 @@ export default function ApplicationViews() {
         </Route>
 
         <Route exact path="/user/:userId(\d+)">
-          {isLoggedIn ? <UserDetail /> : <Redirect to="/login" />}
+          {/* {isLoggedIn ? <ComponentHere /> : <Redirect to="/login" />} */}
         </Route>
 
       </Switch>
