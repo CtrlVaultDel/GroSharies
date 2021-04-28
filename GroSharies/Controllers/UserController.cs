@@ -17,7 +17,7 @@ namespace GroSharies.Controllers
         }
 
         [HttpGet("{firebaseUserId}")]
-        public IActionResult GetByFirebaseUserId(string firebaseUserId)
+        public IActionResult GetByFirebaseId(string firebaseUserId)
         {
             var userProfile = _userRepository.GetByFirebaseId(firebaseUserId);
             if (userProfile == null)
@@ -33,7 +33,7 @@ namespace GroSharies.Controllers
             // All newly registered users start out as a "user" user type (i.e. they are not admins)
             _userRepository.Add(user);
             return CreatedAtAction(
-                nameof(GetByFirebaseUserId), new { firebaseUserId = user.FirebaseId }, user);
+                nameof(GetByFirebaseId), new { firebaseId = user.FirebaseId }, user);
         }
     }
 }
