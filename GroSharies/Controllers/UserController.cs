@@ -19,12 +19,12 @@ namespace GroSharies.Controllers
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetByFirebaseId(string firebaseUserId)
         {
-            var userProfile = _userRepository.GetByFirebaseId(firebaseUserId);
-            if (userProfile == null)
+            var user = _userRepository.GetByFirebaseId(firebaseUserId);
+            if (user == null)
             {
                 return NotFound();
             }
-            return Ok(userProfile);
+            return Ok(user);
         }
 
         [HttpPost]
