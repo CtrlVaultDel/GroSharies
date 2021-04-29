@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { UserContext } from "../providers/UserProvider";
 import Login from "./Login";
 import Register from "./Register";
+import HouseholdList from "./Households/HouseholdList";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserContext);
@@ -22,8 +23,8 @@ export default function ApplicationViews() {
         </Route>
 
         {/* Households Page (List) */}
-        <Route path="/households" exact>
-          {isLoggedin ? <HouseholdList /> : <Redirect to="/Login" />}
+        <Route path="/household" exact>
+          {isLoggedIn ? <HouseholdList /> : <Redirect to="/Login" />}
         </Route>
 
       </Switch>

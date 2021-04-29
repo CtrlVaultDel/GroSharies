@@ -19,7 +19,7 @@ namespace GroSharies.Repositories
                     cmd.CommandText = @"
                         SELECT h.Id AS HouseholdId, h.Name as HouseholdName
                         FROM Household h
-                        JOIN HouseholdUser hu ON h.Id == hu.HouseholdId
+                        JOIN HouseholdUser hu ON h.Id = hu.HouseholdId
                         WHERE hu.UserId = @UserId";
 
                     DbUtils.AddParameter(cmd, "@UserId", userId);
