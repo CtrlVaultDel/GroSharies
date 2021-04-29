@@ -21,5 +21,13 @@ namespace GroSharies.Models
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
+
+        public string DisplayName
+        {
+            get
+            {
+                return this.FirstName + " " + this.LastName;
+            }
+        }
     }
 }
