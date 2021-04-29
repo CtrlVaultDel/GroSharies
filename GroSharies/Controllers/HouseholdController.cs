@@ -47,7 +47,6 @@ namespace GroSharies.Controllers
 
             var householdDetail = _householdRepository.GetById(householdId);          
             return Ok(householdDetail);
-            
         }
 
         [HttpPost]
