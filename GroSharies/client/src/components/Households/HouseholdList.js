@@ -14,9 +14,11 @@ const HouseholdList = () => {
 
   return (
     <Container>
-        <Link to="/households/add" className="nav-link">
-            New Household
-        </Link> 
+        <Row className="justify-content-md-center">
+            <Link to="/household/add" className="nav-link">
+                New Household
+            </Link> 
+        </Row>
         <Row>
             {households.map((h) => (
                 <Col key={h.id} md="4"><Household household={h} /></Col>

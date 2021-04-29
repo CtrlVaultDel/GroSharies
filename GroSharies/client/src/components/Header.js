@@ -54,6 +54,7 @@ export default function Header() {
               <>
                 <NavItem>
                   <a
+                    href="/login"
                     aria-current="page"
                     className="nav-link"
                     style={{ cursor: "pointer" }}
