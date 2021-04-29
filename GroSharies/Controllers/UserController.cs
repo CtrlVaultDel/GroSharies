@@ -16,10 +16,10 @@ namespace GroSharies.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("{firebaseUserId}")]
-        public IActionResult GetByFirebaseId(string firebaseUserId)
+        [HttpGet("{firebaseId}")]
+        public IActionResult GetByFirebaseId(string firebaseId)
         {
-            var user = _userRepository.GetByFirebaseId(firebaseUserId);
+            var user = _userRepository.GetByFirebaseId(firebaseId);
             if (user == null)
             {
                 return NotFound();

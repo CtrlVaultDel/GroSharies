@@ -24,7 +24,7 @@ export function UserProvider(props) {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, pw)
-      .then((signInResponse) => getUserById(signInResponse.user.uid))
+      .then((signInResponse) => getUserProfile(signInResponse.user.uid))
       .then((user) => {
         sessionStorage.setItem("user", JSON.stringify(user));
         setIsLoggedIn(true);
@@ -56,6 +56,17 @@ export function UserProvider(props) {
   };
 
   const getToken = () => firebase.auth().currentUser.getIdToken();
+
+  const getUserProfile = (firebaseUserId) => {
+    return getToken().then((token) =>
+      fetch(`${apiUrl}/${firebaseUserId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((resp) => resp.json())
+    );
+  };
 
   const saveUser = (user) => {
     return getToken().then((token) =>

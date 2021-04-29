@@ -50,9 +50,10 @@ namespace GroSharies.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO User (FirebaseId, Email, FirstName, LastName)
-                                        OUTPUT INSERTED.Id
-                                        VALUES (@FirebaseUserId, @Email, @FirstName, @LastName)";
+                    cmd.CommandText = @"INSERT INTO [User] (FirebaseId, Email, FirstName, LastName)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@FirebaseId, @Email, @FirstName, @LastName)";
+
                     DbUtils.AddParameter(cmd, "@FirebaseId", user.FirebaseId);
                     DbUtils.AddParameter(cmd, "@Email", user.Email);
                     DbUtils.AddParameter(cmd, "@FirstName", user.FirstName);

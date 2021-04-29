@@ -4,7 +4,7 @@ namespace GroSharies.Repositories
 {
     public interface IUserRepository
     {
-        void Add(User user);
         User GetByFirebaseId(string firebaseId);
+        void Add(User user);
     }
 }
