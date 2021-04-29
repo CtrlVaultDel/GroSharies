@@ -19,7 +19,7 @@ export default function Header() {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand tag={RRNavLink} to="/">
+        <NavbarBrand tag={RRNavLink} to="/household">
           GroSharies
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -30,7 +30,7 @@ export default function Header() {
           <Nav className="mr-auto" navbar>
             {isLoggedIn && (
               <NavItem>
-                <NavLink tag={RRNavLink} to="/tag">
+                <NavLink tag={RRNavLink} to="/household">
                   Households
                 </NavLink>
               </NavItem>
@@ -54,6 +54,7 @@ export default function Header() {
               <>
                 <NavItem>
                   <a
+                    href="/login"
                     aria-current="page"
                     className="nav-link"
                     style={{ cursor: "pointer" }}

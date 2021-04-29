@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using GroSharies.Models;
 using GroSharies.Repositories;
+using System.Security.Claims;
 
 namespace GroSharies.Controllers
 {
@@ -32,6 +33,13 @@ namespace GroSharies.Controllers
         {
             _userRepository.Add(user);
             return CreatedAtAction(nameof(GetByFirebaseId), new { firebaseId = user.FirebaseId }, user);
+        }
+
+        // Retrieves the current user object by using the provided firebaseId
+        private User GetCurrentUser()
+        {
+            var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userRepository.GetByFirebaseId(firebaseId);
         }
     }
 }

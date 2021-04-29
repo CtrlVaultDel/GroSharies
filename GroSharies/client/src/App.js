@@ -1,15 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { UserProvider } from "./providers/UserProvider";
 import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
+import { UserProvider } from "./providers/UserProvider";
+import { HouseholdProvider } from "./providers/HouseholdProvider";
 
 function App() {
     return (
         <Router>
             <UserProvider>
-                <Header />
-                <ApplicationViews />
+                <HouseholdProvider>
+                    <Header />
+                    <ApplicationViews />
+                </HouseholdProvider>
             </UserProvider>
         </Router>
     );

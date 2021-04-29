@@ -17,7 +17,7 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT Id, FirebaseId, Email, FirstName, LastName
-                        FROM User                     
+                        FROM [User]                    
                         WHERE FirebaseId = @FirebaseId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseId", firebaseId);
