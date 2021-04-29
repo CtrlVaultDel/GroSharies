@@ -13,7 +13,7 @@ export default function Login() {
   const loginSubmit = (e) => {
     e.preventDefault();
     login(email, password)
-      .then(() => history.push("/"))
+      .then(() => history.push("/households"))
       .catch(() => alert("Invalid email or password"));
   };
 

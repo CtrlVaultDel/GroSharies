@@ -11,16 +11,19 @@ export default function ApplicationViews() {
     <main>
       <Switch>
 
+        {/* Login Page */}
         <Route path="/login">
           <Login />
         </Route>
 
+        {/* Registration Page */}
         <Route path="/register">
           <Register />
         </Route>
 
-        <Route exact path="/user/:userId(\d+)">
-          {/* {isLoggedIn ? <ComponentHere /> : <Redirect to="/login" />} */}
+        {/* Households Page (List) */}
+        <Route path="/households" exact>
+          {isLoggedin ? <HouseholdList /> : <Redirect to="/Login" />}
         </Route>
 
       </Switch>
