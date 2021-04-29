@@ -5,14 +5,14 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 import Household from "./Household";
 
 const HouseholdList = () => {
-  const { households, getAllHouseholds } = useContext(HouseholdContext);
+    const { households, getAllHouseholds } = useContext(HouseholdContext);
 
-  useEffect(() => {
+    useEffect(() => {
     getAllHouseholds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    }, []);
 
-  return (
+    return (
     <Container>
         <Row className="justify-content-md-center">
             <Link to="/household/add" className="nav-link">
@@ -25,7 +25,7 @@ const HouseholdList = () => {
             ))}
         </Row>
     </Container>
-  );
-};
+    );
+    };
 
-export default HouseholdList;
+    export default HouseholdList;

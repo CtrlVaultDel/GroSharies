@@ -56,7 +56,7 @@ namespace GroSharies.Repositories
                         h.Id AS HouseholdId, h.Name AS HouseholdName,
                         sl.Id AS ShoppingListId, sl.Name AS ShoppingListName, sl.DateCreated 
                         FROM Household h
-                        JOIN ShoppingList sl ON h.Id = sl.HouseholdId
+                        LEFT JOIN ShoppingList sl ON h.Id = sl.HouseholdId
                         WHERE h.Id = @HouseholdId";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
@@ -79,13 +79,17 @@ namespace GroSharies.Repositories
                                 ShoppingLists = new List<ShoppingList>()                     
                             };
                         }
-                        var shoppingList = new ShoppingList()
+
+                        if (DbUtils.IsNotDbNull(reader,"ShoppingListId"))
                         {
-                            Id = DbUtils.GetInt(reader, "ShoppingListId"),
-                            Name = DbUtils.GetString(reader, "ShoppingListName"),
-                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
-                        };
-                        householdDetail.ShoppingLists.Add(shoppingList);
+                            var shoppingList = new ShoppingList()
+                            {
+                                Id = DbUtils.GetInt(reader, "ShoppingListId"),
+                                Name = DbUtils.GetString(reader, "ShoppingListName"),
+                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
+                            };
+                            householdDetail.ShoppingLists.Add(shoppingList);
+                        }
                     }
                     reader.Close();
                     return householdDetail;

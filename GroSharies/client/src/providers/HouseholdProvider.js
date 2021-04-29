@@ -21,7 +21,7 @@ export function HouseholdProvider(props) {
         .then(setHouseholds)
     };
 
-    const getHousehold = (householdId) => {
+    const getHousehold = householdId => {
         return getToken()
         .then(token => fetch(`${apiUrl}/${householdId}`, {
             method: "GET",
