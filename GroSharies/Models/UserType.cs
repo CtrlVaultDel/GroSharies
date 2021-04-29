@@ -4,8 +4,8 @@ namespace GroSharies.Models
 {
     public class UserType
     {
-        public int Id { get; }
+        public int Id { get; set; }
 
-        public string FirebaseId { get;}
+        public string Name { get; set; }
     }
 }
