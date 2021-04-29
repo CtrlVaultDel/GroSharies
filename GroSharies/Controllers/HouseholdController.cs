@@ -57,7 +57,7 @@ namespace GroSharies.Controllers
 
             // Add the household object that was passed in to the database
             _householdRepository.Add(household, user.Id);
-            return CreatedAtAction("Get", new { id = household.Id }, household);
+            return CreatedAtAction("Get", new { id = household.Id });
         }
 
         // Retrieves the current user object by using the provided firebaseId

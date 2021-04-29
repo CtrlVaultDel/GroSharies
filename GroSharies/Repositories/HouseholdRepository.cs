@@ -114,7 +114,6 @@ namespace GroSharies.Repositories
                     household.Id = (int)cmd.ExecuteScalar();
                 }
 
-                conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"

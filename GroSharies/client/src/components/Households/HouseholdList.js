@@ -15,7 +15,7 @@ const HouseholdList = () => {
     return (
     <Container>
         <Row className="justify-content-md-center">
-            <Link to="/household/add" className="nav-link">
+            <Link to="/household/new" className="nav-link">
                 New Household
             </Link> 
         </Row>
@@ -26,6 +26,6 @@ const HouseholdList = () => {
         </Row>
     </Container>
     );
-    };
+};
 
     export default HouseholdList;

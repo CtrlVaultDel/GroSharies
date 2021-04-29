@@ -5,6 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import HouseholdList from "./Households/HouseholdList";
 import HouseholdDetails from "./Households/HouseholdDetails";
+import HouseholdForm from "./Households/HouseholdForm";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserContext);
@@ -36,6 +37,12 @@ export default function ApplicationViews() {
             <Route path="/household/:id(\d+)" exact>
                 {isLoggedIn ? <HouseholdDetails /> : <Redirect to="/Login" />}
             </Route>
+
+            {/* New Household Form */}
+            <Route path="/household/new" exact>
+                {isLoggedIn ? <HouseholdForm /> : <Redirect to="/Login" />}
+            </Route>
+
             </Switch>
         </main>
     );

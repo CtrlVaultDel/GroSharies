@@ -23,7 +23,7 @@ const HouseholdDetails = () => {
                 {householdDetail.household.name}
             </Row>
             <Row className="justify-content-md-center">
-                <Link to="/shoppingList/add" className="nav-link">
+                <Link to="/shoppingList/new" className="nav-link">
                     New Shopping List
                 </Link>
             </Row>
