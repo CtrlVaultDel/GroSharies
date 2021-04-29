@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace GroSharies.Models
+﻿namespace GroSharies.Models
 {
     public class UserType
     {
