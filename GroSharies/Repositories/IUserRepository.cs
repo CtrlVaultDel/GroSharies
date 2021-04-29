@@ -1,4 +1,4 @@
-﻿using GroSharies.Models;
+﻿using GroSharies.Models.DataModels;
 
 namespace GroSharies.Repositories
 {
