@@ -16,7 +16,7 @@ const HouseholdDetails = () => {
     }, []);
 
     if(householdDetail == null) return null;
-
+    
     return (
         <Container>
             <Row className="justify-content-md-center">
@@ -27,11 +27,14 @@ const HouseholdDetails = () => {
                     New Shopping List
                 </Link>
             </Row>
-            <Row>
+            {/* If the household already has lists, display them. Otherwise, show a default message */}
+            {householdDetail.shoppingLists.length ?
+                <Row>
                 {householdDetail.shoppingLists.map(shopList => (
                     <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList}/></Col>
                 ))}
-            </Row>
+                </Row> : "You don't have any lists yet!"
+            }       
         </Container>
     );
 };
