@@ -26,7 +26,7 @@ const HouseholdList = () => {
                     md="4">
                         <Household 
                             household = {uh.household} 
-                            isAdmin = {uh.relation.userTypeId} 
+                            userType = {uh.relation.userTypeId} 
                             isAccepted = {uh.relation.isAccepted}
                         />
                 </Col>

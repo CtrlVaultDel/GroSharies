@@ -47,6 +47,10 @@ export default function ApplicationViews() {
                 {isLoggedIn ? <HouseholdForm /> : <Redirect to="/Login" />}
             </Route>
 
+            <Route path="/household/delete/id(\+)" exact>
+                {/* {isLoggedIn ? HouseholdDelete : <Redirect to="/Login" />} */}
+            </Route>
+
             </Switch>
         </main>
     );
