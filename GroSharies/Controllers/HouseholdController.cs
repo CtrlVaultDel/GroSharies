@@ -68,20 +68,21 @@ namespace GroSharies.Controllers
         }
 
         [HttpPut("{householdId}")]
-        public IActionResult Update(int householdId)
+        public IActionResult Update(Household household)
         {
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
             // Check to make sure that one of the user's household Id's matches the one being searched for
             var userHouseholds = _householdRepository.GetAll(user.Id);
-            if (!userHouseholds.Any(userHousehold => userHousehold.Id == householdId)) return Unauthorized();
+            if (!userHouseholds.Any(userHousehold => userHousehold.Id == household.Id)) return Unauthorized();
 
             // Check to make sure that the current user is an admin of the selected household
-            var householdUser = _householdUserRepository.GetHouseholdUser(householdId, user.Id);
+            var householdUser = _householdUserRepository.GetHouseholdUser(household.Id, user.Id);
             if (householdUser.UserTypeId != 1) return Unauthorized();
 
-
+            // If all tests pass, update the Household Name
+            _householdRepository.Update(household);
 
             return NoContent();
         }
