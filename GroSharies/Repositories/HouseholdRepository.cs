@@ -113,19 +113,6 @@ namespace GroSharies.Repositories
 
                     household.Id = (int)cmd.ExecuteScalar();
                 }
-
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        INSERT INTO HouseholdUser (HouseholdId, UserId, UserTypeId, IsAccepted)
-                        OUTPUT INSERTED.ID
-                        VALUES (@HouseholdId, @UserId, @UserTypeId, @IsAccepted";
-
-                    DbUtils.AddParameter(cmd, "@HouseholdId", household.Id);
-                    DbUtils.AddParameter(cmd, "@UserId", userId);
-                    DbUtils.AddParameter(cmd, "@UserTypeId", '1');
-                    DbUtils.AddParameter(cmd, "@IsAccepted", '1');
-                }
             }
         }
     }

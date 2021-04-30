@@ -15,13 +15,16 @@ namespace GroSharies.Controllers
     {
         private readonly IHouseholdRepository _householdRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IHouseholdUserRepository _householdUserRepository;
 
         public HouseholdController(
             IHouseholdRepository householdRepository,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IHouseholdUserRepository householdUserRepository)
         {
             _householdRepository = householdRepository;
             _userRepository = userRepository;
+            _householdUserRepository = householdUserRepository;
         }
 
         [HttpGet]
@@ -57,6 +60,10 @@ namespace GroSharies.Controllers
 
             // Add the household object that was passed in to the database
             _householdRepository.Add(household, user.Id);
+
+            // Add the relationship between the user and the new household (Admin)
+            _householdUserRepository.AddAdmin(household.Id, user.Id);
+
             return CreatedAtAction("Get", new { id = household.Id });
         }
 
