@@ -43,6 +43,10 @@ export default function ApplicationViews() {
                 {isLoggedIn ? <HouseholdForm /> : <Redirect to="/Login" />}
             </Route>
 
+            <Route path="/household/edit/id(\+)" exact>
+                {isLoggedIn ? <HouseholdForm /> : <Redirect to="/Login" />}
+            </Route>
+
             </Switch>
         </main>
     );

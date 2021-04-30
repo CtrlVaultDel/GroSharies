@@ -1,12 +1,24 @@
-import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 const HouseholdForm = () => {
     const history = useHistory();
-    const { saveHousehold } = useContext(HouseholdContext);
+    const { id } = useParams();
+    const { saveHousehold, getHousehold } = useContext(HouseholdContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [household, setHousehold] = useState({name: ""});
+    const [household, setHousehold] = useState({
+        id: 0,
+        name: ""
+    });
+
+    // If the user is editing an existing household, grab the original value(s)
+    useEffect(() => {
+        if(id){
+            getHousehold()
+            .then(setHousehold);
+        }
+    }, []);
 
     // Handles updating the state of household as the user updates the form
     const handleInput = event => {
@@ -23,6 +35,7 @@ const HouseholdForm = () => {
 
         // Save the household object to the database
         saveHousehold({
+            id: household.id,
             name: household.name
         })
         .then(() => history.push("/household"));
