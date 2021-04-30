@@ -24,7 +24,7 @@ export function UserProvider(props) {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, pw)
-      .then((signInResponse) => getUserProfile(signInResponse.user.uid))
+      .then((signInResponse) => getUser(signInResponse.user.uid))
       .then((user) => {
         sessionStorage.setItem("user", JSON.stringify(user));
         setIsLoggedIn(true);
@@ -57,7 +57,7 @@ export function UserProvider(props) {
 
   const getToken = () => firebase.auth().currentUser.getIdToken();
 
-  const getUserProfile = (firebaseUserId) => {
+  const getUser = (firebaseUserId) => {
     return getToken().then((token) =>
       fetch(`${apiUrl}/${firebaseUserId}`, {
         method: "GET",
@@ -81,17 +81,6 @@ export function UserProvider(props) {
     );
   };
 
-  const getUserById = (id) => {
-    return getToken()
-    .then(token => fetch(`${apiUrl}/user/${id}`, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-    .then((res) => res.json()))
-  };
-
   return (
     <UserContext.Provider
       value={{
@@ -99,8 +88,7 @@ export function UserProvider(props) {
         login,
         logout,
         register,
-        getToken,
-        getUserById
+        getToken
       }}
     >
       {isFirebaseReady ? (

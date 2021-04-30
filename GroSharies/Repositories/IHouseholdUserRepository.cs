@@ -1,7 +1,10 @@
-﻿namespace GroSharies.Repositories
+﻿using GroSharies.Models.DataModels;
+
+namespace GroSharies.Repositories
 {
     public interface IHouseholdUserRepository
     {
-        void AddAdmin(int householdId, int userId);
+        public HouseholdUser GetHouseholdUser(int householdId, int userId);
+        public void AddAdmin(int householdId, int userId);
     }
 }

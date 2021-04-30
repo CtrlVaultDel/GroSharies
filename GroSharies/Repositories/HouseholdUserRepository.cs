@@ -1,11 +1,48 @@
 ﻿using GroSharies.Utils;
 using Microsoft.Extensions.Configuration;
+using GroSharies.Models.DataModels;
 
 namespace GroSharies.Repositories
 {
     public class HouseholdUserRepository : BaseRepository, IHouseholdUserRepository
     {
         public HouseholdUserRepository(IConfiguration configuration) : base(configuration) { }
+
+        public HouseholdUser GetHouseholdUser(int householdId, int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, HouseholdId, UserId, UserTypeId, IsAccepted
+                        FROM HouseholdUser
+                        WHERE UserId = @UserId AND HouseholdId = @HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@UserId", userId);
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    HouseholdUser householdUser = null;
+
+                    if (reader.Read())
+                    {
+                        householdUser = new HouseholdUser()
+                        {                         
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                            IsAccepted = DbUtils.GetBool(reader, "IsAccepted")                           
+                        };
+                    }                              
+                    reader.Close();
+                    return householdUser;
+                }
+            }
+        }
 
         public void AddAdmin(int householdId, int userId)
         {

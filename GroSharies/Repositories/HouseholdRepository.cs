@@ -115,5 +115,25 @@ namespace GroSharies.Repositories
                 }
             }
         }
+
+        public void Update(Household household)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Household
+                        SET Name = @Name,                                          
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", household.Id);
+                    DbUtils.AddParameter(cmd, "@Name", household.Name);
+                    
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
