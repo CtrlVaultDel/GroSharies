@@ -16,10 +16,13 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         INSERT INTO HouseholdUser (HouseholdId, UserId, UserTypeId, IsAccepted)
+                        OUTPUT INSERTED.ID
                         VALUES (@HouseholdId, @UserId, 1, 1)";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
                     DbUtils.AddParameter(cmd, "@UserId", userId);
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
