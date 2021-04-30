@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using GroSharies.Models;
+using GroSharies.Models.DataModels;
 using GroSharies.Utils;
 
 namespace GroSharies.Repositories

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GroSharies.Models;
+using GroSharies.Models.DataModels;
 using GroSharies.Repositories;
 using System.Security.Claims;
 

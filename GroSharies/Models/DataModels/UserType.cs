@@ -1,4 +1,4 @@
-﻿namespace GroSharies.Models
+﻿namespace GroSharies.Models.DataModels
 {
     public class UserType
     {

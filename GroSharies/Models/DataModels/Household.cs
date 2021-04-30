@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace GroSharies.Models
+namespace GroSharies.Models.DataModels
 {
     public class Household
     {
