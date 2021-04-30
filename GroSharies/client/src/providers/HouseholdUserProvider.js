@@ -4,12 +4,12 @@ import "firebase/auth";
 
 export const HouseholdUserContext = createContext();
 
-export function HouseholdProvider(props) {
-    const [householdUsers, setHouseholdUsers] = useState([]);
+export function HouseholdUserProvider(props) {
+    const [userHouseholds, setUserHouseholds] = useState([]);
     const { getToken } = useContext(UserContext); 
-    const apiUrl = "/api/household";
+    const apiUrl = "/api/householdUser";
 
-    const getAllHouseholds = () => {
+    const getUserHouseholds = () => {
         return getToken()
         .then(token => fetch(apiUrl, {
             method: "GET",
@@ -18,43 +18,17 @@ export function HouseholdProvider(props) {
             }
         }))
         .then(res => res.json())
-        .then(setHouseholds)
-    };
-
-    const getHousehold = householdId => {
-        return getToken()
-        .then(token => fetch(`${apiUrl}/${householdId}`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }))
-        .then(res => res.json())
-    }
-
-    const saveHousehold = (household) => {
-        return getToken()
-        .then((token) => fetch(apiUrl, {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(household),
-          }))
-        .then(resp => resp.json())
+        .then(setUserHouseholds);
     };
 
     return (
-        <HouseholdContext.Provider
+        <HouseholdUserContext.Provider
             value={{
-                households,
-                getAllHouseholds,
-                getHousehold,
-                saveHousehold
+                userHouseholds,
+                getUserHouseholds
             }}
         >
             {props.children}
-        </HouseholdContext.Provider>
+        </HouseholdUserContext.Provider>
     );
 };

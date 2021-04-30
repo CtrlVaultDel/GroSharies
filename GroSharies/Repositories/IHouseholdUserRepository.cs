@@ -1,12 +1,14 @@
 ﻿using GroSharies.Models.DataModels;
+using GroSharies.Models.DomainModels;
 using System.Collections.Generic;
 
 namespace GroSharies.Repositories
 {
     public interface IHouseholdUserRepository
     {
-        public List<HouseholdUser> GetByUserId(int userId);
-        public HouseholdUser GetHouseholdUser(int householdId, int userId);
-        public void AddAdmin(int householdId, int userId);
+        List<HouseholdUserRelation> GetAllByUserId(int userId);
+
+        HouseholdUser GetHouseholdUser(int householdId, int userId);
+        void AddAdmin(int householdId, int userId);
     }
 }

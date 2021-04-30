@@ -5,6 +5,7 @@ using GroSharies.Models.DataModels;
 using System.Security.Claims;
 using GroSharies.Repositories;
 using System.Collections.Generic;
+using GroSharies.Models.DomainModels;
 
 namespace GroSharies.Controllers
 {
@@ -25,14 +26,14 @@ namespace GroSharies.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetByUserId()
+        public IActionResult GetAllByUserId()
         {
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
-            List<HouseholdUser> householdUserList = _householdUserRepository.GetByUserId(user.Id);
+            List<HouseholdUserRelation> userHouseholds = _householdUserRepository.GetAllByUserId(user.Id);
 
-            return Ok(householdUserList);
+            return Ok(userHouseholds);
         }
 
         // Retrieves the current user object by using the provided firebaseId

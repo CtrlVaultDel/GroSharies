@@ -4,18 +4,21 @@ import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import { UserProvider } from "./providers/UserProvider";
 import { HouseholdProvider } from "./providers/HouseholdProvider";
+import { HouseholdUserProvider } from "./providers/HouseholdUserProvider";
 
 function App() {
     return (
         <Router>
             <UserProvider>
                 <HouseholdProvider>
-                    <Header />
-                    <ApplicationViews />
+                    <HouseholdUserProvider>
+                        <Header />
+                        <ApplicationViews />
+                    </HouseholdUserProvider>
                 </HouseholdProvider>
             </UserProvider>
         </Router>
     );
-}
+};
 
 export default App;

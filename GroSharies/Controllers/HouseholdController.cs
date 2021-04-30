@@ -34,7 +34,7 @@ namespace GroSharies.Controllers
             if (user == null) return NotFound();
 
             // Get the Id and Name of each Household the user is in and return it
-            var userHouseholds = _householdRepository.GetAll(user.Id);
+            var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
             return Ok(userHouseholds);
         }
 
@@ -45,7 +45,7 @@ namespace GroSharies.Controllers
             if (user == null) return NotFound();
 
             // Check to make sure that one of the user's household Id's matches the one being searched for
-            var userHouseholds = _householdRepository.GetAll(user.Id);
+            var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
             if (!userHouseholds.Any(household => household.Id == householdId)) return Unauthorized();
 
             var householdDetail = _householdRepository.GetById(householdId);          
@@ -74,7 +74,7 @@ namespace GroSharies.Controllers
             if (user == null) return NotFound();
 
             // Check to make sure that one of the user's household Id's matches the one being searched for
-            var userHouseholds = _householdRepository.GetAll(user.Id);
+            var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
             if (!userHouseholds.Any(userHousehold => userHousehold.Id == household.Id)) return Unauthorized();
 
             // Check to make sure that the current user is an admin of the selected household
