@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 const HouseholdForm = () => {
+    const history = useHistory();
     const { saveHousehold } = useContext(HouseholdContext);
     const [isLoading, setIsLoading] = useState(false);
     const [household, setHousehold] = useState({name: ""});
@@ -22,7 +24,8 @@ const HouseholdForm = () => {
         // Save the household object to the database
         saveHousehold({
             name: household.name
-        });
+        })
+        .then(() => history.push("/household"));
     }
 
     return (

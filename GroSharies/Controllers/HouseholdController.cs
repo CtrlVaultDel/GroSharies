@@ -46,7 +46,7 @@ namespace GroSharies.Controllers
 
             // Check to make sure that one of the user's household Id's matches the one being searched for
             var userHouseholds = _householdRepository.GetAll(user.Id);
-            if (!userHouseholds.Any(household => household.Id == householdId)) return NotFound();
+            if (!userHouseholds.Any(household => household.Id == householdId)) return Unauthorized();
 
             var householdDetail = _householdRepository.GetById(householdId);          
             return Ok(householdDetail);
@@ -64,7 +64,7 @@ namespace GroSharies.Controllers
             // Add the relationship between the user and the new household (Admin)
             _householdUserRepository.AddAdmin(household.Id, user.Id);
 
-            return CreatedAtAction("Get", new { id = household.Id });
+            return CreatedAtAction(nameof(GetById), new { householdId = household.Id }, household);
         }
 
         // Retrieves the current user object by using the provided firebaseId
