@@ -10,7 +10,7 @@ namespace GroSharies.Repositories
     {
         public HouseholdRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<Household> GetAll(int userId)
+        public List<Household> GetAllHouseholds(int userId)
         {
             using (var conn = Connection)
             {
@@ -18,7 +18,8 @@ namespace GroSharies.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT h.Id AS HouseholdId, h.Name as HouseholdName
+                        SELECT 
+                        h.Id AS HouseholdId, h.Name AS HouseholdName
                         FROM Household h
                         JOIN HouseholdUser hu ON h.Id = hu.HouseholdId
                         WHERE hu.UserId = @UserId";
@@ -31,9 +32,9 @@ namespace GroSharies.Repositories
                     while (reader.Read())
                     {
                         var household = new Household()
-                        {
+                        {                          
                             Id = DbUtils.GetInt(reader, "HouseholdId"),
-                            Name = DbUtils.GetString(reader, "HouseholdName"),
+                            Name = DbUtils.GetString(reader, "HouseholdName")                                                     
                         };
                         userHouseholds.Add(household);
                     }
@@ -112,6 +113,26 @@ namespace GroSharies.Repositories
                     DbUtils.AddParameter(cmd, "@Name", household.Name);
 
                     household.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Update(Household household)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Household
+                        SET Name = @Name                                          
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", household.Id);
+                    DbUtils.AddParameter(cmd, "@Name", household.Name);
+                    
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

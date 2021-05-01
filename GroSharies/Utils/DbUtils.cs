@@ -38,6 +38,18 @@ namespace GroSharies.Utils
         }
 
         /// <summary>
+        ///  Get a boolean from a data reader object.
+        ///  This method assumes the value is not NULL.
+        /// </summary>
+        /// <param name="reader">A SqlDataReader that has not exhausted it's result set.</param>
+        /// <param name="column">The name of the column from the result set refereed to by the reader.</param>
+        /// <returns>The value of the given column.</returns>
+        public static bool GetBool(SqlDataReader reader, string column)
+        {
+            return reader.GetBoolean(reader.GetOrdinal(column));
+        }
+
+        /// <summary>
         ///  Get a DateTime from a data reader object.
         ///  This method assumes the value is not NULL.
         /// </summary>

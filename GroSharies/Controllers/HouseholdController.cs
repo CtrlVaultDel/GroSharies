@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using GroSharies.Models.DataModels;
-using GroSharies.Models.DomainModels;
 using GroSharies.Repositories;
 using System.Security.Claims;
 using System.Linq;
@@ -34,7 +33,7 @@ namespace GroSharies.Controllers
             if (user == null) return NotFound();
 
             // Get the Id and Name of each Household the user is in and return it
-            var userHouseholds = _householdRepository.GetAll(user.Id);
+            var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
             return Ok(userHouseholds);
         }
 
@@ -45,7 +44,7 @@ namespace GroSharies.Controllers
             if (user == null) return NotFound();
 
             // Check to make sure that one of the user's household Id's matches the one being searched for
-            var userHouseholds = _householdRepository.GetAll(user.Id);
+            var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
             if (!userHouseholds.Any(household => household.Id == householdId)) return Unauthorized();
 
             var householdDetail = _householdRepository.GetById(householdId);          
@@ -65,6 +64,26 @@ namespace GroSharies.Controllers
             _householdUserRepository.AddAdmin(household.Id, user.Id);
 
             return CreatedAtAction(nameof(GetById), new { householdId = household.Id }, household);
+        }
+
+        [HttpPut("{householdId}")]
+        public IActionResult Update(Household household)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            // Check to make sure that one of the user's household Id's matches the one being searched for
+            var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
+            if (!userHouseholds.Any(userHousehold => userHousehold.Id == household.Id)) return Unauthorized();
+
+            // Check to make sure that the current user is an admin of the selected household
+            var householdUser = _householdUserRepository.GetHouseholdUser(household.Id, user.Id);
+            if (householdUser.UserTypeId != 1) return Unauthorized();
+
+            // If all tests pass, update the Household Name
+            _householdRepository.Update(household);
+
+            return NoContent();
         }
 
         // Retrieves the current user object by using the provided firebaseId

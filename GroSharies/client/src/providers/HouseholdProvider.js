@@ -9,6 +9,7 @@ export function HouseholdProvider(props) {
     const { getToken } = useContext(UserContext); 
     const apiUrl = "/api/household";
 
+    // Called to retrieve all households associated with the current user
     const getAllHouseholds = () => {
         return getToken()
         .then(token => fetch(apiUrl, {
@@ -21,6 +22,7 @@ export function HouseholdProvider(props) {
         .then(setHouseholds)
     };
 
+    // Called to retrieve a single household and the shopping lists associated with it
     const getHousehold = householdId => {
         return getToken()
         .then(token => fetch(`${apiUrl}/${householdId}`, {
@@ -30,11 +32,12 @@ export function HouseholdProvider(props) {
             }
         }))
         .then(res => res.json())
-    }
+    };
 
+    // Called when a user saves a new household
     const saveHousehold = (household) => {
         return getToken()
-        .then((token) => fetch(apiUrl, {
+        .then(token => fetch(apiUrl, {
             method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
@@ -45,13 +48,27 @@ export function HouseholdProvider(props) {
         .then(resp => resp.json())
     };
 
+    // Called when a user saves an edit to one of their households
+    const updateHousehold = household => {
+        return getToken()
+        .then(token => fetch(`${apiUrl}/${household.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(household),
+        }))
+    };
+
     return (
         <HouseholdContext.Provider
             value={{
                 households,
                 getAllHouseholds,
                 getHousehold,
-                saveHousehold
+                saveHousehold,
+                updateHousehold
             }}
         >
             {props.children}
