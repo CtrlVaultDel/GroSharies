@@ -126,7 +126,7 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         UPDATE Household
-                        SET Name = @Name,                                          
+                        SET Name = @Name                                          
                         WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", household.Id);

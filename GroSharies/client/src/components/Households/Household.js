@@ -15,7 +15,7 @@ const Household = ({ household, userType, isAccepted }) => {
             return (<>
                 <Button size="sm" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
                 <Button size="sm" onClick={() => history.push(`/household/delete/${household.id}`)}><FaTrashAlt /></Button>
-                </>)  
+            </>)  
         }
     };
     
