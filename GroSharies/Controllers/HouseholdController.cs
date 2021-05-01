@@ -38,7 +38,7 @@ namespace GroSharies.Controllers
         }
 
         [HttpGet("{householdId}")]
-        public IActionResult GetById(int householdId) 
+        public IActionResult GetById(int householdId)
         {
             var user = GetCurrentUser();
             if (user == null) return NotFound();
@@ -47,7 +47,7 @@ namespace GroSharies.Controllers
             var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
             if (!userHouseholds.Any(household => household.Id == householdId)) return Unauthorized();
 
-            var householdDetail = _householdRepository.GetById(householdId);          
+            var householdDetail = _householdRepository.GetById(householdId);
             return Ok(householdDetail);
         }
 
@@ -84,6 +84,17 @@ namespace GroSharies.Controllers
             _householdRepository.Update(household);
 
             return NoContent();
+        }
+
+        [HttpDelete("{householdId}")]
+        public IActionResult Delete(int householdId)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+
+
+            _householdRepository.Delete(householdId, shoppingListId);
         }
 
         // Retrieves the current user object by using the provided firebaseId
