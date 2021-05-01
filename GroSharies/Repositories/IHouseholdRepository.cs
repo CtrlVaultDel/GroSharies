@@ -10,5 +10,6 @@ namespace GroSharies.Repositories
         HouseholdDetail GetById(int householdId);
         void Add(Household household, int userId);
         void Update(Household household);
+        void Delete(int householdId, int shoppingListId);
     }
 }

@@ -136,5 +136,63 @@ namespace GroSharies.Repositories
                 }
             }
         }
+
+        public void Delete(int householdId, int shoppingListId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                // Delete ListItem rows related to the Household's ShoppingList(s)
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE ListItem
+                        WHERE ShoppingListId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", shoppingListId);
+                }
+
+                // Delete Purchase rows related to the Household's ShoppingList(s)
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE Purchase
+                        WHERE ShoppingListId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", shoppingListId);
+                }
+
+                // Delete ShoppingList rows related to the Household
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE ShoppingList
+                        WHERE HouseholdId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", householdId);
+                }
+
+                // Delete HouseholdUser rows related to the Household
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE HouseholdUser
+                        WHERE HouseholdId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", householdId);
+                }
+
+                // Finally, delete the Household
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE Household
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", householdId);
+                }
+            }
+        }
     }
 }
