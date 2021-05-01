@@ -137,53 +137,20 @@ namespace GroSharies.Repositories
             }
         }
 
-        public void Delete(int householdId, int shoppingListId)
+        public void Delete(int householdId)
         {
             using (var conn = Connection)
             {
                 conn.Open();
 
-                // Delete ListItem rows related to the Household's ShoppingList(s)
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        DELETE ListItem
-                        WHERE ShoppingListId = @Id";
-
-                    DbUtils.AddParameter(cmd, "@Id", shoppingListId);
-                }
-
-                // Delete Purchase rows related to the Household's ShoppingList(s)
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        DELETE Purchase
-                        WHERE ShoppingListId = @Id";
-
-                    DbUtils.AddParameter(cmd, "@Id", shoppingListId);
-                }
-
-                // Delete ShoppingList rows related to the Household
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        DELETE ShoppingList
-                        WHERE HouseholdId = @Id";
-
-                    DbUtils.AddParameter(cmd, "@Id", householdId);
-                }
-
-                // Delete HouseholdUser rows related to the Household
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        DELETE HouseholdUser
-                        WHERE HouseholdId = @Id";
-
-                    DbUtils.AddParameter(cmd, "@Id", householdId);
-                }
-
-                // Finally, delete the Household
+                // Delete the specified Household row
+                /*
+                    Related Table rows deleted via cascading delete
+                    1) HouseholdUser
+                    2) ShoppingList
+                    3) Purchase
+                    4) ListItem
+                 */
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"

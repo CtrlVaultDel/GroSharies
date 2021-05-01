@@ -92,9 +92,12 @@ namespace GroSharies.Controllers
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
+            // Check to make sure that the current user is an admin of the selected household
+            var householdUser = _householdUserRepository.GetHouseholdUser(householdId, user.Id);
+            if (householdUser.UserTypeId != 1) return Unauthorized();
 
-
-            _householdRepository.Delete(householdId, shoppingListId);
+            _householdRepository.Delete(householdId);
+            return NoContent();
         }
 
         // Retrieves the current user object by using the provided firebaseId
