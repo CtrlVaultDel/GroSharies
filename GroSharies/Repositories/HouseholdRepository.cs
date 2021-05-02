@@ -158,6 +158,7 @@ namespace GroSharies.Repositories
                         WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", householdId);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

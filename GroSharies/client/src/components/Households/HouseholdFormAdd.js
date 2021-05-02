@@ -7,14 +7,13 @@ const HouseholdFormAdd = () => {
     const { saveHousehold } = useContext(HouseholdContext);
     const [isLoading, setIsLoading] = useState(false);
     const [household, setHousehold] = useState({
-        id: 0,
         name: ""
     });
     
     // Handles updating the state of household as the user updates the form
-    const handleInput = event => {
+    const handleInput = e => {
         const newHousehold = { ...household };
-        newHousehold[event.target.id] = event.target.value;
+        newHousehold[e.target.id] = e.target.value;
         setHousehold(newHousehold);
     }
 
@@ -26,7 +25,6 @@ const HouseholdFormAdd = () => {
 
         // Save the household object to the database
         saveHousehold({
-            id: household.id,
             name: household.name
         })
         .then(() => history.push("/household"));
