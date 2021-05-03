@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using GroSharies.Models.DataModels;
-using GroSharies.Models.DomainModels;
 using GroSharies.Utils;
 using System.Collections.Generic;
 
@@ -18,16 +17,15 @@ namespace GroSharies.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT 
-                        sl.Id, sl.HouseholdId, sl.Name, sl.DateCreated,     
-                        FROM ShoppingList sl                      
-                        WHERE sl.HouseholdId = @HouseholdId";
+                        SELECT Id, HouseholdId, [Name], DateCreated    
+                        FROM ShoppingList                   
+                        WHERE HouseholdId = @HouseholdId";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
 
                     var reader = cmd.ExecuteReader();
 
-                    List<ShoppingList> shoppingLists = null;
+                    var shoppingLists = new List<ShoppingList>();
 
                     while (reader.Read())
                     {
@@ -40,6 +38,7 @@ namespace GroSharies.Repositories
                         };
                         shoppingLists.Add(shoppingList);
                     }
+
                     reader.Close();
                     return shoppingLists;
                 }
