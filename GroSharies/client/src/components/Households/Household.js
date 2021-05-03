@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, CardHeader, Button } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
+import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 const Household = ({ household, userType, isAccepted }) => {
 
     const history = useHistory();
-    
+    const { deleteHousehold } = useContext(HouseholdContext);
+
     // Determines if the user is an Admin of the related household.
     // If they are, add an edit button to allow them to change its name.
     const checkIfAdmin = () => {
         if(userType === 1) {
             return (<>
                 <Button size="sm" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
-                <Button size="sm" onClick={() => history.push(`/household/delete/${household.id}`)}><FaTrashAlt /></Button>
+                <Button size="sm" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
             </>)  
-        }
+        };
+    };
+
+    const deleteWarning = () => {
+        const confirmBox = window.confirm(`Are you sure you wish to delete the ${household.name} household? This action is irreversable.`);
+        if (confirmBox){
+            console.log(`Deleting Household: ${household.name}`)
+            deleteHousehold(household.id);
+        };
     };
     
     return(

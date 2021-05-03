@@ -10,9 +10,9 @@ GO
 DROP TABLE IF EXISTS [ListItem];
 DROP TABLE IF EXISTS [Purchase];
 DROP TABLE IF EXISTS [ShoppingList];
+DROP TABLE IF EXISTS [HouseholdUser];
 DROP TABLE IF EXISTS [Household];
 DROP TABLE IF EXISTS [UserType];
-DROP TABLE IF EXISTS [HouseholdUser];
 DROP TABLE IF EXISTS [User];
 GO
 
@@ -45,7 +45,7 @@ CREATE TABLE [ShoppingList] (
   [Name] nvarchar(50) NOT NULL,
   [DateCreated] datetime NOT NULL,
 
-  CONSTRAINT [FK_ShoppingList_Household] FOREIGN KEY ([HouseholdId]) REFERENCES [Household] ([Id]) 
+  CONSTRAINT [FK_ShoppingList_Household] FOREIGN KEY ([HouseholdId]) REFERENCES [Household] ([Id]) ON DELETE CASCADE
 )
 GO
 
@@ -57,8 +57,8 @@ CREATE TABLE [Purchase] (
   [PurchaseDate] datetime NOT NULL,
   [TotalCost] decimal NOT NULL,
 
-  CONSTRAINT [FK_Purchase_ShoppingList] FOREIGN KEY ([ShoppingListId]) REFERENCES [ShoppingList] ([Id]), 
-  CONSTRAINT [FK_Purchase_User] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) 
+  CONSTRAINT [FK_Purchase_ShoppingList] FOREIGN KEY ([ShoppingListId]) REFERENCES [ShoppingList] ([Id]) ON DELETE CASCADE, 
+  CONSTRAINT [FK_Purchase_User] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE CASCADE
 )
 GO
 
@@ -68,7 +68,7 @@ CREATE TABLE [ListItem] (
   [Name] nvarchar(50) NOT NULL,
   [IsChecked] bit NOT NULL DEFAULT 0,
 
-  CONSTRAINT [FK_ListItem_ShoppingList] FOREIGN KEY ([ShoppingListId]) REFERENCES [ShoppingList] ([Id])
+  CONSTRAINT [FK_ListItem_ShoppingList] FOREIGN KEY ([ShoppingListId]) REFERENCES [ShoppingList] ([Id]) ON DELETE CASCADE
 )
 GO
 
@@ -79,8 +79,8 @@ CREATE TABLE [HouseholdUser] (
   [UserTypeId] integer NOT NULL,
   [IsAccepted] bit NOT NULL DEFAULT 0,
 
-  CONSTRAINT [FK_HouseholdUser_Household] FOREIGN KEY ([HouseholdId]) REFERENCES [Household] ([Id]),
-  CONSTRAINT [FK_HouseholdUser_User] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]),
+  CONSTRAINT [FK_HouseholdUser_Household] FOREIGN KEY ([HouseholdId]) REFERENCES [Household] ([Id]) ON DELETE CASCADE,
+  CONSTRAINT [FK_HouseholdUser_User] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE CASCADE,
   CONSTRAINT [FK_HouseholdUser_UserType] FOREIGN KEY ([UserTypeId]) REFERENCES [UserType] ([Id])
 )
 GO

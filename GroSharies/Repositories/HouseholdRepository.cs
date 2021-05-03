@@ -136,5 +136,31 @@ namespace GroSharies.Repositories
                 }
             }
         }
+
+        public void Delete(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                // Delete the specified Household row
+                /*
+                    Related Table rows deleted via cascading delete
+                    1) HouseholdUser
+                    2) ShoppingList
+                    3) Purchase
+                    4) ListItem
+                 */
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE Household
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", householdId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

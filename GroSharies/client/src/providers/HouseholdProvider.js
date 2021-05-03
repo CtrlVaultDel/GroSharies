@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 import { UserContext } from "./UserProvider";
+import { HouseholdUserContext } from "./HouseholdUserProvider";
 import "firebase/auth";
 
 export const HouseholdContext = createContext();
@@ -7,6 +8,7 @@ export const HouseholdContext = createContext();
 export function HouseholdProvider(props) {
     const [households, setHouseholds] = useState([]);
     const { getToken } = useContext(UserContext); 
+    const { getUserHouseholds } = useContext(HouseholdUserContext);
     const apiUrl = "/api/household";
 
     // Called to retrieve all households associated with the current user
@@ -61,6 +63,18 @@ export function HouseholdProvider(props) {
         }))
     };
 
+    // Called when a user requests to delete a household they are an admin of
+    const deleteHousehold = householdId => {
+        return getToken()
+        .then(token => fetch(`${apiUrl}/${householdId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(getUserHouseholds)
+    };
+
     return (
         <HouseholdContext.Provider
             value={{
@@ -68,7 +82,8 @@ export function HouseholdProvider(props) {
                 getAllHouseholds,
                 getHousehold,
                 saveHousehold,
-                updateHousehold
+                updateHousehold,
+                deleteHousehold
             }}
         >
             {props.children}

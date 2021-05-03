@@ -19,9 +19,9 @@ const HouseholdFormEdit = () => {
     },[]);
     
     // Handles updating the state of household as the user updates the form
-    const handleInput = event => {
+    const handleInput = e => {
         const newHousehold = { ...household };
-        newHousehold[event.target.id] = event.target.value;
+        newHousehold[e.target.id] = e.target.value;
         setHousehold(newHousehold);
     }
 

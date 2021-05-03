@@ -10,12 +10,12 @@ function App() {
     return (
         <Router>
             <UserProvider>
-                <HouseholdProvider>
-                    <HouseholdUserProvider>
+                <HouseholdUserProvider>
+                    <HouseholdProvider>
                         <Header />
                         <ApplicationViews />
-                    </HouseholdUserProvider>
-                </HouseholdProvider>
+                    </HouseholdProvider>
+                </HouseholdUserProvider>
             </UserProvider>
         </Router>
     );
