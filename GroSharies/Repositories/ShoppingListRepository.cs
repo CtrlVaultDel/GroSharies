@@ -2,6 +2,7 @@
 using GroSharies.Models.DataModels;
 using GroSharies.Utils;
 using System.Collections.Generic;
+using System;
 
 namespace GroSharies.Repositories
 {
@@ -76,6 +77,27 @@ namespace GroSharies.Repositories
                     }
                     reader.Close();
                     return shoppingList;
+                }
+            }
+        }
+
+        public void Add(ShoppingList shoppingList)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO ShoppingList (HouseholdId, [Name], DateCreated) 
+                        OUTPUT INSERTED.ID
+                        VALUES (@HouseholdId, @Name, @DateCreated)";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", shoppingList.HouseholdId);
+                    DbUtils.AddParameter(cmd, "@Name", shoppingList.Name);
+                    DbUtils.AddParameter(cmd, "@DateCreated", DateTime.Now);
+
+                    shoppingList.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }

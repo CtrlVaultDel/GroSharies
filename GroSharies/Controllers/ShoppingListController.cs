@@ -3,7 +3,6 @@ using GroSharies.Models.DomainModels;
 using GroSharies.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -56,6 +55,18 @@ namespace GroSharies.Controllers
             };
 
             return Ok(shoppingListDetail);
+        }
+
+        [HttpPost]
+        public IActionResult Add(ShoppingList shoppingList)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            // Add the shoppingList object that was passed in to the database
+            _shoppingListRepository.Add(shoppingList);
+
+            return CreatedAtAction(nameof(GetById), new { shoppingListId = shoppingList.Id }, shoppingList);
         }
 
         // Retrieves the current user object by using the provided firebaseId
