@@ -4,18 +4,18 @@ import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import { UserProvider } from "./providers/UserProvider";
 import { HouseholdProvider } from "./providers/HouseholdProvider";
-import { HouseholdUserProvider } from "./providers/HouseholdUserProvider";
+import { ShoppingListProvider } from "./providers/ShoppingListProvider";
 
 function App() {
     return (
         <Router>
             <UserProvider>
-                <HouseholdUserProvider>
-                    <HouseholdProvider>
+                <HouseholdProvider>
+                    <ShoppingListProvider>
                         <Header />
                         <ApplicationViews />
-                    </HouseholdProvider>
-                </HouseholdUserProvider>
+                    </ShoppingListProvider>
+                </HouseholdProvider>
             </UserProvider>
         </Router>
     );

@@ -23,7 +23,7 @@ const HouseholdDetails = () => {
                 {householdDetail.household.name}
             </Row>
             <Row className="justify-content-md-center">
-                <Link to="/shoppingList/new" className="nav-link">
+                <Link to={{pathname:"/shoppingList/new", state:{householdId: id}}}>
                     New Shopping List
                 </Link>
             </Row>

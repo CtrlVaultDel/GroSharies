@@ -1,6 +1,5 @@
 import React, { useState, createContext, useContext } from "react";
 import { UserContext } from "./UserProvider";
-import { HouseholdUserContext } from "./HouseholdUserProvider";
 import "firebase/auth";
 
 export const HouseholdContext = createContext();
@@ -8,11 +7,10 @@ export const HouseholdContext = createContext();
 export function HouseholdProvider(props) {
     const [households, setHouseholds] = useState([]);
     const { getToken } = useContext(UserContext); 
-    const { getUserHouseholds } = useContext(HouseholdUserContext);
     const apiUrl = "/api/household";
 
-    // Called to retrieve all households associated with the current user
-    const getAllHouseholds = () => {
+    // Gets all households associated with the current user
+    const getHouseholds = () => {
         return getToken()
         .then(token => fetch(apiUrl, {
             method: "GET",
@@ -21,10 +19,10 @@ export function HouseholdProvider(props) {
             }
         }))
         .then(res => res.json())
-        .then(setHouseholds)
+        .then(setHouseholds);
     };
 
-    // Called to retrieve a single household and the shopping lists associated with it
+    // Gets single household by the provided householdId
     const getHousehold = householdId => {
         return getToken()
         .then(token => fetch(`${apiUrl}/${householdId}`, {
@@ -36,7 +34,7 @@ export function HouseholdProvider(props) {
         .then(res => res.json())
     };
 
-    // Called when a user saves a new household
+    // Saves a new household object to the database
     const saveHousehold = (household) => {
         return getToken()
         .then(token => fetch(apiUrl, {
@@ -50,7 +48,7 @@ export function HouseholdProvider(props) {
         .then(resp => resp.json())
     };
 
-    // Called when a user saves an edit to one of their households
+    // Updates a pre-existing household object in the database
     const updateHousehold = household => {
         return getToken()
         .then(token => fetch(`${apiUrl}/${household.id}`, {
@@ -63,7 +61,7 @@ export function HouseholdProvider(props) {
         }))
     };
 
-    // Called when a user requests to delete a household they are an admin of
+    // Deletes a household object from the database
     const deleteHousehold = householdId => {
         return getToken()
         .then(token => fetch(`${apiUrl}/${householdId}`, {
@@ -72,14 +70,14 @@ export function HouseholdProvider(props) {
                 Authorization: `Bearer ${token}`
             }
         }))
-        .then(getUserHouseholds)
+        .then(getHouseholds)
     };
 
     return (
         <HouseholdContext.Provider
             value={{
                 households,
-                getAllHouseholds,
+                getHouseholds,
                 getHousehold,
                 saveHousehold,
                 updateHousehold,

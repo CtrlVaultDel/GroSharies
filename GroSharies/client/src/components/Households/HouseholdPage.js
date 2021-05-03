@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
-import { HouseholdUserContext } from "../../providers/HouseholdUserProvider";
+import { HouseholdContext } from "../../providers/HouseholdProvider";
 import Household from "./Household";
 
-const HouseholdList = () => {
-    const { userHouseholds, getUserHouseholds } = useContext(HouseholdUserContext);
+const HouseholdPage = () => {
+    const { households, getHouseholds } = useContext(HouseholdContext);
 
     useEffect(() => {
-        getUserHouseholds();
+        getHouseholds();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -20,14 +20,14 @@ const HouseholdList = () => {
             </Link> 
         </Row>
         <Row>
-            {userHouseholds.map((uh) => (
+            {households.map((h) => (
                 <Col 
-                    key={uh.household.id} 
+                    key={h.household.id} 
                     md="4">
                         <Household 
-                            household = {uh.household} 
-                            userType = {uh.relation.userTypeId} 
-                            isAccepted = {uh.relation.isAccepted}
+                            household = {h.household} 
+                            userType = {h.relation.userTypeId} 
+                            isAccepted = {h.relation.isAccepted}
                         />
                 </Col>
             ))}
@@ -36,4 +36,4 @@ const HouseholdList = () => {
     );
 };
 
-export default HouseholdList;
+export default HouseholdPage;

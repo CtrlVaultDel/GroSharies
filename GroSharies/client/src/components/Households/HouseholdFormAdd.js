@@ -38,7 +38,7 @@ const HouseholdFormAdd = () => {
                 {/* Name Input */}
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="title">Name: </label>
+                        <label htmlFor="title">Household Name: </label>
                         <input
                             type="text"
                             id="name"
