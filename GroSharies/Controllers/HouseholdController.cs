@@ -31,13 +31,14 @@ namespace GroSharies.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAllByUserId()
         {
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
             // Get the Id and Name of each Household the user is in and return it
-            var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
+            var userHouseholds = _householdUserRepository.GetAllByUserId(user.Id);
+
             return Ok(userHouseholds);
         }
 
