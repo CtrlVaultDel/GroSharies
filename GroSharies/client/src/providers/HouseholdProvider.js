@@ -1,6 +1,5 @@
 import React, { useState, createContext, useContext } from "react";
 import { UserContext } from "./UserProvider";
-import { HouseholdUserContext } from "./HouseholdUserProvider";
 import "firebase/auth";
 
 export const HouseholdContext = createContext();
@@ -8,7 +7,6 @@ export const HouseholdContext = createContext();
 export function HouseholdProvider(props) {
     const [households, setHouseholds] = useState([]);
     const { getToken } = useContext(UserContext); 
-    const { getUserHouseholds } = useContext(HouseholdUserContext);
     const apiUrl = "/api/household";
 
     // Gets all households associated with the current user
@@ -72,7 +70,7 @@ export function HouseholdProvider(props) {
                 Authorization: `Bearer ${token}`
             }
         }))
-        .then(getUserHouseholds)
+        .then(getHouseholds)
     };
 
     return (

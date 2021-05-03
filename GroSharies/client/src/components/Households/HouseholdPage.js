@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 import Household from "./Household";
 
-const HouseholdList = () => {
+const HouseholdPage = () => {
     const { households, getHouseholds } = useContext(HouseholdContext);
 
     useEffect(() => {
@@ -36,4 +36,4 @@ const HouseholdList = () => {
     );
 };
 
-export default HouseholdList;
+export default HouseholdPage;

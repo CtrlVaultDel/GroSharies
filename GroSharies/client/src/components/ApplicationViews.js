@@ -5,10 +5,15 @@ import Login from "./Login";
 import Register from "./Register";
 
 // Household Components
-import HouseholdList from "./Households/HouseholdList";
+import HouseholdPage from "./Households/HouseholdPage";
 import HouseholdDetails from "./Households/HouseholdDetails";
 import HouseholdFormAdd from "./Households/HouseholdFormAdd";
 import HouseholdFormEdit from "./Households/HouseholdFormEdit";
+
+// ShoppingList Components
+import ShoppingListDetails from "./ShoppingLists/ShoppingListDetails";
+import ShoppingListFormAdd from "./ShoppingLists/ShoppingListFormAdd";
+import ShoppingListFormEdit from "./ShoppingLists/ShoppingListFormEdit";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserContext);
@@ -16,6 +21,7 @@ export default function ApplicationViews() {
     return (
         <main>
             <Switch>
+                {/* -----------------LOGIN & REGISTRATION PAGES---------------- */}
                 <Route path="/" exact>
                     {isLoggedIn ? <Redirect to="/household"/> : <Redirect to="/login" />}
                 </Route>
@@ -30,12 +36,14 @@ export default function ApplicationViews() {
                     <Register />
                 </Route>
 
-                {/* Edit Household Form */}
+
+                {/* ----------------------HOUSEHOLD PAGES---------------------- */}
+                {/* Household Edit Form */}
                 <Route path="/household/edit/:id" exact>
                     {isLoggedIn ? <HouseholdFormEdit /> : <Redirect to="/Login" />}
                 </Route>
 
-                {/* New Household Form */}
+                {/* Household Add Form */}
                 <Route path="/household/new" exact>
                     {isLoggedIn ? <HouseholdFormAdd /> : <Redirect to="/Login" />}
                 </Route>
@@ -47,8 +55,26 @@ export default function ApplicationViews() {
 
                 {/* Households Page (List) */}
                 <Route path="/household" exact>
-                    {isLoggedIn ? <HouseholdList /> : <Redirect to="/Login" />}
-                </Route>               
+                    {isLoggedIn ? <HouseholdPage /> : <Redirect to="/Login" />}
+                </Route>
+
+
+                {/* --------------------SHOPPING LIST PAGES-------------------- */}
+                {/* ShoppingList Edit Form */}
+                <Route path="/shoppingList/edit/:id" exact>
+                    {isLoggedIn ? <ShoppingListFormEdit /> : <Redirect to="/Login" />}
+                </Route>
+
+                {/* ShoppingList Add Form */}
+                <Route path="/shoppingList/new" exact>
+                    {isLoggedIn ? <ShoppingListFormAdd /> : <Redirect to="/Login" />}
+                </Route>
+
+                {/* ShoppingList Detail Page */}
+                <Route path="/shoppingList/:id" exact>
+                    {isLoggedIn ? <ShoppingListDetails /> : <Redirect to="/Login" />}
+                </Route>
+
             </Switch>
         </main>
     );
