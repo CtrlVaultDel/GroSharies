@@ -18,7 +18,7 @@ namespace GroSharies.Models.DataModels
         public string Vendor { get; set; }
 
         [Required]
-        public DateTime DateCreated { get; set; }
+        public DateTime PurchaseDate { get; set; }
 
         [Required]
         public decimal TotalCost { get; set; }

@@ -4,6 +4,7 @@ using GroSharies.Models.DataModels;
 using GroSharies.Repositories;
 using System.Security.Claims;
 using System.Linq;
+using GroSharies.Models.DomainModels;
 
 namespace GroSharies.Controllers
 {
@@ -15,15 +16,18 @@ namespace GroSharies.Controllers
         private readonly IHouseholdRepository _householdRepository;
         private readonly IUserRepository _userRepository;
         private readonly IHouseholdUserRepository _householdUserRepository;
+        private readonly IShoppingListRepository _shoppingListRepository;
 
         public HouseholdController(
             IHouseholdRepository householdRepository,
             IUserRepository userRepository,
-            IHouseholdUserRepository householdUserRepository)
+            IHouseholdUserRepository householdUserRepository,
+            IShoppingListRepository shoppingListRepository)
         {
             _householdRepository = householdRepository;
             _userRepository = userRepository;
             _householdUserRepository = householdUserRepository;
+            _shoppingListRepository = shoppingListRepository;
         }
 
         [HttpGet]
@@ -47,7 +51,18 @@ namespace GroSharies.Controllers
             var userHouseholds = _householdRepository.GetAllHouseholds(user.Id);
             if (!userHouseholds.Any(household => household.Id == householdId)) return Unauthorized();
 
-            var householdDetail = _householdRepository.GetById(householdId);
+            // Get the specified household
+            var household = _householdRepository.GetById(householdId);
+
+            // Get the specified household's shopping list(s)
+            var shoppingLists = _shoppingListRepository.GetAllById(householdId);
+
+            var householdDetail = new HouseholdDetail()
+            {
+                Household = household,
+                ShoppingLists = shoppingLists
+            };
+
             return Ok(householdDetail);
         }
 

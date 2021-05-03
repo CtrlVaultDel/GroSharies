@@ -45,7 +45,7 @@ namespace GroSharies.Repositories
             }
         }
 
-        public HouseholdDetail GetById(int householdId)
+        public Household GetById(int householdId)
         {
             using (var conn = Connection)
             {
@@ -54,46 +54,26 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT 
-                        h.Id AS HouseholdId, h.Name AS HouseholdName,
-                        sl.Id AS ShoppingListId, sl.Name AS ShoppingListName, sl.DateCreated 
-                        FROM Household h
-                        LEFT JOIN ShoppingList sl ON h.Id = sl.HouseholdId
-                        WHERE h.Id = @HouseholdId";
+                        Id, Name                    
+                        FROM Household 
+                        WHERE Id = @HouseholdId";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
 
                     var reader = cmd.ExecuteReader();
 
-                    HouseholdDetail householdDetail = null;
+                    Household household = null;
 
-                    while (reader.Read())
-                    {
-                        if (householdDetail == null)
-                        {
-                            householdDetail = new HouseholdDetail()
-                            {
-                                Household = new Household() 
-                                {
-                                    Id = DbUtils.GetInt(reader, "HouseholdId"),
-                                    Name = DbUtils.GetString(reader, "HouseholdName")
-                                },
-                                ShoppingLists = new List<ShoppingList>()                     
-                            };
-                        }
-
-                        if (DbUtils.IsNotDbNull(reader,"ShoppingListId"))
-                        {
-                            var shoppingList = new ShoppingList()
-                            {
-                                Id = DbUtils.GetInt(reader, "ShoppingListId"),
-                                Name = DbUtils.GetString(reader, "ShoppingListName"),
-                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
-                            };
-                            householdDetail.ShoppingLists.Add(shoppingList);
-                        }
+                    if (reader.Read())
+                    {                     
+                        household = new Household()
+                        {                         
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name")                                              
+                        }; 
                     }
                     reader.Close();
-                    return householdDetail;
+                    return household;
                 }
             }
         }

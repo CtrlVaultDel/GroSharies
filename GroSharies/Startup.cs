@@ -32,6 +32,9 @@ namespace GroSharies
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IHouseholdRepository, HouseholdRepository>();
             services.AddTransient<IHouseholdUserRepository, HouseholdUserRepository>();
+            services.AddTransient<IShoppingListRepository, ShoppingListRepository>();
+            services.AddTransient<IPurchaseRepository, PurchaseRepository>();
+            services.AddTransient<IListItemRepository, ListItemRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
