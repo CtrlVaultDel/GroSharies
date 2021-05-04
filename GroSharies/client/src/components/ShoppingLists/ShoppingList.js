@@ -1,13 +1,44 @@
-import React from "react";
-import { Card, CardHeader } from "reactstrap";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Card, CardHeader, CardFooter, Button, Row, Col } from "reactstrap";
+import { Link, useHistory } from "react-router-dom";
+import { FaRegEdit } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import { ShoppingListContext } from "../../providers/ShoppingListProvider";
 
 const ShoppingList = ({ shoppingList }) => {
+    const { deleteShoppingList } = useContext(ShoppingListContext);
+    const history = useHistory();
+
+    const deleteWarning = () => {
+        const confirmBox = window.confirm(`Are you sure you wish to delete the ${shoppingList.name} shopping list? This action is irreversable.`);
+        if (confirmBox){
+            deleteShoppingList(shoppingList.id);
+        };
+    };
+
     return (
         <Card className="m-2 shadow postCard">
-            <CardHeader>
+
+            {/* Header & Link to ShoppingList Detail */}
+            <CardHeader className="text-center">
                 <Link to={`/shoppingList/${shoppingList.id}`}>{shoppingList.name}</Link>
             </CardHeader>
+            <CardFooter>
+                <Row>
+                    <Col className="text-center">
+                        {/* Edit button for ShoppingList */}
+                        <Button size="sm" onClick={() => history.push(`/shoppingList/edit/${shoppingList.id}`)}>
+                            <FaRegEdit />
+                        </Button>                    
+                    </Col>
+                    <Col className="text-center">
+                        {/* Delete button for ShoppingList */}
+                        <Button size="sm" onClick={() => deleteWarning()}>
+                            <FaTrashAlt />
+                        </Button>
+                    </Col>
+                </Row>
+            </CardFooter>
         </Card>
     );
 };

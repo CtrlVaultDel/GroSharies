@@ -25,7 +25,7 @@ namespace GroSharies.Repositories
 
                     var reader = cmd.ExecuteReader();
 
-                    List<Purchase> purchases = null;
+                    var purchases = new List<Purchase>();
 
                     while (reader.Read())
                     {

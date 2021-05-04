@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Card, CardHeader, Button } from "reactstrap";
+import { Card, CardHeader, CardFooter, Button, Row, Col } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
@@ -14,10 +14,17 @@ const Household = ({ household, userType, isAccepted }) => {
     // If they are, add an edit button to allow them to change its name.
     const checkIfAdmin = () => {
         if(userType === 1) {
-            return (<>
-                <Button size="sm" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
-                <Button size="sm" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
-            </>)  
+            return (
+            <Row>
+                <Col className="text-center">
+                    {/* Edit button for Household */}
+                    <Button size="sm" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
+                </Col>
+                <Col className="text-center">
+                    {/* Delete button for Household */}
+                    <Button size="sm" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
+                </Col>
+            </Row>)  
         };
     };
 
@@ -30,12 +37,14 @@ const Household = ({ household, userType, isAccepted }) => {
     };
     
     return(
-    <Card className="m-2 shadow postCard">
-        <CardHeader>
-            <Link to={`household/${household.id}`}>{household.name}</Link>
-            {checkIfAdmin()}
-        </CardHeader>
-    </Card>
+        <Card className="m-2 shadow postCard">
+            <CardHeader className="text-center">
+                <Link to={`household/${household.id}`}>{household.name}</Link>
+            </CardHeader>
+            <CardFooter>
+                {checkIfAdmin()}
+            </CardFooter>
+        </Card>
     )
 };
 

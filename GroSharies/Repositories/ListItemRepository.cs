@@ -25,7 +25,7 @@ namespace GroSharies.Repositories
 
                     var reader = cmd.ExecuteReader();
 
-                    List<ListItem> listItems = null;
+                    var listItems = new List<ListItem>();
 
                     while (reader.Read())
                     {
@@ -34,7 +34,7 @@ namespace GroSharies.Repositories
                             Id = DbUtils.GetInt(reader, "Id"),
                             ShoppingListId = DbUtils.GetInt(reader, "ShoppingListId"),
                             Name = DbUtils.GetString(reader, "Name"),
-                            IsChecked = DbUtils.GetBool(reader, "IsChecked"),
+                            IsChecked = DbUtils.GetBool(reader, "IsChecked")
                         };
                         listItems.Add(listItem);
                     }
