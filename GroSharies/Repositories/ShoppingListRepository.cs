@@ -55,7 +55,7 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT 
-                        sl.Id, sl.HouseholdId, sl.Name, sl.DateCreated,     
+                        sl.Id, sl.HouseholdId, sl.Name, sl.DateCreated     
                         FROM ShoppingList sl                      
                         WHERE sl.Id = @ShoppingListId";
 
@@ -98,6 +98,50 @@ namespace GroSharies.Repositories
                     DbUtils.AddParameter(cmd, "@DateCreated", DateTime.Now);
 
                     shoppingList.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Update(ShoppingList shoppingList)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE ShoppingList
+                        SET Name = @Name                                          
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", shoppingList.Id);
+                    DbUtils.AddParameter(cmd, "@Name", shoppingList.Name);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(int shoppingListId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                // Delete the specified ShoppingList row
+                /*
+                    Related Table rows deleted via cascading delete
+                    3) Purchase
+                    4) ListItem
+                 */
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE ShoppingList
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", shoppingListId);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

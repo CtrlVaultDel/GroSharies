@@ -1,48 +1,52 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { HouseholdContext } from "../../providers/HouseholdProvider";
+import { ShoppingListContext } from "../../providers/ShoppingListProvider";
 
 const ShoppingListFormEdit = () => {
     const history = useHistory();
     const { id } = useParams();
-    const { updateHousehold, getHousehold } = useContext(HouseholdContext);
+    const { updateShoppingList, getShoppingList } = useContext(ShoppingListContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [household, setHousehold] = useState({
-        id: 0,
-        name: ""
+    const [shoppingList, setShoppingList] = useState({
+        id: id,
+        householdId: 0,
+        name: "",
+        dateCreated: ""
     });
 
     useEffect(() => {
-        getHousehold(id)
-        .then(resp => setHousehold(resp.household))
+        getShoppingList(id)
+        .then(resp => setShoppingList(resp.shoppingList))
          // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     
     // Handles updating the state of household as the user updates the form
     const handleInput = e => {
-        const newHousehold = { ...household };
-        newHousehold[e.target.id] = e.target.value;
-        setHousehold(newHousehold);
+        const newShoppingList = { ...shoppingList };
+        newShoppingList[e.target.id] = e.target.value;
+        setShoppingList(newShoppingList);
     }
 
     const handleSave = () => {
-        if(household.name === "") return window.alert("Please enter a household name");
+        if(shoppingList.name === "") return window.alert("Please enter a shopping list name");
 
         // Disables the update button until finished
         setIsLoading(true)
 
         // Update the existing household in the database
-        updateHousehold({
-            id: household.id,
-            name: household.name
+        updateShoppingList({
+            id: shoppingList.id,
+            householdId: shoppingList.householdId,
+            name: shoppingList.name,
+            dateCreated: shoppingList.dateCreated
         })
-        .then(() => history.push("/household"));
+        .then(() => history.push(`/household/${shoppingList.householdId}`));
     }
 
     return (
         <>
-            <form className="householdForm">
-                <h2 className="householdForm-title">Update your household</h2>
+            <form className="shoppingListForm">
+                <h2 className="shoppingListForm-title">Update your shopping list</h2>
 
                 {/* Name Input */}
                 <fieldset>
@@ -56,7 +60,7 @@ const ShoppingListFormEdit = () => {
                             autoFocus
                             className="form-control"
                             placeholder="Name"
-                            value={household.name}
+                            value={shoppingList.name}
                         />
                     </div>
                 </fieldset>
@@ -70,7 +74,7 @@ const ShoppingListFormEdit = () => {
                     handleSave();
                     }}
                 >
-                    Update Household
+                    Update Shopping List
                 </button>
             </form>
         </>

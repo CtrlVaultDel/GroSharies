@@ -8,5 +8,7 @@ namespace GroSharies.Repositories
         List<ShoppingList> GetAllById(int householdId);
         ShoppingList GetById(int shoppingListId);
         void Add(ShoppingList shoppingList);
+        void Update(ShoppingList shoppingList);
+        void Delete(int shoppingListId);
     }
 }
