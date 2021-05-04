@@ -84,3 +84,6 @@ CREATE TABLE [HouseholdUser] (
   CONSTRAINT [FK_HouseholdUser_UserType] FOREIGN KEY ([UserTypeId]) REFERENCES [UserType] ([Id])
 )
 GO
+
+INSERT INTO UserType ([Name]) VALUES ('Admin');
+INSERT INTO UserType ([Name]) VALUES ('Member');
