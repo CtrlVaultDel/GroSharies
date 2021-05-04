@@ -38,7 +38,7 @@ const Household = ({ household, userType, isAccepted }) => {
     
     return(
         <Card className="m-2 shadow postCard">
-            <CardHeader>
+            <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>
             <CardFooter>

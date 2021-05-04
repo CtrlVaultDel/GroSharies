@@ -19,7 +19,7 @@ const ShoppingList = ({ shoppingList }) => {
         <Card className="m-2 shadow postCard">
 
             {/* Header & Link to ShoppingList Detail */}
-            <CardHeader >
+            <CardHeader className="text-center">
                 <Link to={`/shoppingList/${shoppingList.id}`}>{shoppingList.name}</Link>
             </CardHeader>
             <CardFooter>
