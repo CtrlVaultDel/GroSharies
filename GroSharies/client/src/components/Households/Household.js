@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { Card, CardHeader, CardFooter, Button, Row, Col } from "reactstrap";
+import { Card, CardHeader, CardBody, CardFooter, Button, Row, Col } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 
-const Household = ({ household, userType, isAccepted }) => {
+const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
     const history = useHistory();
     const { deleteHousehold } = useContext(HouseholdContext);
@@ -15,16 +15,18 @@ const Household = ({ household, userType, isAccepted }) => {
     const checkIfAdmin = () => {
         if(userType === 1) {
             return (
-            <Row>
-                <Col className="text-center">
-                    {/* Edit button for Household */}
-                    <Button size="sm" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
-                </Col>
-                <Col className="text-center">
-                    {/* Delete button for Household */}
-                    <Button size="sm" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
-                </Col>
-            </Row>)  
+            <CardFooter>
+                <Row>
+                    <Col className="text-center">
+                        {/* Edit button for Household */}
+                        <Button size="sm" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
+                    </Col>
+                    <Col className="text-center">
+                        {/* Delete button for Household */}
+                        <Button size="sm" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
+                    </Col>
+                </Row>
+            </CardFooter>)  
         };
     };
 
@@ -37,13 +39,19 @@ const Household = ({ household, userType, isAccepted }) => {
     };
     
     return(
-        <Card className="m-2 shadow postCard">
+        <Card className="m-2 shadow postCard" max-width="100px">
             <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>
-            <CardFooter>
-                {checkIfAdmin()}
-            </CardFooter>
+            <CardBody>
+                <Row>
+                    Users: {numUsers}
+                </Row>  
+                <Row>
+                    Lists: {numLists}       
+                </Row>   
+            </CardBody>          
+            {checkIfAdmin()}
         </Card>
     )
 };

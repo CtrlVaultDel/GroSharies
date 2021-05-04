@@ -128,6 +128,66 @@ namespace GroSharies.Repositories
             }
         }
 
+        public int CountHouseholdUsers(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT HouseholdId,
+                    COUNT(HouseholdId) AS NumUsers
+                    FROM HouseholdUser
+                    WHERE HouseholdId = @HouseholdUserId
+                    GROUP BY HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdUserId", householdId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    int numUsers = 0;
+
+                    if (reader.Read())
+                    {
+                        numUsers = DbUtils.GetInt(reader, "NumUsers");
+                    }
+
+                    return numUsers;
+                }
+            }
+        }
+
+        public int CountHouseholdLists(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT HouseholdId,
+                    COUNT(HouseholdId) AS NumLists
+                    FROM ShoppingList
+                    WHERE HouseholdId = @HouseholdUserId
+                    GROUP BY HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdUserId", householdId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    int numLists = 0;
+
+                    if (reader.Read())
+                    {
+                        numLists = DbUtils.GetInt(reader, "NumLists");
+                    }
+
+                    return numLists;
+                }
+            }
+        }
+
         public void AddAdmin(int householdId, int userId)
         {
             using (var conn = Connection)

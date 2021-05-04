@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";

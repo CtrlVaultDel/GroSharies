@@ -5,6 +5,7 @@ using GroSharies.Repositories;
 using System.Security.Claims;
 using System.Linq;
 using GroSharies.Models.DomainModels;
+using System.Collections.Generic;
 
 namespace GroSharies.Controllers
 {
@@ -39,6 +40,11 @@ namespace GroSharies.Controllers
             // Get the Id and Name of each Household the user is in and return it
             var userHouseholds = _householdUserRepository.GetAllByUserId(user.Id);
 
+            foreach (var hur in userHouseholds)
+            {
+                hur.NumUsers = _householdUserRepository.CountHouseholdUsers(hur.Household.Id);
+                hur.NumLists = _householdUserRepository.CountHouseholdLists(hur.Household.Id);
+            }
             return Ok(userHouseholds);
         }
 

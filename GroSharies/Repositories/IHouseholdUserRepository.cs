@@ -10,5 +10,7 @@ namespace GroSharies.Repositories
         List<HouseholdUser> GetAllByHousehold(int householdId);
         HouseholdUser GetHouseholdUser(int householdId, int userId);
         void AddAdmin(int householdId, int userId);
+        int CountHouseholdUsers(int householdId);
+        int CountHouseholdLists(int householdId);
     }
 }
