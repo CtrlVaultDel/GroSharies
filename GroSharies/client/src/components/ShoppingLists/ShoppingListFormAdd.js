@@ -29,7 +29,6 @@ const ShoppingListFormAdd = () => {
 
         // Disables the save button until finished
         setIsLoading(true)
-        console.log(shoppingList);
         // Save the household object to the database
         saveShoppingList({
             householdId: shoppingList.householdId,

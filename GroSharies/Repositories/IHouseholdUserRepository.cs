@@ -7,7 +7,7 @@ namespace GroSharies.Repositories
     public interface IHouseholdUserRepository
     {
         List<HouseholdUserRelation> GetAllByUserId(int userId);
-
+        List<HouseholdUser> GetAllByHousehold(int householdId);
         HouseholdUser GetHouseholdUser(int householdId, int userId);
         void AddAdmin(int householdId, int userId);
     }

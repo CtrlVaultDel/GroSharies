@@ -5,9 +5,23 @@ import "firebase/auth";
 export const HouseholdContext = createContext();
 
 export function HouseholdProvider(props) {
+    const [householdDetail, setHouseholdDetail] = useState();
     const [households, setHouseholds] = useState([]);
     const { getToken } = useContext(UserContext); 
     const apiUrl = "/api/household";
+    
+    // Gets single household by the provided householdId
+    const getHouseholdDetail = householdId => {
+        return getToken()
+        .then(token => fetch(`${apiUrl}/${householdId}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(res => res.json())
+        .then(setHouseholdDetail);
+    };
 
     // Gets all households associated with the current user
     const getHouseholds = () => {
@@ -20,18 +34,6 @@ export function HouseholdProvider(props) {
         }))
         .then(res => res.json())
         .then(setHouseholds);
-    };
-
-    // Gets single household by the provided householdId
-    const getHousehold = householdId => {
-        return getToken()
-        .then(token => fetch(`${apiUrl}/${householdId}`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }))
-        .then(res => res.json())
     };
 
     // Saves a new household object to the database
@@ -76,9 +78,10 @@ export function HouseholdProvider(props) {
     return (
         <HouseholdContext.Provider
             value={{
-                households,
+                getHouseholdDetail,
+                householdDetail,
                 getHouseholds,
-                getHousehold,
+                households,
                 saveHousehold,
                 updateHousehold,
                 deleteHousehold

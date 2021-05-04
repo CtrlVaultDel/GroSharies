@@ -57,6 +57,41 @@ namespace GroSharies.Repositories
             }
         }
 
+        public List<HouseholdUser> GetAllByHousehold(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT Id, HouseholdId, UserId, UserTypeId, IsAccepted
+                    FROM HouseholdUser
+                    WHERE HouseholdId = @HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var householdUsers = new List<HouseholdUser>();
+
+                    while (reader.Read())
+                    {
+                        var householdUser = new HouseholdUser()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                            IsAccepted = DbUtils.GetBool(reader, "IsAccepted")
+                        };
+                        householdUsers.Add(householdUser);
+                    }
+                    return householdUsers;
+                }
+            }
+        }
+
         public HouseholdUser GetHouseholdUser(int householdId, int userId)
         {
             using (var conn = Connection)
@@ -65,9 +100,9 @@ namespace GroSharies.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, HouseholdId, UserId, UserTypeId, IsAccepted
-                        FROM HouseholdUser
-                        WHERE UserId = @UserId AND HouseholdId = @HouseholdId";
+                    SELECT Id, HouseholdId, UserId, UserTypeId, IsAccepted
+                    FROM HouseholdUser
+                    WHERE UserId = @UserId AND HouseholdId = @HouseholdId";
 
                     DbUtils.AddParameter(cmd, "@UserId", userId);
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);

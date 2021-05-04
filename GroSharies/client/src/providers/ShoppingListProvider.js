@@ -1,26 +1,14 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import { UserContext } from "./UserProvider";
 import "firebase/auth";
+import { HouseholdContext } from "./HouseholdProvider";
 
 export const ShoppingListContext = createContext();
 
 export function ShoppingListProvider(props) {
-    const [ shoppingLists, setShoppingLists] = useState([]);
+    const { getHouseholdDetail } = useContext(HouseholdContext);
     const { getToken } = useContext(UserContext); 
     const apiUrl = "/api/shoppingList";
-
-    // Gets all shoppingLists by the provided householdId
-    const getShoppingLists = householdId => {
-        return getToken()
-        .then(token => fetch(`${apiUrl}/${householdId}`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }))
-        .then(res => res.json())
-        .then(setShoppingLists)
-    };
 
     // Gets single shoppingList by the provided shoppingListId
     const getShoppingList = shoppingListId => {
@@ -62,22 +50,20 @@ export function ShoppingListProvider(props) {
     };
 
     // Deletes a shoppingList object from the database
-    const deleteShoppingList = shoppingListId => {
+    const deleteShoppingList = shoppingList => {
         return getToken()
-        .then(token => fetch(`${apiUrl}/${shoppingListId}`, {
+        .then(token => fetch(`${apiUrl}/${shoppingList.id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }))
-        .then(getShoppingLists)
+        .then(getHouseholdDetail(shoppingList.householdId))
     };
 
     return (
         <ShoppingListContext.Provider
             value={{
-                shoppingLists,
-                getShoppingLists,
                 getShoppingList,
                 saveShoppingList,
                 updateShoppingList,
