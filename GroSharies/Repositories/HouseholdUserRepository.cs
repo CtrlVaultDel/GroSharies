@@ -57,6 +57,41 @@ namespace GroSharies.Repositories
             }
         }
 
+        public List<HouseholdUser> GetAllByHousehold(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT Id, HouseholdId, UserId, UserTypeId, IsAccepted
+                    FROM HouseholdUser
+                    WHERE HouseholdId = @HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var householdUsers = new List<HouseholdUser>();
+
+                    while (reader.Read())
+                    {
+                        var householdUser = new HouseholdUser()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                            IsAccepted = DbUtils.GetBool(reader, "IsAccepted")
+                        };
+                        householdUsers.Add(householdUser);
+                    }
+                    return householdUsers;
+                }
+            }
+        }
+
         public HouseholdUser GetHouseholdUser(int householdId, int userId)
         {
             using (var conn = Connection)
@@ -65,9 +100,9 @@ namespace GroSharies.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, HouseholdId, UserId, UserTypeId, IsAccepted
-                        FROM HouseholdUser
-                        WHERE UserId = @UserId AND HouseholdId = @HouseholdId";
+                    SELECT Id, HouseholdId, UserId, UserTypeId, IsAccepted
+                    FROM HouseholdUser
+                    WHERE UserId = @UserId AND HouseholdId = @HouseholdId";
 
                     DbUtils.AddParameter(cmd, "@UserId", userId);
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
@@ -89,6 +124,66 @@ namespace GroSharies.Repositories
                     }                              
                     reader.Close();
                     return householdUser;
+                }
+            }
+        }
+
+        public int CountHouseholdUsers(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT HouseholdId,
+                    COUNT(HouseholdId) AS NumUsers
+                    FROM HouseholdUser
+                    WHERE HouseholdId = @HouseholdUserId
+                    GROUP BY HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdUserId", householdId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    int numUsers = 0;
+
+                    if (reader.Read())
+                    {
+                        numUsers = DbUtils.GetInt(reader, "NumUsers");
+                    }
+
+                    return numUsers;
+                }
+            }
+        }
+
+        public int CountHouseholdLists(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT HouseholdId,
+                    COUNT(HouseholdId) AS NumLists
+                    FROM ShoppingList
+                    WHERE HouseholdId = @HouseholdUserId
+                    GROUP BY HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdUserId", householdId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    int numLists = 0;
+
+                    if (reader.Read())
+                    {
+                        numLists = DbUtils.GetInt(reader, "NumLists");
+                    }
+
+                    return numLists;
                 }
             }
         }

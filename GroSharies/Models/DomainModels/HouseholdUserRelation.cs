@@ -6,5 +6,7 @@ namespace GroSharies.Models.DomainModels
     {
         public Household Household { get; set; }
         public HouseholdUser Relation { get; set; }
+        public int NumUsers { get; set; }
+        public int NumLists { get; set; }
     }
 }

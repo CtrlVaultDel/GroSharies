@@ -1,19 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import ShoppingList from "../ShoppingLists/ShoppingList";
 
 const HouseholdDetails = () => {
-    const [ householdDetail, setHouseholdDetail ] = useState();
-    const { getHousehold } = useContext(HouseholdContext);
+    const { getHouseholdDetail, householdDetail } = useContext(HouseholdContext);
     const { id } = useParams();
 
-    useEffect(() => {
-    getHousehold(id)
-    .then(setHouseholdDetail);
+    useEffect(() => getHouseholdDetail(id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    , []);
     
     if(householdDetail == null) return null;
     

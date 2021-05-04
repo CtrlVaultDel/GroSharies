@@ -12,7 +12,7 @@ const ShoppingList = ({ shoppingList }) => {
     const deleteWarning = () => {
         const confirmBox = window.confirm(`Are you sure you wish to delete the ${shoppingList.name} shopping list? This action is irreversable.`);
         if (confirmBox){
-            deleteShoppingList(shoppingList.id);
+            deleteShoppingList(shoppingList)
         };
     };
 

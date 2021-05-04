@@ -5,7 +5,7 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 const HouseholdFormEdit = () => {
     const history = useHistory();
     const { id } = useParams();
-    const { updateHousehold, getHousehold } = useContext(HouseholdContext);
+    const { updateHousehold, householdDetail, getHouseholdDetail } = useContext(HouseholdContext);
     const [isLoading, setIsLoading] = useState(false);
     const [household, setHousehold] = useState({
         id: 0,
@@ -13,8 +13,8 @@ const HouseholdFormEdit = () => {
     });
     
     useEffect(() => {
-        getHousehold(id)
-        .then(resp => setHousehold(resp.household))
+        getHouseholdDetail(id)
+        .then(setHousehold(householdDetail.household))
          // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     

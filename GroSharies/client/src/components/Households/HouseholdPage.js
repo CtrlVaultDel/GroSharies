@@ -11,7 +11,7 @@ const HouseholdPage = () => {
         getHouseholds();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
+    console.log(households);
     return (
     <Container>
         <Row className="justify-content-md-center">
@@ -28,6 +28,8 @@ const HouseholdPage = () => {
                             household = {h.household} 
                             userType = {h.relation.userTypeId} 
                             isAccepted = {h.relation.isAccepted}
+                            numLists = {h.numLists}
+                            numUsers = {h.numUsers}
                         />
                 </Col>
             ))}
