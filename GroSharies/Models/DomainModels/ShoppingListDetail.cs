@@ -7,6 +7,6 @@ namespace GroSharies.Models.DomainModels
     {
         public ShoppingList ShoppingList { get; set; }
         public List<ListItem> ListItems { get; set; }
-        public List<Purchase> Purchases { get; set; }
+        public List<PurchaseDetail> Purchases { get; set; }
     }
 }
