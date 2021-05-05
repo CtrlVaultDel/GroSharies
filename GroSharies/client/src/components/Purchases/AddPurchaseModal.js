@@ -11,7 +11,7 @@ const AddPurchaseModal = ({shoppingList}) => {
 
     // Note (UserId will be derived from the server-side)
     const [purchase, setPurchase] = useState({
-        shoppingListId: 0,
+        shoppingListId: shoppingList.id,
         userId: 0,
         vendor: "",
         purchaseDate: currentDate.toLocaleDateString('en-CA'),
@@ -25,6 +25,7 @@ const AddPurchaseModal = ({shoppingList}) => {
         setPurchase(newPurchase);
     };
 
+    // Called when the user submits the new purchase form
     const handleSave = () => {
         if(purchase.vendor === "") return window.alert("Please enter a vendor");
         if(purchase.purchaseDate === "") return window.alert("Please enter a purchase date");
@@ -55,6 +56,7 @@ const AddPurchaseModal = ({shoppingList}) => {
 
                         {/* Vendor Input */}
                         <FormGroup>
+
                             <Label for="vendor">Vendor </Label>
                             <Input
                                 type="text"
@@ -87,6 +89,7 @@ const AddPurchaseModal = ({shoppingList}) => {
                                 id="totalCost"
                                 onChange={handleInput}
                                 required
+                                placeholder= "0"
                                 value={purchase.totalCost}
                             />
                         </FormGroup>
