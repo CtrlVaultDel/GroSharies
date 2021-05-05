@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { PurchaseContext } from "../../providers/PurchaseProvider";
 
-const AddPurchaseModal = ({shoppingList}) => {
-    const { savePurchase } = useContext(PurchaseContext);
+const AddPurchaseModal = ({shoppingList, setPurchases}) => {
+    const { getPurchases, savePurchase } = useContext(PurchaseContext);
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
 
@@ -39,7 +39,9 @@ const AddPurchaseModal = ({shoppingList}) => {
             vendor: purchase.vendor,
             purchaseDate: purchase.purchaseDate,
             totalCost: purchase.totalCost
-        });
+        })
+        .then(getPurchases(shoppingList.id))
+        .then(setPurchases);
     };
 
     const toggle = () => setModal(!modal);

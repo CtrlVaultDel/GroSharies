@@ -8,6 +8,18 @@ export function PurchaseProvider(props) {
     const { getToken } = useContext(UserContext); 
     const apiUrl = "/api/purchase";
 
+    // Retrieves all purchase objects for a particular shoppingList
+    const getPurchases = shoppingListId => {
+        return getToken()
+        .then(token => fetch(`${apiUrl}/${shoppingListId}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(res => res.json())
+    };
+
     // Saves a new purchase object to the database
     const savePurchase = purchase => {
         return getToken()
@@ -49,6 +61,7 @@ export function PurchaseProvider(props) {
     return (
         <PurchaseContext.Provider
             value={{
+                getPurchases,
                 savePurchase,
                 updatePurchase,
                 deletePurchase

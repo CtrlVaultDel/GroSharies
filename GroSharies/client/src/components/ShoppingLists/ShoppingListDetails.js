@@ -68,8 +68,7 @@ const ShoppingListDetails = () => {
 
             {/* ==================== PURCHASES ==================== */}
             <h2 className="text-center">Purchases</h2>
-            {console.log(shoppingList)}
-            <AddPurchaseModal shoppingList = {shoppingList} />
+            <AddPurchaseModal shoppingList = {shoppingList} setPurchases = {setPurchases} />
             <Table dark striped bordered hover>
                 <thead>
                     <tr>
