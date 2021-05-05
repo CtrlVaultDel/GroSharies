@@ -1,10 +1,10 @@
-﻿using GroSharies.Models.DataModels;
+﻿using GroSharies.Models.DomainModels;
 using System.Collections.Generic;
 
 namespace GroSharies.Repositories
 {
     public interface IPurchaseRepository
     {
-        List<Purchase> GetAllById(int shoppingListId);
+        List<PurchaseDetail> GetAllById(int shoppingListId);
     }
 }
