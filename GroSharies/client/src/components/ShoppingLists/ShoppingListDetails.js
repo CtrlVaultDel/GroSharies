@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Table, Button, Input } from "reactstrap";
+import { Container, Row, Table, Button } from "reactstrap";
 import {ShoppingListContext} from "../../providers/ShoppingListProvider";
 import PurchaseRow from "../Purchases/PurchaseRow";
 
@@ -35,6 +35,8 @@ const ShoppingListDetails = () => {
     const checkedItems = getCheckedItems(listItems);
     const uncheckedItems = getUncheckedItems(listItems);
 
+    const handleChange = item => console.log("Item Changed", item.name, item.isChecked);
+
     return (
         <Container>
             <Row className="justify-content-md-center">
@@ -48,15 +50,13 @@ const ShoppingListDetails = () => {
                 <Table bordered size="sm">
                     <thead className="text-center">
                         <tr>
-                            <th>Item Name</th>
-                            <th>Got it?</th>                             
+                            <th>Item Name</th>                            
                         </tr>
                     </thead> 
                     {uncheckedItems.length? uncheckedItems.map(i => 
                         <tbody key={i.id}>
                             <tr>
                                 <td>{i.name}</td>
-                                <td><Input type="checkbox"/></td>
                             </tr>
                         </tbody>                       
                     ) : null
@@ -65,7 +65,6 @@ const ShoppingListDetails = () => {
                         <tbody key={i.id}>
                             <tr>
                                 <td>{i.name}</td>
-                                <td><Input type="checkbox" checked/></td>
                             </tr>
                         </tbody>
                          

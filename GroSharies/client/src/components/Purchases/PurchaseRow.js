@@ -4,7 +4,7 @@ const PurchaseRow = ({ purchaseDetail }) => {
 
     return(
        <tr>
-           <th scope="row">{purchaseDetail.purchase.date}</th>
+           <td>{purchaseDetail.purchase.purchaseDate}</td>
            <td>{purchaseDetail.buyer}</td>
            <td>{purchaseDetail.purchase.vendor}</td>
            <td>{purchaseDetail.purchase.totalCost}</td>
