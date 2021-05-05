@@ -65,7 +65,7 @@ const HouseholdFormAdd = () => {
                 </button>
             </form>
         </>
-        );
+    );
 }
 
 export default HouseholdFormAdd

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Table, Button } from "reactstrap";
 import {ShoppingListContext} from "../../providers/ShoppingListProvider";
 import PurchaseRow from "../Purchases/PurchaseRow";
+import AddPurchaseModal from "../Purchases/AddPurchaseModal";
 
 const ShoppingListDetails = () => {
     const [shoppingList, setShoppingList] = useState([]);
@@ -26,6 +27,8 @@ const ShoppingListDetails = () => {
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    if(!shoppingList) return null;
     
     return (
         <Container>
@@ -63,20 +66,18 @@ const ShoppingListDetails = () => {
                 </Table>
             </Row>
 
-            <h2>Purchases</h2>
-
-            <Row>
-                <input placeholder="New Purchase" />
-                <Button>Add Purchase</Button>
-            </Row>
-
-            <Table striped bordered hover>
+            {/* ==================== PURCHASES ==================== */}
+            <h2 className="text-center">Purchases</h2>
+            {console.log(shoppingList)}
+            <AddPurchaseModal shoppingList = {shoppingList} />
+            <Table dark striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Date</th>
+                        <td>Date</td>
                         <td>Name</td>
                         <td>Vendor</td>
                         <td>Amount</td>
+                        <td>Modify</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,6 +86,7 @@ const ShoppingListDetails = () => {
                         <PurchaseRow key = {p.purchase.id} purchaseDetail = {p} />)
                         ) : <tr>
                                 <th>N/A</th>
+                                <td>N/A</td>
                                 <td>N/A</td>
                                 <td>N/A</td>
                                 <td>N/A</td>
