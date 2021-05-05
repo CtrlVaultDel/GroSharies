@@ -5,7 +5,6 @@ using GroSharies.Repositories;
 using System.Security.Claims;
 using System.Linq;
 using GroSharies.Models.DomainModels;
-using System.Collections.Generic;
 
 namespace GroSharies.Controllers
 {

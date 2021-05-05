@@ -7,28 +7,26 @@ const AddPurchaseModal = ({shoppingList}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
 
-    const currentDate = new Date();
+    const currentDate = new Date().toLocaleDateString('en-CA');
 
     // Note (UserId will be derived from the server-side)
     const [purchase, setPurchase] = useState({
         shoppingListId: shoppingList.id,
         userId: 0,
         vendor: "",
-        purchaseDate: currentDate.toLocaleDateString('en-CA'),
+        purchaseDate: currentDate,
         totalCost: 0
     });
 
     // Handles updating the state of purchase as the user updates the form
     const handleInput = e => {
         const newPurchase = { ...purchase };
-        purchase[e.target.id] = e.target.value;
+        newPurchase[e.target.id] = e.target.value;
         setPurchase(newPurchase);
     };
 
     // Called when the user submits the new purchase form
     const handleSave = () => {
-        if(purchase.vendor === "") return window.alert("Please enter a vendor");
-        if(purchase.purchaseDate === "") return window.alert("Please enter a purchase date");
         if(purchase.totalCost === 0) return window.alert("Please enter an amount");
 
         // Disables the save button until finished
