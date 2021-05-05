@@ -53,5 +53,76 @@ namespace GroSharies.Repositories
                 }
             }
         }
+
+        public void Add(Purchase purchase)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Purchase (ShoppingListId, UserId, Vendor, PurchaseDate, TotalCost) 
+                        OUTPUT INSERTED.ID
+                        VALUES (@ShoppingListId, @UserId, @Vendor, @PurchaseDate, @TotalCost)";
+
+                    DbUtils.AddParameter(cmd, "@ShoppingListId", purchase.ShoppingListId);
+                    DbUtils.AddParameter(cmd, "@UserId", purchase.UserId);
+                    DbUtils.AddParameter(cmd, "@Vendor", purchase.Vendor);
+                    DbUtils.AddParameter(cmd, "@PurchaseDate", purchase.PurchaseDate);
+                    DbUtils.AddParameter(cmd, "@TotalCost", purchase.TotalCost);
+
+                    purchase.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Update(Purchase purchase)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Purchase
+                        SET 
+                            ShoppingListId = @ShoppingListId, 
+                            UserId = @UserId, 
+                            Vendor = @Vendor, 
+                            PurchaseDate = @PurchaseDate, 
+                            TotalCost = @TotalCost 
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", purchase.Id);
+                    DbUtils.AddParameter(cmd, "@ShoppingListId", purchase.ShoppingListId);
+                    DbUtils.AddParameter(cmd, "@UserId", purchase.UserId);
+                    DbUtils.AddParameter(cmd, "@Vendor", purchase.Vendor);
+                    DbUtils.AddParameter(cmd, "@PurchaseDate", purchase.PurchaseDate);
+                    DbUtils.AddParameter(cmd, "@TotalCost", purchase.TotalCost);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(int purchaseId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE Purchase
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", purchaseId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
