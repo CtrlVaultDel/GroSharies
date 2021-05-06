@@ -43,5 +43,70 @@ namespace GroSharies.Repositories
                 }
             }
         }
+
+        public void Add(ListItem listItem)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO ListItem (ShoppingListId, Name, IsChecked) 
+                        OUTPUT INSERTED.ID
+                        VALUES (@ShoppingListId, @Name, @IsChecked)";
+
+                    DbUtils.AddParameter(cmd, "@ShoppingListId", listItem.ShoppingListId);
+                    DbUtils.AddParameter(cmd, "@Name", listItem.Name);
+                    DbUtils.AddParameter(cmd, "@IsChecked", listItem.IsChecked);
+
+                    listItem.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Update(ListItem listItem)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE ListItem
+                        SET 
+                            ShoppingListId = @ShoppingListId, 
+                            Name = @Name, 
+                            IsChecked = @IsChecked, 
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", listItem.Id);
+                    DbUtils.AddParameter(cmd, "@ShoppingListId", listItem.ShoppingListId);
+                    DbUtils.AddParameter(cmd, "@Name", listItem.Name);
+                    DbUtils.AddParameter(cmd, "@IsChecked", listItem.IsChecked);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(int listItemId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE ListItem
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", listItemId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
