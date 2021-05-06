@@ -20,6 +20,17 @@ export function PurchaseProvider(props) {
         .then(res => res.json())
     };
 
+    const getPurchase = purchaseId => {
+        return getToken()
+        .then(token => (`${apiUrl}/${purchaseId}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(res => res.json())
+    };
+
     // Saves a new purchase object to the database
     const savePurchase = purchase => {
         return getToken()
@@ -62,6 +73,7 @@ export function PurchaseProvider(props) {
         <PurchaseContext.Provider
             value={{
                 getPurchases,
+                getpurchase,
                 savePurchase,
                 updatePurchase,
                 deletePurchase
