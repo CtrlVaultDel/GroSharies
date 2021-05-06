@@ -1,21 +1,23 @@
 import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { PurchaseContext } from "../../providers/PurchaseProvider";
+import { FaRegEdit } from "react-icons/fa";
 
-const AddPurchaseModal = ({shoppingList, setPurchases}) => {
-    const { savePurchase } = useContext(PurchaseContext);
+const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
+    const { updatePurchase } = useContext(PurchaseContext);
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
     
-    const currentDate = new Date().toLocaleDateString('en-CA');
-
+    const priorDate = new Date(priorPurchase.purchase.purchaseDate).toLocaleDateString('en-CA');
+    
     // Note (UserId will be derived from the server-side)
     const [purchase, setPurchase] = useState({
+        id: priorPurchase.purchase.id,
         shoppingListId: shoppingList.id,
-        userId: 0,
-        vendor: "",
-        purchaseDate: currentDate,
-        totalCost: 0
+        userId: priorPurchase.purchase.userId,
+        vendor: priorPurchase.purchase.vendor,
+        purchaseDate: priorDate,
+        totalCost: priorPurchase.purchase.totalCost
     });
 
     // Handles updating the state of purchase as the user updates the form
@@ -26,7 +28,7 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
     };
 
     // Called when the user submits the new purchase form
-    const handleSave = () => {
+    const handleUpdate = () => {
         if(purchase.vendor === "") return window.alert("Please enter a vendor");
         if(purchase.totalCost === 0) return window.alert("Please enter an amount");
 
@@ -34,8 +36,9 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
         setIsLoading(true);
 
         // Save the purchase object to the database
-        savePurchase({
-            shoppingListId: shoppingList.id,
+        updatePurchase({
+            id: purchase.id,
+            shoppingListId: purchase.shoppingListId,
             userId: purchase.userId,
             vendor: purchase.vendor,
             purchaseDate: purchase.purchaseDate,
@@ -48,9 +51,9 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
 
     return (
         <div>
-            <Button color="success" onClick={toggle}>New Purchase</Button>
+            <Button size="sm" className="ml-2" color="warning" onClick={toggle}><FaRegEdit /></Button>
             <Modal isOpen={modal} toggle={toggle} >
-                <ModalHeader toggle={toggle}>New Purchase for {shoppingList.name}</ModalHeader>
+                <ModalHeader toggle={toggle}>Edit Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>
                     <Form className="purchaseForm">
 
@@ -104,11 +107,11 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
                             disabled={isLoading}
                             onClick={(event) => {
                             event.preventDefault();
-                            handleSave();
+                            handleUpdate();
                             toggle();
                             }}
                         >
-                            Add Purchase
+                            Update Purchase
                         </Button>
                     </Form>
                 </ModalBody>
@@ -117,4 +120,4 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
     );
 }
 
-export default AddPurchaseModal;
+export default EditPurchaseModal;

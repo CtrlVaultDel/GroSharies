@@ -31,7 +31,7 @@ export function PurchaseProvider(props) {
             },
             body: JSON.stringify(purchase),
           }))
-        .then(resp => resp.json())
+        .then(() => getPurchases(purchase.shoppingListId))
     };
 
     // Updates a pre-existing purchase object in the database
@@ -45,6 +45,7 @@ export function PurchaseProvider(props) {
             },
             body: JSON.stringify(purchase),
         }))
+        .then(() => getPurchases(purchase.shoppingListId))
     };
 
     // Deletes a purchase object from the database

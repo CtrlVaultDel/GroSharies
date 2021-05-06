@@ -46,7 +46,7 @@ namespace GroSharies.Controllers
             // Add the purchase object that was passed in to the database
             _purchaseRepository.Add(purchase);
 
-            return RedirectToAction("GetAllById", new { shoppingListId = purchase.ShoppingListId });
+            return NoContent();
         }
 
         [HttpPut("{purchaseId}")]

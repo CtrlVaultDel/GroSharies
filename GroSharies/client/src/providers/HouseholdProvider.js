@@ -37,7 +37,7 @@ export function HouseholdProvider(props) {
     };
 
     // Saves a new household object to the database
-    const saveHousehold = (household) => {
+    const saveHousehold = household => {
         return getToken()
         .then(token => fetch(apiUrl, {
             method: "POST",
