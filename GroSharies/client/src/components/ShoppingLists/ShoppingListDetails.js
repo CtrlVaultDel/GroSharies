@@ -3,40 +3,32 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Table, Button } from "reactstrap";
 import {ShoppingListContext} from "../../providers/ShoppingListProvider";
 import PurchaseRow from "../Purchases/PurchaseRow";
+import AddPurchaseModal from "../Purchases/AddPurchaseModal";
 
 const ShoppingListDetails = () => {
+    const [shoppingList, setShoppingList] = useState([]);
+    const [checkedItems, setCheckedItems] = useState([]);
+    const [uncheckedItems, setUncheckedItems] = useState([]);
+    const [purchases, setPurchases] = useState([]);
     const { getShoppingList } = useContext(ShoppingListContext);
-
-    /*
-    shoppingListDetails = {
-        shoppingList,
-        listItems,
-        purchases
-    }
-    */
-    // shopListDet == shoppingListDetails
-    const [ shopListDet, setShopListDet] = useState()
     const { id } = useParams();
-
-    useEffect(() => {
-        getShoppingList(id)
-        .then(setShopListDet);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    
-    if(shopListDet == null) return null;
-    
-    // Destructure the ShoppingListDetails object
-    const { shoppingList, listItems, purchases } = shopListDet;
 
     const getCheckedItems = items => items.filter(li => li.isChecked === true);
     const getUncheckedItems = items => items.filter(li => li.isChecked === false);
 
-    const checkedItems = getCheckedItems(listItems);
-    const uncheckedItems = getUncheckedItems(listItems);
+    useEffect(() => {
+        getShoppingList(id)
+        .then(resp => {
+            setShoppingList(resp.shoppingList);
+            setCheckedItems(getCheckedItems(resp.listItems));
+            setUncheckedItems(getUncheckedItems(resp.listItems));
+            setPurchases(resp.purchases)
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-    const handleChange = item => console.log("Item Changed", item.name, item.isChecked);
-
+    if(!shoppingList) return null;
+    
     return (
         <Container>
             <Row className="justify-content-md-center">
@@ -73,28 +65,27 @@ const ShoppingListDetails = () => {
                 </Table>
             </Row>
 
-            <h2>Purchases</h2>
-
-            <Row>
-                <input placeholder="New Purchase" />
-                <Button>Add Purchase</Button>
-            </Row>
-
-            <Table striped bordered hover>
+            {/* ==================== PURCHASES ==================== */}
+            <h2 className="text-center">Purchases</h2>
+            <AddPurchaseModal shoppingList = {shoppingList} setPurchases = {setPurchases} />
+            <Table dark striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Date</th>
+                        <td>Date</td>
                         <td>Name</td>
                         <td>Vendor</td>
                         <td>Amount</td>
+                        <td>Modify</td>
                     </tr>
                 </thead>
                 <tbody>
                     {/* If any purchases exist, use the PurchaseRow component to inject them into the table */}
                     {purchases.length? purchases.map(p => (
                         <PurchaseRow key = {p.purchase.id} purchaseDetail = {p} />)
-                        ) : <tr>
-                                <th>N/A</th>
+                        )
+                            : <tr>
+                                <td>N/A</td>
+                                <td>N/A</td>
                                 <td>N/A</td>
                                 <td>N/A</td>
                                 <td>N/A</td>

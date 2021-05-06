@@ -19,11 +19,11 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                 <Row>
                     <Col className="text-center">
                         {/* Edit button for Household */}
-                        <Button size="sm" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
+                        <Button size="sm" color="warning" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
                     </Col>
                     <Col className="text-center">
                         {/* Delete button for Household */}
-                        <Button size="sm" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
+                        <Button size="sm" color="danger" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
                     </Col>
                 </Row>
             </CardFooter>)  

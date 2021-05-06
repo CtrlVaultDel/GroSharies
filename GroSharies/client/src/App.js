@@ -5,6 +5,7 @@ import ApplicationViews from "./components/ApplicationViews";
 import { UserProvider } from "./providers/UserProvider";
 import { HouseholdProvider } from "./providers/HouseholdProvider";
 import { ShoppingListProvider } from "./providers/ShoppingListProvider";
+import { PurchaseProvider } from "./providers/PurchaseProvider";
 
 function App() {
     return (
@@ -12,8 +13,10 @@ function App() {
             <UserProvider>
                 <HouseholdProvider>
                     <ShoppingListProvider>
-                        <Header />
-                        <ApplicationViews />
+                        <PurchaseProvider>
+                            <Header />
+                            <ApplicationViews />
+                        </PurchaseProvider>
                     </ShoppingListProvider>
                 </HouseholdProvider>
             </UserProvider>

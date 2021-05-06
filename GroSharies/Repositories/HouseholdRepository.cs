@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using GroSharies.Models.DataModels;
-using GroSharies.Models.DomainModels;
 using GroSharies.Utils;
 using System.Collections.Generic;
 

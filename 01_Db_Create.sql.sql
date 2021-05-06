@@ -55,7 +55,7 @@ CREATE TABLE [Purchase] (
   [UserId] integer NOT NULL,
   [Vendor] nvarchar(50) NOT NULL,
   [PurchaseDate] datetime NOT NULL,
-  [TotalCost] decimal NOT NULL,
+  [TotalCost] decimal (18,2) NOT NULL,
 
   CONSTRAINT [FK_Purchase_ShoppingList] FOREIGN KEY ([ShoppingListId]) REFERENCES [ShoppingList] ([Id]) ON DELETE CASCADE, 
   CONSTRAINT [FK_Purchase_User] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE CASCADE

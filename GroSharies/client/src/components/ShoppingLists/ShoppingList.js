@@ -27,13 +27,13 @@ const ShoppingList = ({ shoppingList }) => {
                 <Row>
                     <Col className="text-center">
                         {/* Edit button for ShoppingList */}
-                        <Button size="sm" onClick={() => history.push(`/shoppingList/edit/${shoppingList.id}`)}>
+                        <Button size="sm" color="warning" onClick={() => history.push(`/shoppingList/edit/${shoppingList.id}`)}>
                             <FaRegEdit />
                         </Button>                    
                     </Col>
                     <Col className="text-center">
                         {/* Delete button for ShoppingList */}
-                        <Button size="sm" onClick={() => deleteWarning()}>
+                        <Button size="sm" color="danger" onClick={() => deleteWarning()}>
                             <FaTrashAlt />
                         </Button>
                     </Col>
