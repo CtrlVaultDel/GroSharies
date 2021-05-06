@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, InputGroup, InputGroupAddon, Label, Input } from 'reactstrap';
 import { PurchaseContext } from "../../providers/PurchaseProvider";
 import { FaRegEdit } from "react-icons/fa";
 
@@ -86,13 +86,16 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                         {/* TotalCost Input */}
                         <FormGroup>
                             <Label for="totalCost">Total Cost </Label>
-                            <Input
-                                type="float"
-                                id="totalCost"
-                                onChange={handleInput}
-                                required
-                                value={purchase.totalCost}
-                            />
+                            <InputGroup>
+                                <InputGroupAddon addonType="prepend">$</InputGroupAddon>
+                                <Input
+                                    type="float"
+                                    id="totalCost"
+                                    onChange={handleInput}
+                                    required
+                                    value={purchase.totalCost}
+                                />
+                            </InputGroup>
                         </FormGroup>
 
                         {/* Cancel Button */}

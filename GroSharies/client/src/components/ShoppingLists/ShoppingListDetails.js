@@ -4,25 +4,22 @@ import { Container, Row, Table, Button } from "reactstrap";
 import {ShoppingListContext} from "../../providers/ShoppingListProvider";
 import PurchaseRow from "../Purchases/PurchaseRow";
 import AddPurchaseModal from "../Purchases/AddPurchaseModal";
+import AddListItem from "../ListItems/AddListItem";
 
 const ShoppingListDetails = () => {
     const [shoppingList, setShoppingList] = useState([]);
-    const [checkedItems, setCheckedItems] = useState([]);
-    const [uncheckedItems, setUncheckedItems] = useState([]);
+    const [listItems, setListItems] = useState([]);
     const [purchases, setPurchases] = useState([]);
     const { getShoppingList } = useContext(ShoppingListContext);
     const { id } = useParams();
 
-    const getCheckedItems = items => items.filter(li => li.isChecked === true);
-    const getUncheckedItems = items => items.filter(li => li.isChecked === false);
-
+    const checkedItems = 
     useEffect(() => {
         getShoppingList(id)
         .then(resp => {
             setShoppingList(resp.shoppingList);
-            setCheckedItems(getCheckedItems(resp.listItems));
-            setUncheckedItems(getUncheckedItems(resp.listItems));
-            setPurchases(resp.purchases)
+            setListItems(resp.listItems);
+            setPurchases(resp.purchases);
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -45,23 +42,14 @@ const ShoppingListDetails = () => {
                             <th>Item Name</th>                            
                         </tr>
                     </thead> 
-                    {uncheckedItems.length? uncheckedItems.map(i => 
-                        <tbody key={i.id}>
-                            <tr>
-                                <td>{i.name}</td>
-                            </tr>
-                        </tbody>                       
-                    ) : null
+                    <tbody>
+                    {listItems.length? listItems.map(i => 
+                        <tr key={i.id}>
+                            <td>{i.name}</td>
+                        </tr>
+                        ) : <tr><td>No items yet!</td></tr>
                     }
-                    {checkedItems.length? checkedItems.map(i => 
-                        <tbody key={i.id}>
-                            <tr>
-                                <td>{i.name}</td>
-                            </tr>
-                        </tbody>
-                         
-                    ) : null
-                    }
+                    </tbody>
                 </Table>
             </Row>
 
