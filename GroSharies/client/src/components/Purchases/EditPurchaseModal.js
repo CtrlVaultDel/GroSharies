@@ -53,9 +53,21 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
         <div>
             <Button size="sm" className="ml-2" color="warning" onClick={toggle}><FaRegEdit /></Button>
             <Modal isOpen={modal} toggle={toggle} >
-                <ModalHeader toggle={toggle}>New Purchase for {shoppingList.name}</ModalHeader>
+                <ModalHeader toggle={toggle}>Edit Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>
                     <Form className="purchaseForm">
+
+                        {/* PurchaseDate Input */}
+                        <FormGroup>
+                            <Label for="purchaseDate">Purchase Date </Label>
+                            <Input
+                                type="date"
+                                id="purchaseDate"
+                                onChange={handleInput}
+                                required
+                                value={purchase.purchaseDate}
+                            />
+                        </FormGroup>
 
                         {/* Vendor Input */}
                         <FormGroup>
@@ -68,18 +80,6 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                                 autoFocus
                                 placeholder="Vendor"
                                 value={purchase.vendor}
-                            />
-                        </FormGroup>
-
-                        {/* PurchaseDate Input */}
-                        <FormGroup>
-                            <Label for="purchaseDate">Purchase Date </Label>
-                            <Input
-                                type="date"
-                                id="purchaseDate"
-                                onChange={handleInput}
-                                required
-                                value={purchase.purchaseDate}
                             />
                         </FormGroup>
 

@@ -46,7 +46,7 @@ namespace GroSharies.Controllers
             // Add the purchase object that was passed in to the database
             _purchaseRepository.Add(purchase);
 
-            return RedirectToAction("GetAllById", new { shoppingListId = purchase.ShoppingListId });
+            return NoContent();
         }
 
         [HttpPut("{purchaseId}")]
@@ -58,7 +58,7 @@ namespace GroSharies.Controllers
             // If all tests pass, update the specified purchase object in the DB
             _purchaseRepository.Update(purchase);
 
-            return RedirectToAction("GetAllById", new { shoppingListId = purchase.ShoppingListId });
+            return NoContent();
         }
 
         [HttpDelete("{purchaseId}")]

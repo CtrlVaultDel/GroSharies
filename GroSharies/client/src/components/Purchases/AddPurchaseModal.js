@@ -54,6 +54,18 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
                 <ModalBody>
                     <Form className="purchaseForm">
 
+                        {/* PurchaseDate Input */}
+                        <FormGroup>
+                            <Label for="purchaseDate">Purchase Date </Label>
+                            <Input
+                                type="date"
+                                id="purchaseDate"
+                                onChange={handleInput}
+                                required
+                                value={purchase.purchaseDate}
+                            />
+                        </FormGroup>
+
                         {/* Vendor Input */}
                         <FormGroup>
                             <Label for="vendor">Vendor </Label>
@@ -65,18 +77,6 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
                                 autoFocus
                                 placeholder="Vendor"
                                 value={purchase.vendor}
-                            />
-                        </FormGroup>
-
-                        {/* PurchaseDate Input */}
-                        <FormGroup>
-                            <Label for="purchaseDate">Purchase Date </Label>
-                            <Input
-                                type="date"
-                                id="purchaseDate"
-                                onChange={handleInput}
-                                required
-                                value={purchase.purchaseDate}
                             />
                         </FormGroup>
 
