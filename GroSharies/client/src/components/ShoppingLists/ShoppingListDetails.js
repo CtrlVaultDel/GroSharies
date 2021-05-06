@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Table, Button } from "reactstrap";
+import { Container, Row, Table } from "reactstrap";
 import {ShoppingListContext} from "../../providers/ShoppingListProvider";
 import PurchaseRow from "../Purchases/PurchaseRow";
 import AddPurchaseModal from "../Purchases/AddPurchaseModal";
-import AddListItem from "../ListItems/AddListItem";
+import ListItemSection from "../ListItems/ListItemSection";
 
 const ShoppingListDetails = () => {
     const [shoppingList, setShoppingList] = useState([]);
@@ -13,7 +13,6 @@ const ShoppingListDetails = () => {
     const { getShoppingList } = useContext(ShoppingListContext);
     const { id } = useParams();
 
-    const checkedItems = 
     useEffect(() => {
         getShoppingList(id)
         .then(resp => {
@@ -25,37 +24,20 @@ const ShoppingListDetails = () => {
     }, []);
 
     if(!shoppingList) return null;
-    
     return (
         <Container>
-            <Row className="justify-content-md-center">
-                {shoppingList.name}
-            </Row>
-            <Row className="justify-content-md-center">
-                <input placeholder="New Item" />
-                <Button>Add Item</Button>
-            </Row>
-            <Row>
-                <Table bordered size="sm">
-                    <thead className="text-center">
-                        <tr>
-                            <th>Item Name</th>                            
-                        </tr>
-                    </thead> 
-                    <tbody>
-                    {listItems.length? listItems.map(i => 
-                        <tr key={i.id}>
-                            <td>{i.name}</td>
-                        </tr>
-                        ) : <tr><td>No items yet!</td></tr>
-                    }
-                    </tbody>
-                </Table>
-            </Row>
+            <Row className="justify-content-md-center">{shoppingList.name}</Row>
+
+            {/* ================== List Items ================== */}
+            <ListItemSection listItems = {listItems} setListItems = {setListItems}/>
 
             {/* ==================== PURCHASES ==================== */}
             <h2 className="text-center">Purchases</h2>
+
+            {/* Button that displays the add purchase modal when clicked */}
             <AddPurchaseModal shoppingList = {shoppingList} setPurchases = {setPurchases} />
+
+            {/* Default  */}
             <Table dark striped bordered hover>
                 <thead>
                     <tr>
