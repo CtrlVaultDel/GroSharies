@@ -33,7 +33,6 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
     const deleteWarning = () => {
         const confirmBox = window.confirm(`Are you sure you wish to delete the ${household.name} household? This action is irreversable.`);
         if (confirmBox){
-            console.log(`Deleting Household: ${household.name}`)
             deleteHousehold(household.id);
         };
     };
