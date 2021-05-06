@@ -49,14 +49,15 @@ export function PurchaseProvider(props) {
     };
 
     // Deletes a purchase object from the database
-    const deletePurchase = purchaseId => {
+    const deletePurchase = purchase => {
         return getToken()
-        .then(token => fetch(`${apiUrl}/${purchaseId}`, {
+        .then(token => fetch(`${apiUrl}/${purchase.id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }))
+        .then(() => getPurchases(purchase.shoppingListId))
     };
 
     return (
