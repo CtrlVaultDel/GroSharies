@@ -6,7 +6,7 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
     const { getPurchases, savePurchase } = useContext(PurchaseContext);
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
-
+    
     const currentDate = new Date().toLocaleDateString('en-CA');
 
     // Note (UserId will be derived from the server-side)
@@ -27,6 +27,7 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
 
     // Called when the user submits the new purchase form
     const handleSave = () => {
+        if(purchase.vendor === "") return window.alert("Please enter a vendor");
         if(purchase.totalCost === 0) return window.alert("Please enter an amount");
 
         // Disables the save button until finished
@@ -40,7 +41,6 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
             purchaseDate: purchase.purchaseDate,
             totalCost: purchase.totalCost
         })
-        .then(getPurchases(shoppingList.id))
         .then(setPurchases);
     };
 
@@ -56,7 +56,6 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
 
                         {/* Vendor Input */}
                         <FormGroup>
-
                             <Label for="vendor">Vendor </Label>
                             <Input
                                 type="text"
@@ -89,7 +88,6 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
                                 id="totalCost"
                                 onChange={handleInput}
                                 required
-                                placeholder= "0"
                                 value={purchase.totalCost}
                             />
                         </FormGroup>
@@ -107,6 +105,7 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
                             onClick={(event) => {
                             event.preventDefault();
                             handleSave();
+                            toggle();
                             }}
                         >
                             Add Purchase

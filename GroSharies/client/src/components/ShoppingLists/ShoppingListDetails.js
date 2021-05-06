@@ -11,7 +11,6 @@ const ShoppingListDetails = () => {
     const [uncheckedItems, setUncheckedItems] = useState([]);
     const [purchases, setPurchases] = useState([]);
     const { getShoppingList } = useContext(ShoppingListContext);
-
     const { id } = useParams();
 
     const getCheckedItems = items => items.filter(li => li.isChecked === true);
@@ -83,8 +82,9 @@ const ShoppingListDetails = () => {
                     {/* If any purchases exist, use the PurchaseRow component to inject them into the table */}
                     {purchases.length? purchases.map(p => (
                         <PurchaseRow key = {p.purchase.id} purchaseDetail = {p} />)
-                        ) : <tr>
-                                <th>N/A</th>
+                        )
+                            : <tr>
+                                <td>N/A</td>
                                 <td>N/A</td>
                                 <td>N/A</td>
                                 <td>N/A</td>

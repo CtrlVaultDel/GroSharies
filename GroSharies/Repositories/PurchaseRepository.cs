@@ -23,7 +23,8 @@ namespace GroSharies.Repositories
                     CONCAT(FirstName,' ', LastName) AS FullName
                     FROM Purchase p
                     JOIN [User] u on p.UserId = u.Id
-                    WHERE ShoppingListId = @ShoppingListId";
+                    WHERE ShoppingListId = @ShoppingListId
+                    ORDER BY PurchaseDate";
 
                     DbUtils.AddParameter(cmd, "@ShoppingListId", shoppingListId);
 

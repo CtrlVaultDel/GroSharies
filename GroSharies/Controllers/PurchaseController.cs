@@ -11,10 +11,8 @@ namespace GroSharies.Controllers
     [ApiController]
     public class PurchaseController : ControllerBase
     {
-
         private readonly IPurchaseRepository _purchaseRepository;
         private readonly IUserRepository _userRepository;
-
 
         public PurchaseController(
             IPurchaseRepository purchaseRepository,
@@ -23,6 +21,17 @@ namespace GroSharies.Controllers
         {
             _purchaseRepository = purchaseRepository;
             _userRepository = userRepository;
+        }
+
+        [HttpGet("{shoppingListId}")]
+        public IActionResult GetAllById(int shoppingListId)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            var purchases = _purchaseRepository.GetAllById(shoppingListId);
+
+            return Ok(purchases);
         }
 
         [HttpPost]
@@ -37,7 +46,7 @@ namespace GroSharies.Controllers
             // Add the purchase object that was passed in to the database
             _purchaseRepository.Add(purchase);
 
-            return NoContent();
+            return RedirectToAction("GetAllById", new { shoppingListId = purchase.ShoppingListId });
         }
 
         [HttpPut("{purchaseId}")]
