@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button, Container } from "reactstrap";
+import { Button, Row } from "reactstrap";
 
 // Icons
 import { FaTrashAlt } from "react-icons/fa";
@@ -40,12 +40,12 @@ const PurchaseRow = ({ purchaseDetail, shoppingList, setPurchases }) => {
            <td>{purchaseDetail.purchase.vendor}</td>
            <td>{formatter.format(purchaseDetail.purchase.totalCost)}</td>
            <td >
-               <Container className="sm text-center">
+               <Row className="justify-content-center" size="sm">
                     <EditPurchaseModal shoppingList = {shoppingList} priorPurchase = {purchaseDetail} setPurchases = {setPurchases} />
-                    <Button size="sm" className="ml-2" color="danger" onClick={deleteWarning}>
+                    <Button size="sm" className="ml-3" color="danger" onClick={deleteWarning}>
                         <FaTrashAlt />
                     </Button>
-               </Container>
+               </Row>
             </td>
        </tr>
     )

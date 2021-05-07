@@ -42,12 +42,12 @@ const ListItem = ({ listItem, setListItems }) => {
                     }
 
                     {/* Update listItem */}
-                    <Button color="warning">
+                    <Button className="ml-2" color="warning">
                         <FaRegEdit />
                     </Button>
 
                     {/* Delete listItem */}
-                    <Button color="danger" onClick={()=>{
+                    <Button className="ml-2" color="danger" onClick={()=>{
                         deleteListItem(listItem)
                         .then(setListItems)}}>
                             <FaTrashAlt />
