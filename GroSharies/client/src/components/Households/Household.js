@@ -1,9 +1,15 @@
 import React, { useContext } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Button, Row, Col } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
+
+// Icons
 import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
+
+// Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
+// =========================== IMPORTS END ===========================
+
 
 const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 

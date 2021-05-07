@@ -3,19 +3,17 @@ import "firebase/auth";
 
 // Context
 import { UserContext } from "./UserProvider";
-import { HouseholdContext } from "./HouseholdProvider";
 // =========================== IMPORTS END ===========================
 
 
-export const ShoppingListContext = createContext();
+export const ListItemContext = createContext();
 
-export function ShoppingListProvider(props) {
-    const { getHouseholdDetail } = useContext(HouseholdContext);
+export function ListItemProvider(props) {
     const { getToken } = useContext(UserContext); 
-    const apiUrl = "/api/shoppingList";
+    const apiUrl = "/api/listItem";
 
-    // Gets single shoppingList by the provided shoppingListId
-    const getShoppingList = shoppingListId => {
+    // Retrieves all listItem objects for a particular shoppingList
+    const getListItems = shoppingListId => {
         return getToken()
         .then(token => fetch(`${apiUrl}/${shoppingListId}`, {
             method: "GET",
@@ -26,8 +24,8 @@ export function ShoppingListProvider(props) {
         .then(res => res.json())
     };
 
-    // Saves a new shoppingList object to the database
-    const saveShoppingList = shoppingList => {
+    // Saves a new listItem object to the database
+    const saveListItem = listItem => {
         return getToken()
         .then(token => fetch(apiUrl, {
             method: "POST",
@@ -35,46 +33,47 @@ export function ShoppingListProvider(props) {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(shoppingList),
+            body: JSON.stringify(listItem),
           }))
-        .then(resp => resp.json())
+        .then(() => getListItems(listItem.shoppingListId))
     };
 
-    // Updates a pre-existing shoppingList object in the database
-    const updateShoppingList = shoppingList => {
+    // Updates a pre-existing listItem object in the database
+    const updateListItem = listItem => {
         return getToken()
-        .then(token => fetch(`${apiUrl}/${shoppingList.id}`, {
+        .then(token => fetch(`${apiUrl}/${listItem.id}`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(shoppingList),
+            body: JSON.stringify(listItem),
         }))
+        .then(() => getListItems(listItem.shoppingListId))
     };
 
-    // Deletes a shoppingList object from the database
-    const deleteShoppingList = shoppingList => {
+    // Deletes a listItem object from the database
+    const deleteListItem = listItem => {
         return getToken()
-        .then(token => fetch(`${apiUrl}/${shoppingList.id}`, {
+        .then(token => fetch(`${apiUrl}/${listItem.id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }))
-        .then(getHouseholdDetail(shoppingList.householdId))
+        .then(() => getListItems(listItem.shoppingListId))
     };
 
     return (
-        <ShoppingListContext.Provider
+        <ListItemContext.Provider
             value={{
-                getShoppingList,
-                saveShoppingList,
-                updateShoppingList,
-                deleteShoppingList
+                getListItems,
+                saveListItem,
+                updateListItem,
+                deleteListItem
             }}
         >
             {props.children}
-        </ShoppingListContext.Provider>
+        </ListItemContext.Provider>
     );
 };

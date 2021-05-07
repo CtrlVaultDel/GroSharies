@@ -1,8 +1,14 @@
 import React, { useContext } from "react";
 import { Button, Container } from "reactstrap";
 import { FaTrashAlt } from "react-icons/fa";
+
+// Components
 import EditPurchaseModal from "./EditPurchaseModal";
+
+// Context
 import { PurchaseContext } from "../../providers/PurchaseProvider";
+// =========================== IMPORTS END ===========================
+
 
 const PurchaseRow = ({ purchaseDetail, shoppingList, setPurchases }) => {
     const { deletePurchase } = useContext(PurchaseContext);

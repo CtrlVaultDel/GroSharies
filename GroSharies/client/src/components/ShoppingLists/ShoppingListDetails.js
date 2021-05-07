@@ -1,73 +1,49 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Table, Button } from "reactstrap";
-import {ShoppingListContext} from "../../providers/ShoppingListProvider";
+import { Container, Table } from "reactstrap";
+
+// Components
+import ListItemSection from "../ListItems/ListItemSection";
 import PurchaseRow from "../Purchases/PurchaseRow";
 import AddPurchaseModal from "../Purchases/AddPurchaseModal";
 
+// Context
+import {ShoppingListContext} from "../../providers/ShoppingListProvider";
+// =========================== IMPORTS END ===========================
+
+
 const ShoppingListDetails = () => {
     const [shoppingList, setShoppingList] = useState([]);
-    const [checkedItems, setCheckedItems] = useState([]);
-    const [uncheckedItems, setUncheckedItems] = useState([]);
+    const [listItems, setListItems] = useState([]);
     const [purchases, setPurchases] = useState([]);
     const { getShoppingList } = useContext(ShoppingListContext);
     const { id } = useParams();
-
-    const getCheckedItems = items => items.filter(li => li.isChecked === true);
-    const getUncheckedItems = items => items.filter(li => li.isChecked === false);
 
     useEffect(() => {
         getShoppingList(id)
         .then(resp => {
             setShoppingList(resp.shoppingList);
-            setCheckedItems(getCheckedItems(resp.listItems));
-            setUncheckedItems(getUncheckedItems(resp.listItems));
-            setPurchases(resp.purchases)
+            setListItems(resp.listItems);
+            setPurchases(resp.purchases);
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if(!shoppingList) return null;
-    
     return (
         <Container>
-            <Row className="justify-content-md-center">
-                {shoppingList.name}
-            </Row>
-            <Row className="justify-content-md-center">
-                <input placeholder="New Item" />
-                <Button>Add Item</Button>
-            </Row>
-            <Row>
-                <Table bordered size="sm">
-                    <thead className="text-center">
-                        <tr>
-                            <th>Item Name</th>                            
-                        </tr>
-                    </thead> 
-                    {uncheckedItems.length? uncheckedItems.map(i => 
-                        <tbody key={i.id}>
-                            <tr>
-                                <td>{i.name}</td>
-                            </tr>
-                        </tbody>                       
-                    ) : null
-                    }
-                    {checkedItems.length? checkedItems.map(i => 
-                        <tbody key={i.id}>
-                            <tr>
-                                <td>{i.name}</td>
-                            </tr>
-                        </tbody>
-                         
-                    ) : null
-                    }
-                </Table>
-            </Row>
+            <h2 className="text-center">{shoppingList.name}</h2>
+
+            {/* ================== List Items ================== */}
+            <ListItemSection shoppingListId = {shoppingList.id} listItems = {listItems} setListItems = {setListItems}/>
 
             {/* ==================== PURCHASES ==================== */}
-            <h2 className="text-center">Purchases</h2>
+            <h4 className="text-center">Purchases</h4>
+
+            {/* Button that displays the add purchase modal when clicked */}
             <AddPurchaseModal shoppingList = {shoppingList} setPurchases = {setPurchases} />
+
+            {/* Default  */}
             <Table dark striped bordered hover>
                 <thead>
                     <tr>

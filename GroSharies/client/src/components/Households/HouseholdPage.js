@@ -1,8 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
-import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Components
 import Household from "./Household";
+
+// Context
+import { HouseholdContext } from "../../providers/HouseholdProvider";
+// =========================== IMPORTS END ===========================
+
 
 const HouseholdPage = () => {
     const { households, getHouseholds } = useContext(HouseholdContext);
