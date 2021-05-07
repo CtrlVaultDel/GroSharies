@@ -1,14 +1,13 @@
 import React from "react";
-import { Row, Col, Input, ListGroup, ListGroupItem, Button } from "reactstrap";
+import { Row, Col, Container, Input, ListGroup, ListGroupItem } from "reactstrap";
+import AddListItem from "./AddListItem";
 
-const ListItemSection = ({listItems, setListItems}) => {
-    return (<>
-    <h2 className="text-center">To Get List</h2>
-        <Row className="justify-content-md-center">
-            <input placeholder="New Item" />
-            <Button>Add Item</Button>
-        </Row>
-        <Col>           
+const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
+    return (
+    <Container className="text-center">
+        <h4 className="text-center">To Get List</h4>
+        <AddListItem shoppingListId = {shoppingListId} setListItems = {setListItems}/>
+        <div>           
             {listItems.length? listItems.map(i => 
             <div key={i.id}>
                 <ListGroup>
@@ -22,8 +21,8 @@ const ListItemSection = ({listItems, setListItems}) => {
             </div>
                 ) : <Row>No items yet!</Row>
             }
-        </Col>
-    </>
+        </div>
+    </Container>
     )
 }
 export default ListItemSection;

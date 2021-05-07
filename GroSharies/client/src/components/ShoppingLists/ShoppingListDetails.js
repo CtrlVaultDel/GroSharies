@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Row, Table } from "reactstrap";
+import { Container, Table } from "reactstrap";
 import {ShoppingListContext} from "../../providers/ShoppingListProvider";
 import PurchaseRow from "../Purchases/PurchaseRow";
 import AddPurchaseModal from "../Purchases/AddPurchaseModal";
@@ -26,13 +26,13 @@ const ShoppingListDetails = () => {
     if(!shoppingList) return null;
     return (
         <Container>
-            <Row className="justify-content-md-center">{shoppingList.name}</Row>
+            <h2 className="text-center">{shoppingList.name}</h2>
 
             {/* ================== List Items ================== */}
-            <ListItemSection listItems = {listItems} setListItems = {setListItems}/>
+            <ListItemSection shoppingListId = {shoppingList.id} listItems = {listItems} setListItems = {setListItems}/>
 
             {/* ==================== PURCHASES ==================== */}
-            <h2 className="text-center">Purchases</h2>
+            <h4 className="text-center">Purchases</h4>
 
             {/* Button that displays the add purchase modal when clicked */}
             <AddPurchaseModal shoppingList = {shoppingList} setPurchases = {setPurchases} />
