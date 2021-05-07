@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Container, Input, Card, CardBody } from "reactstrap";
+import { Container, Card, CardBody } from "reactstrap";
 
 // Components
 import AddListItem from "./AddListItem";
@@ -14,10 +14,10 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
         <AddListItem shoppingListId = {shoppingListId} setListItems = {setListItems}/>
         <div>           
             {listItems.length? listItems.map(i => 
-                <Card key={i.id}>
+                <Card key={i.id} style={{backgroundColor: i.isChecked ? "#787878" : "initial"}} >
                     <CardBody>
                         <ListItem 
-                            listItem = {i} setListItems = {setListItems} shoppingListId = {shoppingListId}
+                            listItem = {i} setListItems = {setListItems}
                         />
                     </CardBody>
                 </Card>

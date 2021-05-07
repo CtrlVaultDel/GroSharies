@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "reactstrap";
 
 // Icons
@@ -11,18 +11,26 @@ import { ListItemContext } from "../../providers/ListItemProvider";
 // =========================== IMPORTS END ===========================
 
 
-const ListItem = ({ listItem, setListItems, shoppingListId }) => {
+const ListItem = ({ listItem, setListItems }) => {
     const { toggleListItem, updateListItem, deleteListItem } = useContext(ListItemContext);
-    
+    const [isLoading, setIsLoading] = useState(false)
+
     return (
         <div>
             <span style ={{textDecoration: listItem.isChecked ? "line-through" : ""}}>{listItem.name}</span>
 
-            {/* toggling, updating or deleting a listItem will also update the parent listItems state */}
             {/* Toggle between complete/incomplete */}
-            <Button size="sm" color="success" onClick={() => {
+            <Button size="sm" color="success" disabled={isLoading} onClick={() => {
+                setIsLoading(true)
+                
+                // Toggle the listItem complete state
+                listItem.isChecked = !listItem.isChecked;
+                
+                // Save the the updated state to the database
                 toggleListItem(listItem)
-                .then(setListItems)}}>
+                .then(setListItems)
+                .then(setIsLoading(false))
+            }}>
                     <FaCheckCircle />
             </Button>
             

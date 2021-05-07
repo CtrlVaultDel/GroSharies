@@ -45,7 +45,7 @@ namespace GroSharies.Repositories
             }
         }
 
-        public void ToggleIsChecked(ListItem listItem)
+        public void Toggle(ListItem listItem)
         {
             using (var conn = Connection)
             {
