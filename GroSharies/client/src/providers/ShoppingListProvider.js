@@ -1,7 +1,11 @@
 import React, { createContext, useContext } from "react";
-import { UserContext } from "./UserProvider";
 import "firebase/auth";
+
+// Context
+import { UserContext } from "./UserProvider";
 import { HouseholdContext } from "./HouseholdProvider";
+// =========================== IMPORTS END ===========================
+
 
 export const ShoppingListContext = createContext();
 

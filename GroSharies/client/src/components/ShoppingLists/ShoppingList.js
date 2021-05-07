@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
-import { Card, CardHeader, CardFooter, Button, Row, Col } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
-import { FaRegEdit } from "react-icons/fa";
+import { Card, CardHeader, CardFooter, Button, Row, Col } from "reactstrap";
 import { FaTrashAlt } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
+
+// Context
 import { ShoppingListContext } from "../../providers/ShoppingListProvider";
+// =========================== IMPORTS END ===========================
+
 
 const ShoppingList = ({ shoppingList }) => {
     const { deleteShoppingList } = useContext(ShoppingListContext);

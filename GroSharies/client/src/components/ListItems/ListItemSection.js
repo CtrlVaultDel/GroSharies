@@ -1,6 +1,10 @@
 import React from "react";
-import { Row, Col, Container, Input, ListGroup, ListGroupItem } from "reactstrap";
+import { Row, Container, Input, ListGroup, ListGroupItem } from "reactstrap";
+
+// Components
 import AddListItem from "./AddListItem";
+// =========================== IMPORTS END ===========================
+
 
 const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
     return (

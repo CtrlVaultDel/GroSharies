@@ -1,10 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Table } from "reactstrap";
-import {ShoppingListContext} from "../../providers/ShoppingListProvider";
+
+// Components
+import ListItemSection from "../ListItems/ListItemSection";
 import PurchaseRow from "../Purchases/PurchaseRow";
 import AddPurchaseModal from "../Purchases/AddPurchaseModal";
-import ListItemSection from "../ListItems/ListItemSection";
+
+// Context
+import {ShoppingListContext} from "../../providers/ShoppingListProvider";
+// =========================== IMPORTS END ===========================
+
 
 const ShoppingListDetails = () => {
     const [shoppingList, setShoppingList] = useState([]);

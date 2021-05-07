@@ -1,8 +1,14 @@
 import React, { useContext, useEffect } from "react";
-import { HouseholdContext } from "../../providers/HouseholdProvider";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
+
+// Components
 import ShoppingList from "../ShoppingLists/ShoppingList";
+
+// Context
+import { HouseholdContext } from "../../providers/HouseholdProvider";
+// =========================== IMPORTS END ===========================
+
 
 const HouseholdDetails = () => {
     const { getHouseholdDetail, householdDetail } = useContext(HouseholdContext);

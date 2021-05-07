@@ -1,6 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
+
+// Context
 import { ShoppingListContext } from "../../providers/ShoppingListProvider";
+// =========================== IMPORTS END ===========================
+
 
 const ShoppingListFormEdit = () => {
     const history = useHistory();

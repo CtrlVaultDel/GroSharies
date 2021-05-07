@@ -1,6 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+
+// Context
 import { ShoppingListContext } from "../../providers/ShoppingListProvider";
+// =========================== IMPORTS END ===========================
+
 
 const ShoppingListFormAdd = () => {
     const { saveShoppingList } = useContext(ShoppingListContext);

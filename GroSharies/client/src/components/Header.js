@@ -9,7 +9,11 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
+
+// Context
 import { UserContext } from "../providers/UserProvider";
+// =========================== IMPORTS END ===========================
+
 
 export default function Header() {
   const { isLoggedIn, logout } = useContext(UserContext);
