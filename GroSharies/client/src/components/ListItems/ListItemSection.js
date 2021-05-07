@@ -1,6 +1,10 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
 
+// Styles
+import "../../styles/shoppingList.css";
+
+
 // Components
 import AddListItem from "./AddListItem";
 import ListItem from "./ListItem";
@@ -9,10 +13,14 @@ import ListItem from "./ListItem";
 
 const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
     return (
-        <div className = "itemList-section">
+        <>
             <h4 className="text-center">To Get List</h4>
+
+            {/* Add listItem button */}
             <AddListItem shoppingListId = {shoppingListId} setListItems = {setListItems}/>
-            <div>           
+
+            {/* List of all items */}
+            <div className="overflow">           
                 {listItems.length? listItems.map(i => 
 
                     // If listItems exist, display them on the DOM
@@ -33,7 +41,7 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
                     </Card>
                 }
             </div>
-        </div>
+        </>
     )
 }
 export default ListItemSection;

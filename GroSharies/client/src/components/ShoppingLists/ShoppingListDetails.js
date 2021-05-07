@@ -38,9 +38,8 @@ const ShoppingListDetails = () => {
             <h2 className="text-center">{shoppingList.name}</h2>
 
             {/* =================== LIST ITEMS =================== */}
-            <div className="overflow">
-                <ListItemSection shoppingListId = {shoppingList.id} listItems = {listItems} setListItems = {setListItems}/>
-            </div>
+            
+            <ListItemSection shoppingListId = {shoppingList.id} listItems = {listItems} setListItems = {setListItems}/>
 
 
             {/* ==================== PURCHASES ==================== */}
