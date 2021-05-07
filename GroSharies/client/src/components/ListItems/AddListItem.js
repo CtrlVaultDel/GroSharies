@@ -44,13 +44,15 @@ const AddListItem = ({ shoppingListId, setListItems}) => {
         .then(res => {
             setListItems(res);
             setNewListItem(initialState);
-        });
+        })
+        .then(setIsLoading(false))
     };
 
     return(
         <Form className="listItemForm">
             <InputGroup className="text-center">          
                 <Input 
+                    autoComplete="off"
                     type="text" 
                     id="name" 
                     placeholder="New Item"
@@ -60,6 +62,7 @@ const AddListItem = ({ shoppingListId, setListItems}) => {
                     onChange = {handleInput}
                 />
                 <Button 
+                    type="submit"
                     color="success" 
                     disabled={isLoading}
                     onClick={event => {

@@ -54,8 +54,8 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
     const toggle = () => setModal(!modal);
 
     return (
-        <div>
-            <Button size="sm" className="ml-2" color="warning" onClick={toggle}><FaRegEdit /></Button>
+        <>
+            <Button size="sm" color="warning" onClick={toggle}><FaRegEdit /></Button>
             <Modal isOpen={modal} toggle={toggle} >
                 <ModalHeader toggle={toggle}>Edit Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>
@@ -77,6 +77,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                         <FormGroup>
                             <Label for="vendor">Vendor </Label>
                             <Input
+                                autoComplete="off"
                                 type="text"
                                 id="vendor"
                                 onChange={handleInput}
@@ -93,6 +94,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                             <InputGroup>
                                 <InputGroupAddon addonType="prepend">$</InputGroupAddon>
                                 <Input
+                                    autoComplete="off"
                                     type="float"
                                     id="totalCost"
                                     onChange={handleInput}
@@ -123,7 +125,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                     </Form>
                 </ModalBody>
             </Modal>
-        </div>
+        </>
     );
 }
 

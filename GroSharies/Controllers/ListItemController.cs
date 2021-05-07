@@ -29,6 +29,7 @@ namespace GroSharies.Controllers
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
+            // Get all listItems associated with the shoppingListId passed in
             var listItems = _listItemRepository.GetAllById(shoppingListId);
 
             return Ok(listItems);
@@ -40,19 +41,31 @@ namespace GroSharies.Controllers
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
-            // Add the purchase object that was passed in to the database
+            // Add the listItem object that was passed in to the database
             _listItemRepository.Add(listItem);
 
             return NoContent();
         }
 
-        [HttpPut("{purchaseId}")]
+        [HttpPut("toggle/{listItemId}")]
+        public IActionResult Toggle(ListItem listItem)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            // Toggle the IsChecked value of the passed in listItem object
+            _listItemRepository.Toggle(listItem);
+
+            return NoContent();
+        }
+
+        [HttpPut("{listItemId}")]
         public IActionResult Update(ListItem listItem)
         {
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
-            // If all tests pass, update the specified purchase object in the DB
+            // If all tests pass, update the specified listItem object in the DB
             _listItemRepository.Update(listItem);
 
             return NoContent();

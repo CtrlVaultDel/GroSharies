@@ -33,10 +33,24 @@ export function ListItemProvider(props) {
               Authorization: `Bearer ${token}`,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(listItem),
+            body: JSON.stringify(listItem)
           }))
         .then(() => getListItems(listItem.shoppingListId))
     };
+
+    // Toggles a pre-existing listItem object between complete & incomplete
+    const toggleListItem = listItem => {
+        return getToken()
+        .then(token => fetch(`${apiUrl}/toggle/${listItem.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(listItem)
+        }))
+        .then(() => getListItems(listItem.shoppingListId))
+    }
 
     // Updates a pre-existing listItem object in the database
     const updateListItem = listItem => {
@@ -47,7 +61,7 @@ export function ListItemProvider(props) {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(listItem),
+            body: JSON.stringify(listItem)
         }))
         .then(() => getListItems(listItem.shoppingListId))
     };
@@ -69,6 +83,7 @@ export function ListItemProvider(props) {
             value={{
                 getListItems,
                 saveListItem,
+                toggleListItem,
                 updateListItem,
                 deleteListItem
             }}

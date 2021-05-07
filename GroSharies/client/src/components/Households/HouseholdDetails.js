@@ -2,6 +2,9 @@ import React, { useContext, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 
+// Icons
+import { FaPlusCircle } from "react-icons/fa";
+
 // Components
 import ShoppingList from "../ShoppingLists/ShoppingList";
 
@@ -23,11 +26,9 @@ const HouseholdDetails = () => {
     return (
         <Container>
             <Row className="justify-content-md-center">
-                {householdDetail.household.name}
-            </Row>
-            <Row className="justify-content-md-center">
+                <h2>{householdDetail.household.name} Shopping Lists</h2>
                 <Link to={{pathname:"/shoppingList/new", state:{householdId: id}}}>
-                    New Shopping List
+                    <FaPlusCircle />
                 </Link>
             </Row>
             {/* If the household already has lists, display them. Otherwise, show a default message */}
