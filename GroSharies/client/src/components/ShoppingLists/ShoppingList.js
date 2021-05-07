@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Card, CardHeader, CardFooter, Button, Row, Col } from "reactstrap";
+
+// Icons
 import { FaTrashAlt } from "react-icons/fa";
 import { FaRegEdit } from "react-icons/fa";
 

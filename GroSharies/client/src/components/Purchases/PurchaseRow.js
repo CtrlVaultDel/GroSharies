@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Container } from "reactstrap";
+
+// Icons
 import { FaTrashAlt } from "react-icons/fa";
 
 // Components

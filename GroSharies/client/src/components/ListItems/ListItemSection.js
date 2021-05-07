@@ -3,6 +3,7 @@ import { Row, Container, Input, Card, CardBody } from "reactstrap";
 
 // Components
 import AddListItem from "./AddListItem";
+import ListItem from "./ListItem";
 // =========================== IMPORTS END ===========================
 
 
@@ -13,15 +14,19 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
         <AddListItem shoppingListId = {shoppingListId} setListItems = {setListItems}/>
         <div>           
             {listItems.length? listItems.map(i => 
-            <div key={i.id}>
-                <Card>
+                <Card key={i.id}>
                     <CardBody>
-                        {i.name}
-                        <Input type="checkbox" id={"checkbox" + i.id} name="completeTask" defaultValue={i.isChecked} />
+                        <ListItem 
+                            listItem = {i} setListItems = {setListItems} shoppingListId = {shoppingListId}
+                        />
                     </CardBody>
                 </Card>
-            </div>
-                ) : <Row>No items yet!</Row>
+                ) : 
+                <Card>
+                    <CardBody>
+                        No items yet!
+                    </CardBody>
+                </Card>
             }
         </div>
     </Container>
