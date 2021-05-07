@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button } from "reactstrap";
+import { Button, Col, Row, Container } from "reactstrap";
 
 // Icons
 import { FaCheckCircle } from "react-icons/fa";
@@ -15,37 +15,46 @@ const ListItem = ({ listItem, setListItems }) => {
     const { toggleListItem, updateListItem, deleteListItem } = useContext(ListItemContext);
     const [isLoading, setIsLoading] = useState(false)
 
+    const toggleEvent = () => {
+        setIsLoading(true)
+                
+        // Toggle the listItem complete state
+        listItem.isChecked = !listItem.isChecked;
+        
+        // Save the the updated state to the database
+        toggleListItem(listItem)
+        .then(setListItems)
+        .then(setIsLoading(false))
+    };
+
     return (
-        <div>
-            <span style ={{textDecoration: listItem.isChecked ? "line-through" : ""}}>{listItem.name}</span>
+        <Row className="listItem">
+            <Col>
+                <span style ={{textDecoration: listItem.isChecked ? "line-through" : ""}}>{listItem.name}</span>
+            </Col>
+            <Col className="text-right">
+                <Container className="float-right">
+                    {/* Change the toggle button based off whether or not the item is already checked off */}
+                    {listItem.isChecked ? 
+                        <Button color="info" disabled={isLoading} onClick={toggleEvent}><FaCheckCircle /></Button> 
+                        :
+                        <Button color="success" disabled={isLoading} onClick={toggleEvent}><FaCheckCircle /></Button>
+                    }
 
-            {/* Toggle between complete/incomplete */}
-            <Button size="sm" color="success" disabled={isLoading} onClick={() => {
-                setIsLoading(true)
-                
-                // Toggle the listItem complete state
-                listItem.isChecked = !listItem.isChecked;
-                
-                // Save the the updated state to the database
-                toggleListItem(listItem)
-                .then(setListItems)
-                .then(setIsLoading(false))
-            }}>
-                    <FaCheckCircle />
-            </Button>
-            
-            {/* Update listItem */}
-            <Button size="sm" color="warning">
-                <FaRegEdit />
-            </Button>
+                    {/* Update listItem */}
+                    <Button color="warning">
+                        <FaRegEdit />
+                    </Button>
 
-            {/* Delete listItem */}
-            <Button size="sm" color="danger" onClick={()=>{
-                deleteListItem(listItem)
-                .then(setListItems)}}>
-                    <FaTrashAlt />
-            </Button>
-        </div>
+                    {/* Delete listItem */}
+                    <Button color="danger" onClick={()=>{
+                        deleteListItem(listItem)
+                        .then(setListItems)}}>
+                            <FaTrashAlt />
+                    </Button>
+                </Container>
+            </Col>
+        </Row>
     );
 }
 
