@@ -44,6 +44,7 @@ const HouseholdFormAdd = () => {
                     <div className="form-group">
                         <label htmlFor="title">Household Name: </label>
                         <input
+                            autoComplete="off"
                             type="text"
                             id="name"
                             onChange={handleInput}

@@ -77,6 +77,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                         <FormGroup>
                             <Label for="vendor">Vendor </Label>
                             <Input
+                                autoComplete="off"
                                 type="text"
                                 id="vendor"
                                 onChange={handleInput}
@@ -93,6 +94,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                             <InputGroup>
                                 <InputGroupAddon addonType="prepend">$</InputGroupAddon>
                                 <Input
+                                    autoComplete="off"
                                     type="float"
                                     id="totalCost"
                                     onChange={handleInput}

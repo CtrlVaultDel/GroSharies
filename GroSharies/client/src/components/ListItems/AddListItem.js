@@ -51,6 +51,7 @@ const AddListItem = ({ shoppingListId, setListItems}) => {
         <Form className="listItemForm">
             <InputGroup className="text-center">          
                 <Input 
+                    autoComplete="off"
                     type="text" 
                     id="name" 
                     placeholder="New Item"

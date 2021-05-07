@@ -51,6 +51,7 @@ const ShoppingListFormAdd = () => {
                     <div className="form-group">
                         <label htmlFor="title">Shopping List Name: </label>
                         <input
+                            autoComplete="off"
                             type="text"
                             id="name"
                             onChange={handleInput}

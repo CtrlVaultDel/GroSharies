@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Container, Input, ListGroup, ListGroupItem } from "reactstrap";
+import { Row, Container, Input, Card, CardBody } from "reactstrap";
 
 // Components
 import AddListItem from "./AddListItem";
@@ -14,14 +14,12 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
         <div>           
             {listItems.length? listItems.map(i => 
             <div key={i.id}>
-                <ListGroup>
-                    <ListGroupItem>
+                <Card>
+                    <CardBody>
                         {i.name}
-                    </ListGroupItem>
-                    <ListGroupItem>
                         <Input type="checkbox" id={"checkbox" + i.id} name="completeTask" defaultValue={i.isChecked} />
-                    </ListGroupItem>
-                </ListGroup>
+                    </CardBody>
+                </Card>
             </div>
                 ) : <Row>No items yet!</Row>
             }
