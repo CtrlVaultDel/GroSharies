@@ -1,107 +1,65 @@
-import React, { useState, useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, InputGroup, InputGroupAddon, Label, Input } from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { FaRegEdit } from "react-icons/fa";
 
-// Components
-import { PurchaseContext } from "../../providers/PurchaseProvider";
 // =========================== IMPORTS END ===========================
 
-
-const EditListItemModal = ({ shoppingList, priorPurchase, setPurchases}) => {
-    const { updatePurchase } = useContext(PurchaseContext);
+const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
     
-    const priorDate = new Date(priorPurchase.purchase.purchaseDate).toLocaleDateString('en-CA');
-    
     // Note (UserId will be derived from the server-side)
-    const [purchase, setPurchase] = useState({
-        id: priorPurchase.purchase.id,
-        shoppingListId: shoppingList.id,
-        userId: priorPurchase.purchase.userId,
-        vendor: priorPurchase.purchase.vendor,
-        purchaseDate: priorDate,
-        totalCost: priorPurchase.purchase.totalCost
-    });
+    
+    const [newListItem, setNewListItem] = useState (listItem);
 
-    // Handles updating the state of purchase as the user updates the form
+    // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
-        const newPurchase = { ...purchase };
-        newPurchase[e.target.id] = e.target.value;
-        setPurchase(newPurchase);
+        const item = { ...newListItem };
+        item[e.target.id] = e.target.value;
+        setNewListItem(item);
     };
 
     // Called when the user submits the new purchase form
     const handleUpdate = () => {
-        if(purchase.vendor === "") return window.alert("Please enter a vendor");
-        if(purchase.totalCost === 0) return window.alert("Please enter an amount");
+        if(newListItem.name === "") return window.alert("Please enter an name");
 
         // Disables the save button until finished
         setIsLoading(true);
 
         // Save the purchase object to the database
-        updatePurchase({
-            id: purchase.id,
-            shoppingListId: purchase.shoppingListId,
-            userId: purchase.userId,
-            vendor: purchase.vendor,
-            purchaseDate: purchase.purchaseDate,
-            totalCost: purchase.totalCost
+        updateListItem({
+            id: newListItem.id,
+            shoppingListId: newListItem.shoppingListId,
+            name: newListItem.name,
+            isChecked: newListItem.isChecked
         })
-        .then(setPurchases);
+        .then(setListItems)
+        .then(setIsLoading(false));
     };
 
     const toggle = () => setModal(!modal);
 
     return (
         <>
-            <Button size="sm" color="warning" onClick={toggle}><FaRegEdit /></Button>
+            <Button className="ml-2" color="warning" onClick={toggle}><FaRegEdit /></Button>
             <Modal isOpen={modal} toggle={toggle} >
-                <ModalHeader toggle={toggle}>Edit Purchase for {shoppingList.name}</ModalHeader>
+                <ModalHeader toggle={toggle}>Edit List Item</ModalHeader>
                 <ModalBody>
                     <Form className="purchaseForm">
 
-                        {/* PurchaseDate Input */}
+                        {/* Name Input */}
                         <FormGroup>
-                            <Label for="purchaseDate">Purchase Date </Label>
-                            <Input
-                                type="date"
-                                id="purchaseDate"
-                                onChange={handleInput}
-                                required
-                                value={purchase.purchaseDate}
-                            />
-                        </FormGroup>
-
-                        {/* Vendor Input */}
-                        <FormGroup>
-                            <Label for="vendor">Vendor </Label>
+                            <Label for="name">Name </Label>
                             <Input
                                 autoComplete="off"
                                 type="text"
-                                id="vendor"
+                                id="name"
                                 onChange={handleInput}
                                 required
                                 autoFocus
-                                placeholder="Vendor"
-                                value={purchase.vendor}
+                                placeholder="Item Name"
+                                value={newListItem.name}
                             />
-                        </FormGroup>
-
-                        {/* TotalCost Input */}
-                        <FormGroup>
-                            <Label for="totalCost">Total Cost </Label>
-                            <InputGroup>
-                                <InputGroupAddon addonType="prepend">$</InputGroupAddon>
-                                <Input
-                                    autoComplete="off"
-                                    type="float"
-                                    id="totalCost"
-                                    onChange={handleInput}
-                                    required
-                                    value={purchase.totalCost}
-                                />
-                            </InputGroup>
                         </FormGroup>
 
                         {/* Cancel Button */}
@@ -120,7 +78,7 @@ const EditListItemModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                             toggle();
                             }}
                         >
-                            Update Purchase
+                            Update ListItem
                         </Button>
                     </Form>
                 </ModalBody>

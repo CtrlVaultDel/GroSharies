@@ -3,11 +3,13 @@ import { Button, Col, Row, Container } from "reactstrap";
 
 // Icons
 import { FaCheckCircle } from "react-icons/fa";
-import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 
-// Components
+// Context
 import { ListItemContext } from "../../providers/ListItemProvider";
+
+// Components
+import EditListItemModal from "./EditListItemModal";
 // =========================== IMPORTS END ===========================
 
 
@@ -42,9 +44,7 @@ const ListItem = ({ listItem, setListItems }) => {
                     }
 
                     {/* Update listItem */}
-                    <Button className="ml-2" color="warning">
-                        <FaRegEdit />
-                    </Button>
+                    <EditListItemModal updateListItem={updateListItem} listItem={listItem} setListItems={setListItems} />
 
                     {/* Delete listItem */}
                     <Button className="ml-2" color="danger" onClick={()=>{
