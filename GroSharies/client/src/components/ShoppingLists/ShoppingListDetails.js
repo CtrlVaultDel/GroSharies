@@ -39,7 +39,11 @@ const ShoppingListDetails = () => {
 
             {/* =================== LIST ITEMS =================== */}
             
-            <ListItemSection shoppingListId = {shoppingList.id} listItems = {listItems} setListItems = {setListItems}/>
+            <ListItemSection 
+                shoppingListId = {shoppingList.id} 
+                listItems = {listItems} 
+                setListItems = {setListItems}
+            />
 
 
             {/* ==================== PURCHASES ==================== */}

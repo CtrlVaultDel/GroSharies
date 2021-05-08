@@ -13,7 +13,7 @@ import { ListItemContext } from "../../providers/ListItemProvider";
 
 const ListItem = ({ listItem, setListItems }) => {
     const { toggleListItem, updateListItem, deleteListItem } = useContext(ListItemContext);
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
     const toggleEvent = () => {
         setIsLoading(true)
