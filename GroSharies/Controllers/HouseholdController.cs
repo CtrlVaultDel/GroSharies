@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using GroSharies.Models.DataModels;
 using GroSharies.Repositories;
-using System.Security.Claims;
 using System.Linq;
 using GroSharies.Models.DomainModels;
 
@@ -11,13 +10,8 @@ namespace GroSharies.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class HouseholdController : ControllerBase
+    public class HouseholdController : BaseController
     {
-        private readonly IHouseholdRepository _householdRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IHouseholdUserRepository _householdUserRepository;
-        private readonly IShoppingListRepository _shoppingListRepository;
-
         public HouseholdController(
             IHouseholdRepository householdRepository,
             IUserRepository userRepository,
@@ -123,13 +117,6 @@ namespace GroSharies.Controllers
 
             _householdRepository.Delete(householdId);
             return NoContent();
-        }
-
-        // Retrieves the current user object by using the provided firebaseId
-        private User GetCurrentUser()
-        {
-            var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userRepository.GetByFirebaseId(firebaseId);
         }
     }
 }

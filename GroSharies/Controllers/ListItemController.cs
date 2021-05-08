@@ -9,11 +9,8 @@ namespace GroSharies.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ListItemController : ControllerBase
+    public class ListItemController : BaseController
     {
-        private readonly IListItemRepository _listItemRepository;
-        private readonly IUserRepository _userRepository;
-
         public ListItemController(
             IListItemRepository listItemRepository,
             IUserRepository userRepository
@@ -80,13 +77,6 @@ namespace GroSharies.Controllers
             _listItemRepository.Delete(listItemId);
 
             return NoContent();
-        }
-
-        // Retrieves the current user object by using the provided firebaseId
-        private User GetCurrentUser()
-        {
-            var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userRepository.GetByFirebaseId(firebaseId);
         }
     }
 }

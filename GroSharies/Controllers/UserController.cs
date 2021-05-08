@@ -9,9 +9,8 @@ namespace GroSharies.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
-        private readonly IUserRepository _userRepository;
         public UserController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -33,13 +32,6 @@ namespace GroSharies.Controllers
         {
             _userRepository.Add(user);
             return CreatedAtAction(nameof(GetByFirebaseId), new { firebaseId = user.FirebaseId }, user);
-        }
-
-        // Retrieves the current user object by using the provided firebaseId
-        private User GetCurrentUser()
-        {
-            var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userRepository.GetByFirebaseId(firebaseId);
         }
     }
 }
