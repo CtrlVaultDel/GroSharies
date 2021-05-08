@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 
@@ -14,14 +14,18 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 
 const HouseholdDetails = () => {
-    const { getHouseholdDetail, householdDetail } = useContext(HouseholdContext);
+    const { getHouseholdDetail } = useContext(HouseholdContext);
+    const [householdDetail, setHouseholdDetail] = useState()
     const { id } = useParams();
 
-    useEffect(() => getHouseholdDetail(id)
+    useEffect(() => {
+        getHouseholdDetail(id)
+        .then(setHouseholdDetail)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     , []);
     
-    if(householdDetail == null) return null;
+    if(!householdDetail) return null;
     
     return (
         <Container>
@@ -31,13 +35,15 @@ const HouseholdDetails = () => {
                     <FaPlusCircle />
                 </Link>
             </Row>
+
             {/* If the household already has lists, display them. Otherwise, show a default message */}
             {householdDetail.shoppingLists.length ?
-                <Row>
-                {householdDetail.shoppingLists.map(shopList => (
-                    <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList}/></Col>
-                ))}
-                </Row> : "You don't have any lists yet!"
+
+            <Row>
+            {householdDetail.shoppingLists.map(shopList => (
+                <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList}/></Col>
+            ))}
+            </Row> : "You don't have any lists yet!"
             }       
         </Container>
     );

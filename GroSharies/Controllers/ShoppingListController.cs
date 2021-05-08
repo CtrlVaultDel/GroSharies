@@ -11,14 +11,8 @@ namespace GroSharies.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ShoppingListController : ControllerBase
+    public class ShoppingListController : BaseController
     {
-        private readonly IShoppingListRepository _shoppingListRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IPurchaseRepository _purchaseRepository;
-        private readonly IListItemRepository _listItemRepository;
-        private readonly IHouseholdRepository _householdRepository;
-
         public ShoppingListController(
             IShoppingListRepository shoppingListRepository,
             IUserRepository userRepository,
@@ -96,13 +90,6 @@ namespace GroSharies.Controllers
 
             _shoppingListRepository.Delete(shoppingListId);
             return NoContent();
-        }
-
-        // Retrieves the current user object by using the provided firebaseId
-        private User GetCurrentUser()
-        {
-            var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userRepository.GetByFirebaseId(firebaseId);
         }
     }
 }

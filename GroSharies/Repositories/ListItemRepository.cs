@@ -98,7 +98,7 @@ namespace GroSharies.Repositories
                         SET 
                             ShoppingListId = @ShoppingListId, 
                             Name = @Name, 
-                            IsChecked = @IsChecked, 
+                            IsChecked = @IsChecked
                         WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", listItem.Id);

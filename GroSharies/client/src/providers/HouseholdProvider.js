@@ -9,7 +9,6 @@ import { UserContext } from "./UserProvider";
 export const HouseholdContext = createContext();
 
 export function HouseholdProvider(props) {
-    const [householdDetail, setHouseholdDetail] = useState();
     const [households, setHouseholds] = useState([]);
     const { getToken } = useContext(UserContext); 
     const apiUrl = "/api/household";
@@ -24,7 +23,6 @@ export function HouseholdProvider(props) {
             }
         }))
         .then(res => res.json())
-        .then(setHouseholdDetail);
     };
 
     // Gets all households associated with the current user
@@ -83,7 +81,6 @@ export function HouseholdProvider(props) {
         <HouseholdContext.Provider
             value={{
                 getHouseholdDetail,
-                householdDetail,
                 getHouseholds,
                 households,
                 saveHousehold,
