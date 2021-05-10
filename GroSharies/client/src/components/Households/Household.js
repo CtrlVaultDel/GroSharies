@@ -8,6 +8,9 @@ import { FaTrashAlt } from "react-icons/fa";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Components
+import HouseholdInvite from "./HouseholdInvite";
 // =========================== IMPORTS END ===========================
 
 
@@ -21,8 +24,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
     const checkIfAdmin = () => {
         if(userType === 1) {
             return (
-            <CardFooter>
-                <Row>
+                <>
                     <Col className="text-center">
                         {/* Edit button for Household */}
                         <Button size="sm" color="warning" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
@@ -31,8 +33,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                         {/* Delete button for Household */}
                         <Button size="sm" color="danger" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
                     </Col>
-                </Row>
-            </CardFooter>)  
+                </>)
         };
     };
 
@@ -55,8 +56,13 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                 <Row>
                     Lists: {numLists}       
                 </Row>   
-            </CardBody>          
-            {checkIfAdmin()}
+            </CardBody>  
+            <CardFooter>
+                <Row>
+                    <HouseholdInvite household={household} />
+                    {checkIfAdmin()}
+                </Row>
+            </CardFooter>        
         </Card>
     )
 };

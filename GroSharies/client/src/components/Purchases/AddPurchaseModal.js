@@ -45,7 +45,8 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
             purchaseDate: purchase.purchaseDate,
             totalCost: purchase.totalCost
         })
-        .then(setPurchases);
+        .then(setPurchases)
+        .then(() => toggle())
     };
 
     const toggle = () => setModal(!modal);
@@ -114,7 +115,6 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
                             onClick={(event) => {
                             event.preventDefault();
                             handleSave();
-                            toggle();
                             }}
                         >
                             Add Purchase

@@ -34,7 +34,10 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
             isChecked: newListItem.isChecked
         })
         .then(setListItems)
-        .then(setIsLoading(false));
+        .then(() => {
+            setIsLoading(false);
+            toggle();
+        })
     };
 
     const toggle = () => setModal(!modal);
@@ -75,7 +78,6 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                             onClick={(event) => {
                             event.preventDefault();
                             handleUpdate();
-                            toggle();
                             }}
                         >
                             Update ListItem

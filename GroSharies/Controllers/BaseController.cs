@@ -1,6 +1,7 @@
 ﻿using GroSharies.Models.DataModels;
 using GroSharies.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Security.Claims;
 
 namespace GroSharies.Controllers
@@ -20,6 +21,8 @@ namespace GroSharies.Controllers
         // Retrieves the current user object by using the provided firebaseId
         protected User GetCurrentUser()
         {
+            // Get User Claims
+
             var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userRepository.GetByFirebaseId(firebaseId);
         }

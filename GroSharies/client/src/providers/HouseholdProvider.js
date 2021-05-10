@@ -77,6 +77,17 @@ export function HouseholdProvider(props) {
         .then(getHouseholds)
     };
 
+    const inviteUser = invitation => {
+        return getToken()
+        .then(token => fetch("/api/householdUser", {
+            medhot: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(getHouseholds)
+    }
+
     return (
         <HouseholdContext.Provider
             value={{
@@ -85,7 +96,8 @@ export function HouseholdProvider(props) {
                 households,
                 saveHousehold,
                 updateHousehold,
-                deleteHousehold
+                deleteHousehold,
+                inviteUser
             }}
         >
             {props.children}
