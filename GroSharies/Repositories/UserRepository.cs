@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using GroSharies.Models.DataModels;
 using GroSharies.Utils;
+using System.Collections.Generic;
 
 namespace GroSharies.Repositories
 {
@@ -39,6 +40,53 @@ namespace GroSharies.Repositories
                     reader.Close();
 
                     return user;
+                }
+            }
+        }
+
+        public List<string> GetAllEmails()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Email FROM [User]";
+
+                    var reader = cmd.ExecuteReader();
+                    var emails = new List<string>();
+
+                    while (reader.Read())
+                    {
+                        string email = DbUtils.GetString(reader, "Email");
+                        emails.Add(email);
+                    }
+
+                    return emails;
+                }
+            }
+        }
+
+        public int GetUserIdByEmail(string email)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id FROM [User] WHERE Email= @Email";
+
+                    DbUtils.AddParameter(cmd, "@Email", email);
+
+                    var reader = cmd.ExecuteReader();
+                    int userId = 0;
+
+                    if (reader.Read())
+                    {
+                        userId = DbUtils.GetInt(reader, "Id");
+                    }
+                    reader.Close();
+                    return userId;
                 }
             }
         }

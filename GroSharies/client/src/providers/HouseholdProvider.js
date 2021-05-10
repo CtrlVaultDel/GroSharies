@@ -77,6 +77,54 @@ export function HouseholdProvider(props) {
         .then(getHouseholds)
     };
 
+    const inviteUser = invitation => {
+        return getToken()
+        .then(token => fetch("/api/householdUser", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(invitation)
+        }))
+        .then(getHouseholds)
+    }
+
+    const declineInvite = householdId => {
+        return getToken()
+        .then(token => fetch(`api/householdUser/decline/${householdId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json" 
+            }
+        }))
+        .then(getHouseholds)
+    }
+
+    const acceptInvite = householdId => {
+        return getToken()
+        .then(token => fetch(`api/householdUser/accept/${householdId}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }))
+        .then(getHouseholds)
+    }
+
+    const getEmailsByHousehold = householdId => {
+        return getToken()
+        .then(token => fetch(`/api/householdUser/${householdId}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(resp => resp.json())
+    }
+
     return (
         <HouseholdContext.Provider
             value={{
@@ -85,7 +133,11 @@ export function HouseholdProvider(props) {
                 households,
                 saveHousehold,
                 updateHousehold,
-                deleteHousehold
+                deleteHousehold,
+                inviteUser,
+                declineInvite,
+                acceptInvite,
+                getEmailsByHousehold
             }}
         >
             {props.children}

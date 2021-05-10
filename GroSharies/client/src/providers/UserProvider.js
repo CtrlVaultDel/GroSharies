@@ -66,7 +66,7 @@ export function UserProvider(props) {
             headers: {
             Authorization: `Bearer ${token}`,
             },
-        }).then((resp) => resp.json())
+        }).then(res => res.json())
         );
     };
 
@@ -79,7 +79,7 @@ export function UserProvider(props) {
             "Content-Type": "application/json",
             },
             body: JSON.stringify(user),
-        }).then((resp) => resp.json())
+        }).then(res => res.json())
         );
     };
 
@@ -91,8 +91,19 @@ export function UserProvider(props) {
                 Authorization: `Bearer ${token}`
             }
         })
-        .then((res) => res.json()))
+        .then(res => res.json()))
     };
+
+    const getAllEmails = () => {
+        return getToken()
+        .then(token => fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(res => res.json());
+    }
 
     return (
         <UserContext.Provider
@@ -102,7 +113,8 @@ export function UserProvider(props) {
             logout,
             register,
             getToken,
-            getUserById
+            getUserById,
+            getAllEmails
         }}
         >
         {isFirebaseReady ? (

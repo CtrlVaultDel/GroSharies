@@ -16,6 +16,13 @@ namespace GroSharies.Controllers
             _userRepository = userRepository;
         }
 
+        [HttpGet]
+        public IActionResult GetAllEmails()
+        {
+            var emails = _userRepository.GetAllEmails();
+            return Ok(emails);
+        }
+
         [HttpGet("{firebaseId}")]
         public IActionResult GetByFirebaseId(string firebaseId)
         {

@@ -13,13 +13,14 @@ namespace GroSharies.Controllers
         protected IShoppingListRepository _shoppingListRepository;
         protected IListItemRepository _listItemRepository;
         protected IPurchaseRepository _purchaseRepository;
-        protected User user;
 
         public BaseController() {}
 
         // Retrieves the current user object by using the provided firebaseId
         protected User GetCurrentUser()
         {
+            // Get User Claims
+
             var firebaseId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userRepository.GetByFirebaseId(firebaseId);
         }

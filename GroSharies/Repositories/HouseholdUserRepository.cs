@@ -128,6 +128,36 @@ namespace GroSharies.Repositories
             }
         }
 
+        public List<string> GetEmailsByHousehold(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT u.Email
+                    FROM HouseholdUser hu
+                    LEFT JOIN [User] u ON hu.UserId = u.Id
+                    WHERE hu.HouseholdId = @HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var allHouseholdEmails = new List<string>();
+
+                    while (reader.Read())
+                    {
+                        string email = DbUtils.GetString(reader, "Email");
+                        allHouseholdEmails.Add(email);
+                    }
+                    reader.Close();
+                    return allHouseholdEmails;
+                }
+            }
+        }
+
         public int CountHouseholdUsers(int householdId)
         {
             using (var conn = Connection)
@@ -199,6 +229,65 @@ namespace GroSharies.Repositories
                         INSERT INTO HouseholdUser (HouseholdId, UserId, UserTypeId, IsAccepted)
                         OUTPUT INSERTED.ID
                         VALUES (@HouseholdId, @UserId, 1, 1)";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+                    DbUtils.AddParameter(cmd, "@UserId", userId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void InviteMember(int householdId, int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO HouseholdUser (HouseholdId, UserId, UserTypeId, IsAccepted)
+                        OUTPUT INSERTED.ID
+                        VALUES (@HouseholdId, @UserId, 2, 0)";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+                    DbUtils.AddParameter(cmd, "@UserId", userId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void AcceptInvite(int householdId, int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE HouseholdUser 
+                        SET IsAccepted = 1
+                        WHERE HouseholdId = @HouseholdId AND UserId = @UserId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+                    DbUtils.AddParameter(cmd, "@UserId", userId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeclineInvite(int householdId, int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE HouseholdUser 
+                        WHERE HouseholdId = @HouseholdId AND UserId = @UserId";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
                     DbUtils.AddParameter(cmd, "@UserId", userId);
