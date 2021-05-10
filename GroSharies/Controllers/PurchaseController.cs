@@ -26,7 +26,7 @@ namespace GroSharies.Controllers
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
-            var purchases = _purchaseRepository.GetAllById(shoppingListId);
+            var purchases = _purchaseRepository.GetDetailsById(shoppingListId);
 
             return Ok(purchases);
         }

@@ -10,7 +10,7 @@ namespace GroSharies.Repositories
     {
         public PurchaseRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<PurchaseDetail> GetAllById(int shoppingListId)
+        public List<PurchaseDetail> GetDetailsById(int shoppingListId)
         {
             using (var conn = Connection)
             {
@@ -48,6 +48,45 @@ namespace GroSharies.Repositories
                             Buyer = DbUtils.GetString(reader, "FullName")
                         };
                         purchases.Add(purchaseDetail);
+                    }
+                    reader.Close();
+                    return purchases;
+                }
+            }
+        }
+
+        public List<Purchase> GetAllByUserId(int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT 
+                    p.Id AS PurchaseId, ShoppingListId, UserId, Vendor, PurchaseDate, TotalCost 
+                    FROM Purchase p
+                    WHERE UserId = @UserId
+                    ORDER BY PurchaseDate";
+
+                    DbUtils.AddParameter(cmd, "@UserId", userId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var purchases = new List<Purchase>();
+
+                    while (reader.Read())
+                    {
+                        var purchase = new Purchase()
+                        {                            
+                            Id = DbUtils.GetInt(reader, "PurchaseId"),
+                            ShoppingListId = DbUtils.GetInt(reader, "ShoppingListId"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            Vendor = DbUtils.GetString(reader, "Vendor"),
+                            PurchaseDate = DbUtils.GetDateTime(reader, "PurchaseDate"),
+                            TotalCost = DbUtils.GetDecimal(reader, "TotalCost")              
+                        };
+                        purchases.Add(purchase);
                     }
                     reader.Close();
                     return purchases;
