@@ -32,10 +32,12 @@ const HouseholdInvite = ({household}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const [invitation, setInvitation] = useState({
+    const initialState = {
         householdId: household.id,
         email: ""
-    });
+    }
+
+    const [invitation, setInvitation] = useState(initialState);
 
     // Handles updating the state of the invitation as the user updates the form
     const handleInput = e => {
@@ -76,7 +78,7 @@ const HouseholdInvite = ({household}) => {
     return (
         <>
             <Button size="sm" color="success" onClick={toggle}><FaAddressBook /></Button>
-            <Modal isOpen={modal} toggle={toggle} >
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => setInvitation(initialState)}>
                 <ModalHeader toggle={toggle}>New Invitation for {household.name} Household</ModalHeader>
                 <ModalBody>
                     <Form className="invitationForm">

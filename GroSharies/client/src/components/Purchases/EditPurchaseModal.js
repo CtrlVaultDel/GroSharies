@@ -62,7 +62,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
     return (
         <>
             <Button size="sm" color="warning" onClick={toggle}><FaRegEdit /></Button>
-            <Modal isOpen={modal} toggle={toggle} backdrop="static">
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => setPurchase(initialState)}>
                 <ModalHeader toggle={toggle}>Edit Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>
                     <Form className="purchaseForm">
@@ -113,10 +113,8 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={()=>{
-                                toggle();
-                                setPurchase(initialState);
-                            }}>Cancel
+                            onClick={()=>toggle()}>
+                                Cancel
                         </Button>
 
                         {/* Save Button */}
