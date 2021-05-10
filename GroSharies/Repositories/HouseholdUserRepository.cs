@@ -257,5 +257,44 @@ namespace GroSharies.Repositories
                 }
             }
         }
+
+        public void AcceptInvite(int householdId, int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE HouseholdUser 
+                        SET IsAccepted = 1
+                        WHERE HouseholdId = @HouseholdId AND UserId = @UserId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+                    DbUtils.AddParameter(cmd, "@UserId", userId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeclineInvite(int householdId, int userId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE HouseholdUser 
+                        WHERE HouseholdId = @HouseholdId AND UserId = @UserId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+                    DbUtils.AddParameter(cmd, "@UserId", userId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

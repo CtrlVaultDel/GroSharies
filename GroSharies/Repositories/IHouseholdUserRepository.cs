@@ -14,5 +14,7 @@ namespace GroSharies.Repositories
         void InviteMember(int householdId, int userId);
         int CountHouseholdUsers(int householdId);
         int CountHouseholdLists(int householdId);
+        void AcceptInvite(int householdId, int userId);
+        void DeclineInvite(int householdId, int userId);
     }
 }

@@ -17,7 +17,7 @@ import HouseholdInvite from "./HouseholdInvite";
 const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
     const history = useHistory();
-    const { deleteHousehold } = useContext(HouseholdContext);
+    const { deleteHousehold, acceptInvite, declineInvite } = useContext(HouseholdContext);
 
     // Determines if the user is an Admin of the related household.
     // If they are, add an edit button to allow them to change its name.
@@ -50,13 +50,13 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
             return (
                 <>
                     {/* Accept button for invitation */}
-                    <Col Col className="text-center">
-                        <Button color="success">Accept Invite</Button>
+                    <Col className="text-center">
+                        <Button onClick={() => acceptInvite(household.id)} color="success">Accept Invite</Button>
                     </Col>
 
                     {/* Decline button for invitation */}
-                    <Col Col className="text-center">
-                        <Button color="danger">Decline Invite</Button>
+                    <Col className="text-center">
+                        <Button onClick={() => declineInvite(household.id)} color="danger">Decline Invite</Button>
                     </Col>
                 </>
             )

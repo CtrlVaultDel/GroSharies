@@ -90,6 +90,30 @@ export function HouseholdProvider(props) {
         .then(getHouseholds)
     }
 
+    const declineInvite = householdId => {
+        return getToken()
+        .then(token => fetch(`api/householdUser/decline/${householdId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json" 
+            }
+        }))
+        .then(getHouseholds)
+    }
+
+    const acceptInvite = householdId => {
+        return getToken()
+        .then(token => fetch(`api/householdUser/accept/${householdId}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }))
+        .then(getHouseholds)
+    }
+
     const getEmailsByHousehold = householdId => {
         return getToken()
         .then(token => fetch(`/api/householdUser/${householdId}`, {
@@ -111,6 +135,8 @@ export function HouseholdProvider(props) {
                 updateHousehold,
                 deleteHousehold,
                 inviteUser,
+                declineInvite,
+                acceptInvite,
                 getEmailsByHousehold
             }}
         >
