@@ -80,12 +80,25 @@ export function HouseholdProvider(props) {
     const inviteUser = invitation => {
         return getToken()
         .then(token => fetch("/api/householdUser", {
-            medhot: "POST",
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(invitation)
+        }))
+        .then(getHouseholds)
+    }
+
+    const getEmailsByHousehold = householdId => {
+        return getToken()
+        .then(token => fetch(`/api/householdUser/${householdId}`, {
+            method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }))
-        .then(getHouseholds)
+        .then(resp => resp.json())
     }
 
     return (
@@ -97,7 +110,8 @@ export function HouseholdProvider(props) {
                 saveHousehold,
                 updateHousehold,
                 deleteHousehold,
-                inviteUser
+                inviteUser,
+                getEmailsByHousehold
             }}
         >
             {props.children}

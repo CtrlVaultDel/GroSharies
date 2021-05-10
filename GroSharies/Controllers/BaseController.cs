@@ -1,7 +1,6 @@
 ﻿using GroSharies.Models.DataModels;
 using GroSharies.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Security.Claims;
 
 namespace GroSharies.Controllers
@@ -14,7 +13,6 @@ namespace GroSharies.Controllers
         protected IShoppingListRepository _shoppingListRepository;
         protected IListItemRepository _listItemRepository;
         protected IPurchaseRepository _purchaseRepository;
-        protected User user;
 
         public BaseController() {}
 

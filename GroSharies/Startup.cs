@@ -29,12 +29,12 @@ namespace GroSharies
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IHouseholdRepository, HouseholdRepository>();
             services.AddTransient<IHouseholdUserRepository, HouseholdUserRepository>();
-            services.AddTransient<IShoppingListRepository, ShoppingListRepository>();
-            services.AddTransient<IPurchaseRepository, PurchaseRepository>();
             services.AddTransient<IListItemRepository, ListItemRepository>();
+            services.AddTransient<IPurchaseRepository, PurchaseRepository>();
+            services.AddTransient<IShoppingListRepository, ShoppingListRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

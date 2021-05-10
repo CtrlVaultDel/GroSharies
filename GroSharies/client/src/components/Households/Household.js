@@ -40,7 +40,11 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
     const checkIfAccepted = () => {
         if(isAccepted){
-            return (<HouseholdInvite household={household} />)
+            return (
+                <Col className="text-center">
+                    <HouseholdInvite household={household} />
+                </Col>
+            )
         }
         else{
             return (
