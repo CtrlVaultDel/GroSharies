@@ -62,7 +62,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
     return (
         <>
             <Button size="sm" color="warning" onClick={toggle}><FaRegEdit /></Button>
-            <Modal isOpen={modal} toggle={toggle} >
+            <Modal isOpen={modal} toggle={toggle} backdrop="static">
                 <ModalHeader toggle={toggle}>Edit Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>
                     <Form className="purchaseForm">

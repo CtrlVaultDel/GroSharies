@@ -60,7 +60,7 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
     return (
         <div>
             <Button color="success" onClick={toggle}>New Purchase</Button>
-            <Modal isOpen={modal} toggle={toggle} >
+            <Modal isOpen={modal} toggle={toggle} backdrop="static">
                 <ModalHeader toggle={toggle}>New Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>
                     <Form className="purchaseForm">
