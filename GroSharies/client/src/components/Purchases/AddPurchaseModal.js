@@ -13,14 +13,16 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
     
     const currentDate = new Date().toLocaleDateString('en-CA');
 
-    // Note (UserId will be derived from the server-side)
-    const [purchase, setPurchase] = useState({
+    const initialState = {
         shoppingListId: shoppingList.id,
         userId: 0,
         vendor: "",
         purchaseDate: currentDate,
         totalCost: 0
-    });
+    }
+
+    // Note (UserId will be derived from the server-side)
+    const [purchase, setPurchase] = useState(initialState);
 
     // Handles updating the state of purchase as the user updates the form
     const handleInput = e => {
@@ -46,7 +48,11 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
             totalCost: purchase.totalCost
         })
         .then(setPurchases)
-        .then(() => toggle())
+        .then(()=>{
+            toggle();
+            setIsLoading(false);
+            setPurchase(initialState)
+        })
     };
 
     const toggle = () => setModal(!modal);
@@ -105,7 +111,10 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={toggle}>Cancel
+                            onClick={() =>{
+                                toggle();
+                                setPurchase(initialState);
+                                }}>Cancel
                         </Button>
 
                         {/* Save Button */}
