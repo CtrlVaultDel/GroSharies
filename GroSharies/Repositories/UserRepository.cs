@@ -2,6 +2,7 @@
 using GroSharies.Models.DataModels;
 using GroSharies.Utils;
 using System.Collections.Generic;
+using GroSharies.Models.DomainModels;
 
 namespace GroSharies.Repositories
 {

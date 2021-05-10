@@ -105,6 +105,17 @@ export function UserProvider(props) {
         .then(res => res.json());
     }
 
+    const getUserInfo = () => {
+        return getToken()
+        .then(token => fetch(`${apiUrl}/userProfile`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }))
+        .then(res => res.json())
+    }
+
     return (
         <UserContext.Provider
         value={{
@@ -114,7 +125,8 @@ export function UserProvider(props) {
             register,
             getToken,
             getUserById,
-            getAllEmails
+            getAllEmails,
+            getUserInfo
         }}
         >
         {isFirebaseReady ? (

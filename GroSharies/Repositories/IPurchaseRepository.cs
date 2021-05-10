@@ -6,7 +6,8 @@ namespace GroSharies.Repositories
 {
     public interface IPurchaseRepository
     {
-        List<PurchaseDetail> GetAllById(int shoppingListId);
+        List<PurchaseDetail> GetDetailsById(int shoppingListId);
+        List<Purchase> GetAllByUserId(int userId);
         void Add(Purchase purchase);
         void Update(Purchase purchase);
         void Delete(int purchaseId);

@@ -4,6 +4,9 @@ import { UserContext } from "../providers/UserProvider";
 import Login from "./Login";
 import Register from "./Register";
 
+// Userprofile Components
+import UserProfilePage from "./User/UserProfilePage"
+
 // Household Components
 import HouseholdPage from "./Households/HouseholdPage";
 import HouseholdDetails from "./Households/HouseholdDetails";
@@ -34,6 +37,12 @@ export default function ApplicationViews() {
                 {/* Registration Page */}
                 <Route path="/register">
                     <Register />
+                </Route>
+
+
+                {/* -----------------------USER PROFILE----------------------- */}
+                <Route path="/user" exact>
+                    {isLoggedIn ? <UserProfilePage /> : <Redirect to="/Login" />}
                 </Route>
 
 

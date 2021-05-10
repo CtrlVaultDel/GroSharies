@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using GroSharies.Models.DataModels;
 using GroSharies.Repositories;
 using System.Security.Claims;
+using GroSharies.Models.DomainModels;
 
 namespace GroSharies.Controllers
 {
@@ -11,9 +12,14 @@ namespace GroSharies.Controllers
     [ApiController]
     public class UserController : BaseController
     {
-        public UserController(IUserRepository userRepository)
+        public UserController(
+            IUserRepository userRepository,
+            IHouseholdUserRepository householdUserRepository,
+            IPurchaseRepository purchaseRepository)
         {
             _userRepository = userRepository;
+            _householdUserRepository = householdUserRepository;
+            _purchaseRepository = purchaseRepository;
         }
 
         [HttpGet]
@@ -27,11 +33,28 @@ namespace GroSharies.Controllers
         public IActionResult GetByFirebaseId(string firebaseId)
         {
             var user = _userRepository.GetByFirebaseId(firebaseId);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            if (user == null) return NotFound();
+            
             return Ok(user);
+        }
+
+        [HttpGet("userProfile")]
+        public IActionResult GetUserProfile()
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            var households = _householdUserRepository.GetAllByUserId(user.Id);
+            var purchases = _purchaseRepository.GetAllByUserId(user.Id);
+
+            var userProfile = new UserProfile()
+            {
+                UserInfo = user,
+                Households = households,
+                Purchases = purchases
+            };
+
+            return Ok(userProfile);
         }
 
         [HttpPost]

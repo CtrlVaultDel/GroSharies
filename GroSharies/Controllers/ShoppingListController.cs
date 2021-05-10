@@ -41,7 +41,7 @@ namespace GroSharies.Controllers
             var listItems = _listItemRepository.GetAllById(shoppingListId);
 
             // Get the List of Shopping List Purchases (Purchase)
-            var purchases = _purchaseRepository.GetAllById(shoppingListId);
+            var purchases = _purchaseRepository.GetDetailsById(shoppingListId);
 
             // Save all of the relevant data in a single details object
             var shoppingListDetail = new ShoppingListDetail()
