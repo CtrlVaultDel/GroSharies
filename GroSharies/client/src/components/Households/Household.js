@@ -25,17 +25,39 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
         if(userType === 1) {
             return (
                 <>
+                    {/* Edit button for Household */}
                     <Col className="text-center">
-                        {/* Edit button for Household */}
                         <Button size="sm" color="warning" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
                     </Col>
+
+                    {/* Delete button for Household */}
                     <Col className="text-center">
-                        {/* Delete button for Household */}
                         <Button size="sm" color="danger" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
                     </Col>
                 </>)
         };
     };
+
+    const checkIfAccepted = () => {
+        if(isAccepted){
+            return (<HouseholdInvite household={household} />)
+        }
+        else{
+            return (
+                <>
+                    {/* Accept button for invitation */}
+                    <Col Col className="text-center">
+                        <Button color="success">Accept Invite</Button>
+                    </Col>
+
+                    {/* Decline button for invitation */}
+                    <Col Col className="text-center">
+                        <Button color="danger">Decline Invite</Button>
+                    </Col>
+                </>
+            )
+        }
+    }
 
     const deleteWarning = () => {
         const confirmBox = window.confirm(`Are you sure you wish to delete the ${household.name} household? This action is irreversable.`);
@@ -59,7 +81,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
             </CardBody>  
             <CardFooter>
                 <Row>
-                    <HouseholdInvite household={household} />
+                    {checkIfAccepted()}
                     {checkIfAdmin()}
                 </Row>
             </CardFooter>        
