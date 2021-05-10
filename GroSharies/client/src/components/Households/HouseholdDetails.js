@@ -38,12 +38,13 @@ const HouseholdDetails = () => {
 
             {/* If the household already has lists, display them. Otherwise, show a default message */}
             {householdDetail.shoppingLists.length ?
-
-            <Row>
-            {householdDetail.shoppingLists.map(shopList => (
-                <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList}/></Col>
-            ))}
-            </Row> : "You don't have any lists yet!"
+                <Row>
+                {householdDetail.shoppingLists.map(shopList => (
+                    <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList} setHouseholdDetail={setHouseholdDetail}/></Col>
+                ))}
+                </Row> 
+                : 
+                "You don't have any lists yet!"
             }       
         </Container>
     );

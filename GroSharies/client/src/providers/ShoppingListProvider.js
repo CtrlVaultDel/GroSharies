@@ -62,7 +62,7 @@ export function ShoppingListProvider(props) {
                 Authorization: `Bearer ${token}`
             }
         }))
-        .then(getHouseholdDetail(shoppingList.householdId))
+        .then(() => getHouseholdDetail(shoppingList.householdId))
     };
 
     return (

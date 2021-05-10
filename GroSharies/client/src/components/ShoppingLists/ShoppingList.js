@@ -11,7 +11,7 @@ import { ShoppingListContext } from "../../providers/ShoppingListProvider";
 // =========================== IMPORTS END ===========================
 
 
-const ShoppingList = ({ shoppingList }) => {
+const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
     const { deleteShoppingList } = useContext(ShoppingListContext);
     const history = useHistory();
 
@@ -19,6 +19,7 @@ const ShoppingList = ({ shoppingList }) => {
         const confirmBox = window.confirm(`Are you sure you wish to delete the ${shoppingList.name} shopping list? This action is irreversable.`);
         if (confirmBox){
             deleteShoppingList(shoppingList)
+            .then(setHouseholdDetail)
         };
     };
 
