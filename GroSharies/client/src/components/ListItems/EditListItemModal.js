@@ -8,9 +8,14 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
     
-    // Note (UserId will be derived from the server-side)
-    
-    const [newListItem, setNewListItem] = useState (listItem);
+    const initialState = {
+        id: listItem.id,
+        shoppingListId: listItem.shoppingListId,
+        name: listItem.name,
+        isChecked: Boolean
+    }
+
+    const [newListItem, setNewListItem] = useState(initialState)
 
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
@@ -31,7 +36,7 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
             id: newListItem.id,
             shoppingListId: newListItem.shoppingListId,
             name: newListItem.name,
-            isChecked: newListItem.isChecked
+            isChecked: listItem.isChecked
         })
         .then(setListItems)
         .then(() => {
@@ -44,8 +49,8 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
 
     return (
         <>
-            <Button className="ml-2" color="warning" onClick={toggle}><FaRegEdit /></Button>
-            <Modal isOpen={modal} toggle={toggle} >
+            <Button className="ml-2" color="warning" onClick={toggle} ><FaRegEdit /></Button>
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => setNewListItem(initialState)}>
                 <ModalHeader toggle={toggle}>Edit List Item</ModalHeader>
                 <ModalBody>
                     <Form className="purchaseForm">
@@ -68,7 +73,8 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={toggle}>Cancel
+                            onClick={() =>toggle()}>
+                            Cancel
                         </Button>
 
                         {/* Save Button */}

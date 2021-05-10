@@ -14,15 +14,17 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
     
     const priorDate = new Date(priorPurchase.purchase.purchaseDate).toLocaleDateString('en-CA');
     
-    // Note (UserId will be derived from the server-side)
-    const [purchase, setPurchase] = useState({
+    const initialState = {
         id: priorPurchase.purchase.id,
         shoppingListId: shoppingList.id,
         userId: priorPurchase.purchase.userId,
         vendor: priorPurchase.purchase.vendor,
         purchaseDate: priorDate,
         totalCost: priorPurchase.purchase.totalCost
-    });
+    }
+
+    // Note (UserId will be derived from the server-side)
+    const [purchase, setPurchase] = useState(initialState);
 
     // Handles updating the state of purchase as the user updates the form
     const handleInput = e => {
@@ -49,7 +51,10 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
             totalCost: purchase.totalCost
         })
         .then(setPurchases)
-        .then(() => toggle())
+        .then(() => {
+            toggle();
+            setIsLoading(false);
+        })
     };
 
     const toggle = () => setModal(!modal);
@@ -57,7 +62,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
     return (
         <>
             <Button size="sm" color="warning" onClick={toggle}><FaRegEdit /></Button>
-            <Modal isOpen={modal} toggle={toggle} >
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => setPurchase(initialState)}>
                 <ModalHeader toggle={toggle}>Edit Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>
                     <Form className="purchaseForm">
@@ -108,7 +113,8 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={toggle}>Cancel
+                            onClick={()=>toggle()}>
+                                Cancel
                         </Button>
 
                         {/* Save Button */}

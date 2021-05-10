@@ -19,10 +19,10 @@ const ListItem = ({ listItem, setListItems }) => {
 
     const toggleEvent = () => {
         setIsLoading(true)
-                
+
         // Toggle the listItem complete state
         listItem.isChecked = !listItem.isChecked;
-        
+
         // Save the the updated state to the database
         toggleListItem(listItem)
         .then(setListItems)

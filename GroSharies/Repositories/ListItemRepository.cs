@@ -95,16 +95,11 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         UPDATE ListItem
-                        SET 
-                            ShoppingListId = @ShoppingListId, 
-                            Name = @Name, 
-                            IsChecked = @IsChecked
+                        SET Name = @Name
                         WHERE Id = @Id";
 
                     DbUtils.AddParameter(cmd, "@Id", listItem.Id);
-                    DbUtils.AddParameter(cmd, "@ShoppingListId", listItem.ShoppingListId);
                     DbUtils.AddParameter(cmd, "@Name", listItem.Name);
-                    DbUtils.AddParameter(cmd, "@IsChecked", listItem.IsChecked);
 
                     cmd.ExecuteNonQuery();
                 }
