@@ -24,7 +24,7 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
     };
 
     return (
-        <Card className="m-2 shadow postCard">
+        <Card style={{minWidth:"220px"}} className="m-2 shadow postCard">
 
             {/* Header & Link to ShoppingList Detail */}
             <CardHeader className="text-center">

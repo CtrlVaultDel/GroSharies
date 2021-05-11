@@ -26,7 +26,7 @@ const HouseholdPage = () => {
 
     return (
         <>
-            <Row className="justify-content-md-center" id="PageHeader">
+            <Row className="justify-content-center" id="PageHeader">
                 <h1>Your Households</h1>
                 <Link id="mainAddButton" to="/household/new">
                     <FaPlusCircle />

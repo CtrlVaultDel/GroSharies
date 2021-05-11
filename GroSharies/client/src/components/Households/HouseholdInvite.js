@@ -71,8 +71,9 @@ const HouseholdInvite = ({household}) => {
             email: invitation.email
         })
         setIsLoading(false);
+        window.alert(`Invitation sent to ${invitation.email}`);
+        setInvitation(initialState);
         toggle();
-        return window.alert(`Invitation sent to ${invitation.email}`);
     };
 
     return (
@@ -101,7 +102,10 @@ const HouseholdInvite = ({household}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={toggle}>Cancel
+                            onClick={() => {
+                                toggle();
+                                setInvitation(initialState)
+                            }}>Cancel
                         </Button>
 
                         {/* Save Button */}

@@ -74,7 +74,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
     };
     
     return(
-        <Card className="m-2 shadow postCard">
+        <Card style={{minWidth:"220px"}} className="m-2 shadow postCard">
             <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>

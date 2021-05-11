@@ -42,7 +42,7 @@ import { UserContext } from "../providers/UserProvider";
                     <Button color="secondary">Login</Button>
                 </FormGroup>
                 <em>
-                    Not registered? <Link to="register">Register</Link>
+                    Not registered? <Link to="register">Click Here</Link>
                 </em>
             </Form>
         </Card>
