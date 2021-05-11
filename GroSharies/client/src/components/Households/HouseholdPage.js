@@ -1,15 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
 
 // Styles
 import "../../styles/index.css";
 
-// Icons
-import { FaPlusCircle } from "react-icons/fa";
-
 // Components
 import Household from "./Household";
+import AddHouseholdModal from "./AddHouseholdModal";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
@@ -28,9 +25,7 @@ const HouseholdPage = () => {
         <>
             <Row className="justify-content-center" id="pageHeader">
                 <h1>Your Households</h1>
-                <Link id="mainAddButton" to="/household/new">
-                    <FaPlusCircle />
-                </Link> 
+                <AddHouseholdModal />
             </Row>
             <Container>
                 <Row>

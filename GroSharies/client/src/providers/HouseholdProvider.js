@@ -49,7 +49,7 @@ export function HouseholdProvider(props) {
             },
             body: JSON.stringify(household),
           }))
-        .then(resp => resp.json())
+        .then(getHouseholds)
     };
 
     // Updates a pre-existing household object in the database

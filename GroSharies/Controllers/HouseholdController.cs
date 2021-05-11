@@ -82,7 +82,7 @@ namespace GroSharies.Controllers
             // Add the relationship between the user and the new household (Admin)
             _householdUserRepository.AddAdmin(household.Id, user.Id);
 
-            return CreatedAtAction(nameof(GetById), new { householdId = household.Id }, household);
+            return NoContent();
         }
 
         [HttpPut("{householdId}")]

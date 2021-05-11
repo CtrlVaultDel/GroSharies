@@ -16,8 +16,6 @@ const UserProfilePage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    console.log(userInfo)
-
     // const getAllCosts = (purchaseArray) => {
     //         let sum = purchaseArray.reduce(function(acc, purchase){
     //             acc[purchase.totalCost];

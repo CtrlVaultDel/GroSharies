@@ -5,42 +5,37 @@ import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } 
 import { FaPlusCircle } from "react-icons/fa";
 
 // Context
-import { ShoppingListContext } from "../../providers/ShoppingListProvider";
+import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // =========================== IMPORTS END ===========================
 
-const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
-    const { saveShoppingList } = useContext(ShoppingListContext);
+const EditHouseholdModal = () => {
+    const { saveHousehold } = useContext(HouseholdContext);
     const [isLoading, setIsLoading] = useState(false);
 
-    const initialState = {
-        householdId: householdId,
-        name: ""
-    }
+    const initialState = {name: ""}
 
-    const [shoppingList, setShoppingList] = useState(initialState);
+    const [household, setHousehold] = useState(initialState);
     const [modal, setModal] = useState(false);
     
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
-        const newShoppingList = { ...shoppingList };
-        newShoppingList[e.target.id] = e.target.value;
-        setShoppingList(newShoppingList);
+        const newHousehold = { ...household };
+        newHousehold[e.target.id] = e.target.value;
+        setHousehold(newHousehold);
     };
 
     // Called when the user submits the new purchase form
     const handleSave = () => {
-        if(shoppingList.name === "") return window.alert("Please enter an name");
+        if(household.name === "") return window.alert("Please enter an name");
 
         // Disables the save button until finished
         setIsLoading(true);
 
         // Save the purchase object to the database
-        saveShoppingList({
-            householdId: shoppingList.householdId,
-            name: shoppingList.name
+        saveHousehold({
+            name: household.name,
         })
-        .then(setHouseholdDetail)
         .then(() => {
             setIsLoading(false);
             toggle();
@@ -51,11 +46,11 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
 
     return (
         <>
-            <Button size="lg" style={{padding:"0", border: "none", background:"none", marginLeft:"6px", marginBottom:"10px"}} onClick={toggle} ><FaPlusCircle /></Button>
-            <Modal isOpen={modal} toggle={toggle} onClosed={() => setShoppingList(initialState)}>
-                <ModalHeader toggle={toggle}>New Shopping List</ModalHeader>
+            <Button size="lg" style={{padding:"0", border: "none", background:"none", marginLeft:"10px", marginBottom:"10px"}} onClick={toggle} ><FaPlusCircle /></Button>
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => setHousehold(initialState)}>
+                <ModalHeader toggle={toggle}>Add Household</ModalHeader>
                 <ModalBody>
-                    <Form className="shoppingListAddForm" onSubmit={(e) => {
+                    <Form className="householdAddForm"onSubmit={(e) => {
                         e.preventDefault()
                         handleSave()
                     }}>
@@ -71,16 +66,17 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
                                 required
                                 autoFocus
                                 placeholder="Item Name"
-                                value={shoppingList.name}
+                                value={household.name}
                             />
                         </FormGroup>
+
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
                             onClick={
                                 () =>{
                                 toggle();
-                                setShoppingList(initialState)
+                                setHousehold(initialState)
                             }}>
                             Cancel
                         </Button>
@@ -94,7 +90,7 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
                             handleSave();
                             }}
                         >
-                            Save Shopping List
+                            Save Household
                         </Button>
                     </Form>
                 </ModalBody>
@@ -103,4 +99,4 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
     );
 }
 
-export default AddShoppingListModal;
+export default EditHouseholdModal;
