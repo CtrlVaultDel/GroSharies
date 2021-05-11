@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Button, Row, Col } from "reactstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Styles
 import "../../styles/index.css";
 
 // Icons
-import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 
 // Context
@@ -20,7 +19,6 @@ import EditHouseholdModal from "./EditHouseholdModal";
 
 const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
-    const history = useHistory();
     const { deleteHousehold, acceptInvite, declineInvite } = useContext(HouseholdContext);
 
     // Determines if the user is an Admin of the related household.

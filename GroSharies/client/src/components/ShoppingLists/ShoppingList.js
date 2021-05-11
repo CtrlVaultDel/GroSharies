@@ -1,19 +1,20 @@
 import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Card, CardHeader, CardFooter, Button, Row, Col } from "reactstrap";
 
 // Icons
 import { FaTrashAlt } from "react-icons/fa";
-import { FaRegEdit } from "react-icons/fa";
 
 // Context
 import { ShoppingListContext } from "../../providers/ShoppingListProvider";
+
+// Components
+import EditShoppingListModal from "./EditShoppingListModal";
 // =========================== IMPORTS END ===========================
 
 
 const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
     const { deleteShoppingList } = useContext(ShoppingListContext);
-    const history = useHistory();
 
     const deleteWarning = () => {
         const confirmBox = window.confirm(`Are you sure you wish to delete the ${shoppingList.name} shopping list? This action is irreversable.`);
@@ -34,9 +35,7 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
                 <Row>
                     <Col className="text-center">
                         {/* Edit button for ShoppingList */}
-                        <Button size="sm" color="warning" onClick={() => history.push(`/shoppingList/edit/${shoppingList.id}`)}>
-                            <FaRegEdit />
-                        </Button>                    
+                        <EditShoppingListModal shoppingList = {shoppingList} setHouseholdDetail = {setHouseholdDetail}/>               
                     </Col>
                     <Col className="text-center">
                         {/* Delete button for ShoppingList */}
