@@ -11,7 +11,6 @@ import UserProfilePage from "./User/UserProfilePage"
 import HouseholdPage from "./Households/HouseholdPage";
 import HouseholdDetails from "./Households/HouseholdDetails";
 import HouseholdFormAdd from "./Households/HouseholdFormAdd";
-import HouseholdFormEdit from "./Households/HouseholdFormEdit";
 
 // ShoppingList Components
 import ShoppingListDetails from "./ShoppingLists/ShoppingListDetails";
@@ -47,10 +46,6 @@ export default function ApplicationViews() {
 
 
                 {/* ----------------------HOUSEHOLD PAGES---------------------- */}
-                {/* Household Edit Form */}
-                <Route path="/household/edit/:id" exact>
-                    {isLoggedIn ? <HouseholdFormEdit /> : <Redirect to="/Login" />}
-                </Route>
 
                 {/* Household Add Form */}
                 <Route path="/household/new" exact>

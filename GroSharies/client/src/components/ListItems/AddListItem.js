@@ -63,7 +63,7 @@ const AddListItem = ({ shoppingListId, setListItems}) => {
                 />
                 <Button 
                     type="submit"
-                    color="success" 
+                    color="secondary" 
                     disabled={isLoading}
                     onClick={event => {
                         event.preventDefault();

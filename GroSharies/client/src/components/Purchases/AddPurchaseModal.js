@@ -59,7 +59,7 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
 
     return (
         <div>
-            <Button color="success" onClick={toggle}>New Purchase</Button>
+            <Button color="secondary" onClick={toggle}>New Purchase</Button>
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setPurchase(initialState)}>
                 <ModalHeader toggle={toggle}>New Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>

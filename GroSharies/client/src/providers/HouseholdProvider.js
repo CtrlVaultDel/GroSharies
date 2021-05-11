@@ -63,6 +63,7 @@ export function HouseholdProvider(props) {
             },
             body: JSON.stringify(household),
         }))
+        .then(getHouseholds)
     };
 
     // Deletes a household object from the database

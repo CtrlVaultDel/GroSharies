@@ -37,7 +37,7 @@ const ShoppingListDetails = () => {
     return (
         <>
             <h1 className="text-center" id="pageHeader">{shoppingList.name}</h1>
-            <Container>
+            <Container >
 
                 {/* =================== LIST ITEMS =================== */}
                 
@@ -52,7 +52,7 @@ const ShoppingListDetails = () => {
                 <h4 className="text-center">Purchases</h4>
 
                 {/* Button that displays the add purchase modal when clicked */}
-                <AddPurchaseModal shoppingList = {shoppingList} setPurchases = {setPurchases} />
+                <AddPurchaseModal color="secondary" shoppingList = {shoppingList} setPurchases = {setPurchases} />
 
                 <div className="overflow">
                     <Table dark striped bordered hover>

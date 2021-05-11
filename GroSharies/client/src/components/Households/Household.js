@@ -14,6 +14,7 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // Components
 import HouseholdInvite from "./HouseholdInvite";
+import EditHouseholdModal from "./EditHouseholdModal";
 // =========================== IMPORTS END ===========================
 
 
@@ -30,7 +31,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                 <>
                     {/* Edit button for Household */}
                     <Col className="text-center">
-                        <Button size="sm" color="warning" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
+                        <EditHouseholdModal household = {household}/>
                     </Col>
 
                     {/* Delete button for Household */}

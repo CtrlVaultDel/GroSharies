@@ -66,7 +66,7 @@ const ShoppingListFormAdd = () => {
 
                 {/* Save Button */}
                 <button
-                    className="btn btn-primary"
+                    className="btn btn-secondary"
                     disabled={isLoading}
                     onClick={(event) => {
                     event.preventDefault();
