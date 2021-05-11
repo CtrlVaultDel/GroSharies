@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 
+// Styles
+import "../../styles/index.css";
+
 // Icons
 import { FaPlusCircle } from "react-icons/fa";
 
@@ -28,25 +31,27 @@ const HouseholdDetails = () => {
     if(!householdDetail) return null;
     
     return (
-        <Container>
-            <Row className="justify-content-md-center">
-                <h2>{householdDetail.household.name} Shopping Lists</h2>
-                <Link to={{pathname:"/shoppingList/new", state:{householdId: id}}}>
+        <>
+            <Row className="justify-content-md-center" id="pageHeader">
+                <h1>{householdDetail.household.name} Shopping Lists</h1>
+                <Link id="mainAddButton" to={{pathname:"/shoppingList/new", state:{householdId: id}}}>
                     <FaPlusCircle />
                 </Link>
             </Row>
+            <Container>
 
-            {/* If the household already has lists, display them. Otherwise, show a default message */}
-            {householdDetail.shoppingLists.length ?
-                <Row>
-                {householdDetail.shoppingLists.map(shopList => (
-                    <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList} setHouseholdDetail={setHouseholdDetail}/></Col>
-                ))}
-                </Row> 
-                : 
-                "You don't have any lists yet!"
-            }       
-        </Container>
+                {/* If the household already has lists, display them. Otherwise, show a default message */}
+                {householdDetail.shoppingLists.length ?
+                    <Row>
+                    {householdDetail.shoppingLists.map(shopList => (
+                        <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList} setHouseholdDetail={setHouseholdDetail}/></Col>
+                    ))}
+                    </Row> 
+                    : 
+                    "You don't have any lists yet!"
+                }       
+            </Container>
+        </>
     );
 };
 
