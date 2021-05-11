@@ -49,7 +49,10 @@ const AddListItem = ({ shoppingListId, setListItems}) => {
     };
 
     return(
-        <Form className="listItemForm">
+        <Form className="listItemForm" onSubmit={(e) => {
+            e.preventDefault()
+            handleSave()
+        }}>
             <InputGroup className="text-center">          
                 <Input 
                     autoComplete="off"

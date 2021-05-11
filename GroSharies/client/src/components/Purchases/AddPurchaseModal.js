@@ -63,7 +63,10 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setPurchase(initialState)}>
                 <ModalHeader toggle={toggle}>New Purchase for {shoppingList.name}</ModalHeader>
                 <ModalBody>
-                    <Form className="purchaseForm">
+                    <Form className="purchaseAddForm" onSubmit={(e) => {
+                        e.preventDefault()
+                        handleSave()
+                    }}>
 
                         {/* PurchaseDate Input */}
                         <FormGroup>

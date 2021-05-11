@@ -59,8 +59,10 @@ const EditShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setEditedShoppingList(initialState)}>
                 <ModalHeader toggle={toggle}>Edit Shopping List</ModalHeader>
                 <ModalBody>
-                    <Form className="shoppingListEditForm">
-
+                    <Form className="shoppingListEditForm" onSubmit={(e) => {
+                        e.preventDefault()
+                        handleUpdate()
+                    }}>
                         {/* Name Input */}
                         <FormGroup>
                             <Label for="name">Name </Label>

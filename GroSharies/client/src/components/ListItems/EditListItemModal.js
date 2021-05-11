@@ -53,7 +53,10 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setNewListItem(initialState)}>
                 <ModalHeader toggle={toggle}>Edit List Item</ModalHeader>
                 <ModalBody>
-                    <Form className="purchaseForm">
+                    <Form className="purchaseForm" onSubmit={(e) => {
+                        e.preventDefault()
+                        handleUpdate()
+                    }}>
 
                         {/* Name Input */}
                         <FormGroup>

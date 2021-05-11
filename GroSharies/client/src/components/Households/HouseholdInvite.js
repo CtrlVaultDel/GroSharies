@@ -82,7 +82,10 @@ const HouseholdInvite = ({household}) => {
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setInvitation(initialState)}>
                 <ModalHeader toggle={toggle}>New Invitation for {household.name} Household</ModalHeader>
                 <ModalBody>
-                    <Form className="invitationForm">
+                    <Form className="invitationForm" onSubmit={(e) => {
+                        e.preventDefault()
+                        handleInvite()
+                    }}>
 
                         {/* Email Input */}
                         <FormGroup>

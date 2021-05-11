@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 
 // Icons
-import { FaBorderNone, FaPlusCircle } from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa";
 
 // Context
 import { ShoppingListContext } from "../../providers/ShoppingListProvider";
@@ -29,7 +29,7 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
     };
 
     // Called when the user submits the new purchase form
-    const handleUpdate = () => {
+    const handleSave = () => {
         if(shoppingList.name === "") return window.alert("Please enter an name");
 
         // Disables the save button until finished
@@ -55,7 +55,10 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setShoppingList(initialState)}>
                 <ModalHeader toggle={toggle}>New Shopping List</ModalHeader>
                 <ModalBody>
-                    <Form className="shoppingListEditForm">
+                    <Form className="shoppingListAddForm" onSubmit={(e) => {
+                        e.preventDefault()
+                        handleSave()
+                    }}>
 
                         {/* Name Input */}
                         <FormGroup>
@@ -71,7 +74,6 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
                                 value={shoppingList.name}
                             />
                         </FormGroup>
-
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
@@ -89,7 +91,7 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
                             disabled={isLoading}
                             onClick={(event) => {
                             event.preventDefault();
-                            handleUpdate();
+                            handleSave();
                             }}
                         >
                             Save Shopping List

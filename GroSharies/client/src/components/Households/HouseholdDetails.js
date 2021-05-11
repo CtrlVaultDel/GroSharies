@@ -1,12 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 
 // Styles
 import "../../styles/index.css";
-
-// Icons
-import { FaPlusCircle } from "react-icons/fa";
 
 // Components
 import ShoppingList from "../ShoppingLists/ShoppingList";

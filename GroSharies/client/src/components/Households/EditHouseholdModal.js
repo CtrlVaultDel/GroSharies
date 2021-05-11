@@ -54,7 +54,10 @@ const EditHouseholdModal = ({ household }) => {
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setEditedHousehold(initialState)}>
                 <ModalHeader toggle={toggle}>Edit Household</ModalHeader>
                 <ModalBody>
-                    <Form className="householdEditForm">
+                    <Form className="householdEditForm"onSubmit={(e) => {
+                        e.preventDefault()
+                        handleUpdate()
+                    }}>
 
                         {/* Name Input */}
                         <FormGroup>
