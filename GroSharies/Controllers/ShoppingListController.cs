@@ -63,7 +63,7 @@ namespace GroSharies.Controllers
             // Add the shoppingList object that was passed in to the database
             _shoppingListRepository.Add(shoppingList);
 
-            return CreatedAtAction(nameof(GetById), new { shoppingListId = shoppingList.Id }, shoppingList);
+            return NoContent();
         }
 
         [HttpPut("{shoppingListId}")]
