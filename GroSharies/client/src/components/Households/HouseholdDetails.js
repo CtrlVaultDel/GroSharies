@@ -33,7 +33,7 @@ const HouseholdDetails = () => {
     return (
         <>
             <Row className="justify-content-md-center" id="pageHeader">
-                <h1>{householdDetail.household.name} Shopping Lists</h1>
+                <h1> Shopping Lists ({householdDetail.household.name})</h1>
                 <Link id="mainAddButton" to={{pathname:"/shoppingList/new", state:{householdId: id}}}>
                     <FaPlusCircle />
                 </Link>

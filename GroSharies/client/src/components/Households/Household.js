@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Button, Row, Col } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 
+// Styles
+import "../../styles/index.css";
+
 // Icons
 import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
