@@ -14,7 +14,6 @@ import HouseholdFormAdd from "./Households/HouseholdFormAdd";
 
 // ShoppingList Components
 import ShoppingListDetails from "./ShoppingLists/ShoppingListDetails";
-import ShoppingListFormAdd from "./ShoppingLists/ShoppingListFormAdd";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserContext);
@@ -63,11 +62,6 @@ export default function ApplicationViews() {
 
 
                 {/* --------------------SHOPPING LIST PAGES-------------------- */}
-
-                {/* ShoppingList Add Form */}
-                <Route path="/shoppingList/new" exact>
-                    {isLoggedIn ? <ShoppingListFormAdd /> : <Redirect to="/Login" />}
-                </Route>
 
                 {/* ShoppingList Detail Page */}
                 <Route path="/shoppingList/:id" exact>

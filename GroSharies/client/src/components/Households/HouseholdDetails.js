@@ -10,6 +10,7 @@ import { FaPlusCircle } from "react-icons/fa";
 
 // Components
 import ShoppingList from "../ShoppingLists/ShoppingList";
+import AddShoppingListModal from "../ShoppingLists/AddShoppingListModal";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
@@ -34,9 +35,7 @@ const HouseholdDetails = () => {
         <>
             <Row className="justify-content-center" id="pageHeader">
                 <h1> Shopping Lists ({householdDetail.household.name})</h1>
-                <Link id="mainAddButton" to={{pathname:"/shoppingList/new", state:{householdId: id}}}>
-                    <FaPlusCircle />
-                </Link>
+                <AddShoppingListModal householdId = {householdDetail.household.id} setHouseholdDetail = {setHouseholdDetail}/>
             </Row>
             <Container>
 
