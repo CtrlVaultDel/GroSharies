@@ -1,44 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+
+// Icons
 import { FaRegEdit } from "react-icons/fa";
+
+// Context
+import { ShoppingListContext } from "../../providers/ShoppingListProvider";
 
 // =========================== IMPORTS END ===========================
 
-const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
+const EditShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
+    const { updateShoppingList } = useContext(ShoppingListContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [modal, setModal] = useState(false);
-    
+
     const initialState = {
-        id: listItem.id,
-        shoppingListId: listItem.shoppingListId,
-        name: listItem.name,
-        isChecked: Boolean
+        id: shoppingList.id,
+        householdId: shoppingList.householdId,
+        name: shoppingList.name,
+        dateCreated: shoppingList.dateCreated
     }
 
-    const [newListItem, setNewListItem] = useState(initialState)
-
+    const [editedShoppingList, setEditedShoppingList] = useState(initialState);
+    const [modal, setModal] = useState(false);
+    
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
-        const item = { ...newListItem };
-        item[e.target.id] = e.target.value;
-        setNewListItem(item);
+        const newShoppingList = { ...editedShoppingList };
+        newShoppingList[e.target.id] = e.target.value;
+        setEditedShoppingList(newShoppingList);
     };
 
     // Called when the user submits the new purchase form
     const handleUpdate = () => {
-        if(newListItem.name === "") return window.alert("Please enter an name");
+        if(editedShoppingList.name === "") return window.alert("Please enter an name");
 
         // Disables the save button until finished
         setIsLoading(true);
 
         // Save the purchase object to the database
-        updateListItem({
-            id: newListItem.id,
-            shoppingListId: newListItem.shoppingListId,
-            name: newListItem.name,
-            isChecked: listItem.isChecked
+        updateShoppingList({
+            id: editedShoppingList.id,
+            householdId: editedShoppingList.householdId,
+            name: editedShoppingList.name,
+            dateCreated: editedShoppingList.dateCreated
         })
-        .then(setListItems)
+        .then(setHouseholdDetail)
         .then(() => {
             setIsLoading(false);
             toggle();
@@ -49,15 +55,14 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
 
     return (
         <>
-            <Button className="ml-2" color="warning" onClick={toggle} ><FaRegEdit /></Button>
-            <Modal isOpen={modal} toggle={toggle} onClosed={() => setNewListItem(initialState)}>
-                <ModalHeader toggle={toggle}>Edit List Item</ModalHeader>
+            <Button size="sm" color="warning" onClick={toggle} ><FaRegEdit /></Button>
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => setEditedShoppingList(initialState)}>
+                <ModalHeader toggle={toggle}>Edit Shopping List</ModalHeader>
                 <ModalBody>
-                    <Form className="purchaseForm" onSubmit={(e) => {
+                    <Form className="shoppingListEditForm" onSubmit={(e) => {
                         e.preventDefault()
                         handleUpdate()
                     }}>
-
                         {/* Name Input */}
                         <FormGroup>
                             <Label for="name">Name </Label>
@@ -69,14 +74,18 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                                 required
                                 autoFocus
                                 placeholder="Item Name"
-                                value={newListItem.name}
+                                value={editedShoppingList.name}
                             />
                         </FormGroup>
 
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={() =>toggle()}>
+                            onClick={
+                                () =>{
+                                toggle();
+                                setEditedShoppingList(initialState)
+                            }}>
                             Cancel
                         </Button>
 
@@ -89,7 +98,7 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                             handleUpdate();
                             }}
                         >
-                            Update ListItem
+                            Update Shopping List
                         </Button>
                     </Form>
                 </ModalBody>
@@ -98,4 +107,4 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
     );
 }
 
-export default EditListItemModal;
+export default EditShoppingListModal;

@@ -37,7 +37,7 @@ export function ShoppingListProvider(props) {
             },
             body: JSON.stringify(shoppingList),
           }))
-        .then(resp => resp.json())
+        .then(() => getHouseholdDetail(shoppingList.householdId))
     };
 
     // Updates a pre-existing shoppingList object in the database
@@ -51,6 +51,7 @@ export function ShoppingListProvider(props) {
             },
             body: JSON.stringify(shoppingList),
         }))
+        .then(() => getHouseholdDetail(shoppingList.householdId))
     };
 
     // Deletes a shoppingList object from the database

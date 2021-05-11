@@ -10,13 +10,9 @@ import UserProfilePage from "./User/UserProfilePage"
 // Household Components
 import HouseholdPage from "./Households/HouseholdPage";
 import HouseholdDetails from "./Households/HouseholdDetails";
-import HouseholdFormAdd from "./Households/HouseholdFormAdd";
-import HouseholdFormEdit from "./Households/HouseholdFormEdit";
 
 // ShoppingList Components
 import ShoppingListDetails from "./ShoppingLists/ShoppingListDetails";
-import ShoppingListFormAdd from "./ShoppingLists/ShoppingListFormAdd";
-import ShoppingListFormEdit from "./ShoppingLists/ShoppingListFormEdit";
 
 export default function ApplicationViews() {
     const { isLoggedIn } = useContext(UserContext);
@@ -47,15 +43,6 @@ export default function ApplicationViews() {
 
 
                 {/* ----------------------HOUSEHOLD PAGES---------------------- */}
-                {/* Household Edit Form */}
-                <Route path="/household/edit/:id" exact>
-                    {isLoggedIn ? <HouseholdFormEdit /> : <Redirect to="/Login" />}
-                </Route>
-
-                {/* Household Add Form */}
-                <Route path="/household/new" exact>
-                    {isLoggedIn ? <HouseholdFormAdd /> : <Redirect to="/Login" />}
-                </Route>
 
                 {/* Household Detail Page */}
                 <Route path="/household/:id" exact>
@@ -69,15 +56,6 @@ export default function ApplicationViews() {
 
 
                 {/* --------------------SHOPPING LIST PAGES-------------------- */}
-                {/* ShoppingList Edit Form */}
-                <Route path="/shoppingList/edit/:id" exact>
-                    {isLoggedIn ? <ShoppingListFormEdit /> : <Redirect to="/Login" />}
-                </Route>
-
-                {/* ShoppingList Add Form */}
-                <Route path="/shoppingList/new" exact>
-                    {isLoggedIn ? <ShoppingListFormAdd /> : <Redirect to="/Login" />}
-                </Route>
 
                 {/* ShoppingList Detail Page */}
                 <Route path="/shoppingList/:id" exact>

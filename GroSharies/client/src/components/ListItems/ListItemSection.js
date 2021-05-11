@@ -24,7 +24,7 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
                 {listItems.length? listItems.map(i => 
 
                     // If listItems exist, display them on the DOM
-                    <Card key={i.id} style={{backgroundColor: i.isChecked ? "#787878" : "initial"}} >
+                    <Card key={i.id} style={{backgroundColor: i.isChecked ? "#787878" : "#c2f0c6"}} >
                         <CardBody>
                             <ListItem 
                                 listItem = {i} setListItems = {setListItems}

@@ -1,44 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+
+// Icons
 import { FaRegEdit } from "react-icons/fa";
+
+// Context
+import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // =========================== IMPORTS END ===========================
 
-const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
+const EditHouseholdModal = ({ household }) => {
+    const { updateHousehold } = useContext(HouseholdContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [modal, setModal] = useState(false);
-    
+
     const initialState = {
-        id: listItem.id,
-        shoppingListId: listItem.shoppingListId,
-        name: listItem.name,
-        isChecked: Boolean
+        id: household.id,
+        name: household.name
     }
 
-    const [newListItem, setNewListItem] = useState(initialState)
-
+    const [editedHousehold, setEditedHousehold] = useState(initialState);
+    const [modal, setModal] = useState(false);
+    
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
-        const item = { ...newListItem };
-        item[e.target.id] = e.target.value;
-        setNewListItem(item);
+        const newHousehold = { ...editedHousehold };
+        newHousehold[e.target.id] = e.target.value;
+        setEditedHousehold(newHousehold);
     };
 
     // Called when the user submits the new purchase form
     const handleUpdate = () => {
-        if(newListItem.name === "") return window.alert("Please enter an name");
+        if(editedHousehold.name === "") return window.alert("Please enter an name");
 
         // Disables the save button until finished
         setIsLoading(true);
 
         // Save the purchase object to the database
-        updateListItem({
-            id: newListItem.id,
-            shoppingListId: newListItem.shoppingListId,
-            name: newListItem.name,
-            isChecked: listItem.isChecked
+        updateHousehold({
+            id: editedHousehold.id,
+            name: editedHousehold.name,
         })
-        .then(setListItems)
         .then(() => {
             setIsLoading(false);
             toggle();
@@ -49,11 +50,11 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
 
     return (
         <>
-            <Button className="ml-2" color="warning" onClick={toggle} ><FaRegEdit /></Button>
-            <Modal isOpen={modal} toggle={toggle} onClosed={() => setNewListItem(initialState)}>
-                <ModalHeader toggle={toggle}>Edit List Item</ModalHeader>
+            <Button size="sm" color="warning" onClick={toggle} ><FaRegEdit /></Button>
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => setEditedHousehold(initialState)}>
+                <ModalHeader toggle={toggle}>Edit Household</ModalHeader>
                 <ModalBody>
-                    <Form className="purchaseForm" onSubmit={(e) => {
+                    <Form className="householdEditForm"onSubmit={(e) => {
                         e.preventDefault()
                         handleUpdate()
                     }}>
@@ -69,14 +70,18 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                                 required
                                 autoFocus
                                 placeholder="Item Name"
-                                value={newListItem.name}
+                                value={editedHousehold.name}
                             />
                         </FormGroup>
 
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={() =>toggle()}>
+                            onClick={
+                                () =>{
+                                toggle();
+                                setEditedHousehold(initialState)
+                            }}>
                             Cancel
                         </Button>
 
@@ -89,7 +94,7 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                             handleUpdate();
                             }}
                         >
-                            Update ListItem
+                            Update Household
                         </Button>
                     </Form>
                 </ModalBody>
@@ -98,4 +103,4 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
     );
 }
 
-export default EditListItemModal;
+export default EditHouseholdModal;

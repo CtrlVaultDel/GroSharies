@@ -1,44 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
-import { FaRegEdit } from "react-icons/fa";
+
+// Icons
+import { FaPlusCircle } from "react-icons/fa";
+
+// Context
+import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // =========================== IMPORTS END ===========================
 
-const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
+const EditHouseholdModal = () => {
+    const { saveHousehold } = useContext(HouseholdContext);
     const [isLoading, setIsLoading] = useState(false);
+
+    const initialState = {name: ""}
+
+    const [household, setHousehold] = useState(initialState);
     const [modal, setModal] = useState(false);
     
-    const initialState = {
-        id: listItem.id,
-        shoppingListId: listItem.shoppingListId,
-        name: listItem.name,
-        isChecked: Boolean
-    }
-
-    const [newListItem, setNewListItem] = useState(initialState)
-
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
-        const item = { ...newListItem };
-        item[e.target.id] = e.target.value;
-        setNewListItem(item);
+        const newHousehold = { ...household };
+        newHousehold[e.target.id] = e.target.value;
+        setHousehold(newHousehold);
     };
 
     // Called when the user submits the new purchase form
-    const handleUpdate = () => {
-        if(newListItem.name === "") return window.alert("Please enter an name");
+    const handleSave = () => {
+        if(household.name === "") return window.alert("Please enter an name");
 
         // Disables the save button until finished
         setIsLoading(true);
 
         // Save the purchase object to the database
-        updateListItem({
-            id: newListItem.id,
-            shoppingListId: newListItem.shoppingListId,
-            name: newListItem.name,
-            isChecked: listItem.isChecked
+        saveHousehold({
+            name: household.name,
         })
-        .then(setListItems)
         .then(() => {
             setIsLoading(false);
             toggle();
@@ -49,13 +46,13 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
 
     return (
         <>
-            <Button className="ml-2" color="warning" onClick={toggle} ><FaRegEdit /></Button>
-            <Modal isOpen={modal} toggle={toggle} onClosed={() => setNewListItem(initialState)}>
-                <ModalHeader toggle={toggle}>Edit List Item</ModalHeader>
+            <Button size="lg" style={{padding:"0", border: "none", background:"none", marginLeft:"10px", marginBottom:"10px"}} onClick={toggle} ><FaPlusCircle /></Button>
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => setHousehold(initialState)}>
+                <ModalHeader toggle={toggle}>Add Household</ModalHeader>
                 <ModalBody>
-                    <Form className="purchaseForm" onSubmit={(e) => {
+                    <Form className="householdAddForm"onSubmit={(e) => {
                         e.preventDefault()
-                        handleUpdate()
+                        handleSave()
                     }}>
 
                         {/* Name Input */}
@@ -69,14 +66,18 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                                 required
                                 autoFocus
                                 placeholder="Item Name"
-                                value={newListItem.name}
+                                value={household.name}
                             />
                         </FormGroup>
 
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={() =>toggle()}>
+                            onClick={
+                                () =>{
+                                toggle();
+                                setHousehold(initialState)
+                            }}>
                             Cancel
                         </Button>
 
@@ -86,10 +87,10 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                             disabled={isLoading}
                             onClick={(event) => {
                             event.preventDefault();
-                            handleUpdate();
+                            handleSave();
                             }}
                         >
-                            Update ListItem
+                            Save Household
                         </Button>
                     </Form>
                 </ModalBody>
@@ -98,4 +99,4 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
     );
 }
 
-export default EditListItemModal;
+export default EditHouseholdModal;

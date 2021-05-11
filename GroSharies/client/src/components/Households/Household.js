@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Card, CardHeader, CardBody, CardFooter, Button, Row, Col } from "reactstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+// Styles
+import "../../styles/index.css";
 
 // Icons
-import { FaRegEdit } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 
 // Context
@@ -11,12 +13,12 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // Components
 import HouseholdInvite from "./HouseholdInvite";
+import EditHouseholdModal from "./EditHouseholdModal";
 // =========================== IMPORTS END ===========================
 
 
 const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
-    const history = useHistory();
     const { deleteHousehold, acceptInvite, declineInvite } = useContext(HouseholdContext);
 
     // Determines if the user is an Admin of the related household.
@@ -27,7 +29,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                 <>
                     {/* Edit button for Household */}
                     <Col className="text-center">
-                        <Button size="sm" color="warning" onClick={() => history.push(`/household/edit/${household.id}`)}><FaRegEdit /></Button>
+                        <EditHouseholdModal household = {household}/>
                     </Col>
 
                     {/* Delete button for Household */}
@@ -71,7 +73,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
     };
     
     return(
-        <Card className="m-2 shadow postCard">
+        <Card style={{minWidth:"220px"}} className="m-2 shadow postCard">
             <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>

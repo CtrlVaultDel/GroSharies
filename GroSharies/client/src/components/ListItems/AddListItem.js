@@ -49,7 +49,10 @@ const AddListItem = ({ shoppingListId, setListItems}) => {
     };
 
     return(
-        <Form className="listItemForm">
+        <Form className="listItemForm" onSubmit={(e) => {
+            e.preventDefault()
+            handleSave()
+        }}>
             <InputGroup className="text-center">          
                 <Input 
                     autoComplete="off"
@@ -63,7 +66,7 @@ const AddListItem = ({ shoppingListId, setListItems}) => {
                 />
                 <Button 
                     type="submit"
-                    color="success" 
+                    color="secondary" 
                     disabled={isLoading}
                     onClick={event => {
                         event.preventDefault();
