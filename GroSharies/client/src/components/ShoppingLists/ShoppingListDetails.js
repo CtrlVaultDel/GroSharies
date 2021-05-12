@@ -37,7 +37,7 @@ const ShoppingListDetails = () => {
     return (
         <>
             <h1 className="text-center" id="pageHeader">{shoppingList.name}</h1>
-            <Container >
+            <Container>
 
                 {/* =================== LIST ITEMS =================== */}
                 

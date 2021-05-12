@@ -37,9 +37,9 @@ export default function Header() {
                 <Nav className="mr-auto" navbar>
                 {isLoggedIn && (
                     <NavItem>
-                    <NavLink tag={RRNavLink} to="/household">
-                        Households
-                    </NavLink>
+                        <NavLink tag={RRNavLink} to="/household">
+                            Households
+                        </NavLink>
                     </NavItem>
                 )}
                 </Nav>
@@ -48,9 +48,9 @@ export default function Header() {
                 {/* If logged in, render the My Profile link */}
                 {isLoggedIn && (
                     <NavItem>
-                    <NavLink tag={RRNavLink} to="/user">
-                        My Profile
-                    </NavLink>
+                        <NavLink tag={RRNavLink} to="/user">
+                            My Profile
+                        </NavLink>
                     </NavItem>
                 )}
                 </Nav>
@@ -58,7 +58,6 @@ export default function Header() {
                 {/* If logged in, render the Logout link */}
                 <Nav navbar>
                 {isLoggedIn && (
-                    <>
                     <NavItem>
                         <a
                         href="/login"
@@ -67,11 +66,9 @@ export default function Header() {
                         style={{ cursor: "pointer" }}
                         onClick={logout}
                         >
-                        Logout ({currentEmail})
+                            Logout ({currentEmail})
                         </a>
                     </NavItem>
-
-                    </>
                 )}
                 </Nav>
 
