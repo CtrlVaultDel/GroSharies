@@ -22,6 +22,7 @@ export default function Header() {
     const { isLoggedIn, logout } = useContext(UserContext);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const currentEmail = JSON.parse(sessionStorage.getItem("user")).email;
 
     return (
         <Navbar light expand="md" id="navbar-header">
@@ -66,7 +67,7 @@ export default function Header() {
                         style={{ cursor: "pointer" }}
                         onClick={logout}
                         >
-                        Logout
+                        Logout ({currentEmail})
                         </a>
                     </NavItem>
 
@@ -77,16 +78,16 @@ export default function Header() {
                 {/* If not logged in, only show the Login & Registration links */}
                 {!isLoggedIn && (
                     <>
-                    <NavItem>
-                        <NavLink tag={RRNavLink} to="/login">
-                        Login
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink tag={RRNavLink} to="/register">
-                        Register
-                        </NavLink>
-                    </NavItem>
+                        <NavItem>
+                            <NavLink tag={RRNavLink} to="/login">
+                            Login
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={RRNavLink} to="/register">
+                            Register
+                            </NavLink>
+                        </NavItem>
                     </>
                 )}
                 </Nav>
