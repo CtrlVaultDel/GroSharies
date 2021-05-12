@@ -1,6 +1,6 @@
 .overflow {
 	overflow-y: auto;
-	overflow-x: auto;
+	overflow-x: hidden;
 	max-height: 500px;
 	margin-bottom: 15px;
 }
