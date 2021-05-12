@@ -22,6 +22,7 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
     useEffect(() => {
         getListItems(shoppingList.id)
         .then(setListItems)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
     const deleteWarning = () => {
@@ -37,7 +38,7 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
 
     const completionRate = () => {
         if(!listItems.length) return 0
-        listItems.map((li)=> {
+        listItems.forEach((li)=> {
             totalItems++;
             if(li.isChecked){
                 completeItems++;
