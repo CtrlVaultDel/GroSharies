@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Card } from "reactstrap";
 
 // Styles
 import "../../styles/index.css";
@@ -20,6 +20,7 @@ const HouseholdPage = () => {
         getHouseholds();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
     return (
         <>
             <Row className="justify-content-center" id="pageHeader">
@@ -28,7 +29,7 @@ const HouseholdPage = () => {
             </Row>
             <Container>
                 <Row className="justify-content-center">
-                    {households.map((h) => (
+                    {households.length ? households.map((h) => (
                         <Col 
                             key={h.household.id} 
                             md="4">
@@ -40,7 +41,13 @@ const HouseholdPage = () => {
                                     numUsers = {h.numUsers}
                                 />
                         </Col>
-                    ))}
+                    ))
+                    :
+                    <Card style={{padding:"10px", maxWidth:"200px"}} className="shadow postCard">
+                        <div>You are not in any households yet!</div>
+                        <div>Click the plus button above to create a new one or ask someone to invite you to theirs!</div>
+                    </Card>
+                }
                 </Row>
             </Container>
         </>

@@ -68,10 +68,12 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
             <CardFooter>
                 <Row>
                     <Col className="text-center">
+
                         {/* Edit button for ShoppingList */}
                         <EditShoppingListModal shoppingList = {shoppingList} setHouseholdDetail = {setHouseholdDetail}/>               
                     </Col>
                     <Col className="text-center">
+                        
                         {/* Delete button for ShoppingList */}
                         <Button
                             id={"deleteShoppingListButton"+shoppingList.id} 
