@@ -278,7 +278,7 @@ namespace GroSharies.Repositories
             }
         }
 
-        public void DeclineInvite(int householdId, int userId)
+        public void DeclineInviteOrLeave(int householdId, int userId)
         {
             using (var conn = Connection)
             {

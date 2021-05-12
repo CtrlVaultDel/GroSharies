@@ -78,6 +78,18 @@ export function HouseholdProvider(props) {
         .then(getHouseholds)
     };
 
+    const leaveHousehold = householdId => {
+        return getToken()
+        .then(token => fetch(`api/householdUser/leave/${householdId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }))
+        .then(getHouseholds)
+    }
+
     const inviteUser = invitation => {
         return getToken()
         .then(token => fetch("/api/householdUser", {
@@ -135,6 +147,7 @@ export function HouseholdProvider(props) {
                 saveHousehold,
                 updateHousehold,
                 deleteHousehold,
+                leaveHousehold,
                 inviteUser,
                 declineInvite,
                 acceptInvite,

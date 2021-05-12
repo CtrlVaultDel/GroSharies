@@ -41,17 +41,6 @@ namespace GroSharies.Controllers
             return NoContent();
         }
 
-        [HttpDelete("decline/{householdId}")]
-        public IActionResult DeclineInvite(int householdId)
-        {
-            var user = GetCurrentUser();
-            if (user == null) return NotFound();
-
-            _householdUserRepository.DeclineInvite(householdId, user.Id);
-
-            return NoContent();
-        }
-
         [HttpPut("accept/{householdId}")]
         public IActionResult AcceptInvite(int householdId)
         {
@@ -62,5 +51,28 @@ namespace GroSharies.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("decline/{householdId}")]
+        public IActionResult DeclineInvite(int householdId)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            _householdUserRepository.DeclineInviteOrLeave(householdId, user.Id);
+
+            return NoContent();
+        }
+
+        [HttpDelete("leave/{householdId}")]
+        public IActionResult LeaveHousehold(int householdId)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            _householdUserRepository.DeclineInviteOrLeave(householdId, user.Id);
+
+            return NoContent();
+        }
+
     }
 }

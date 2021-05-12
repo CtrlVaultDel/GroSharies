@@ -43,7 +43,7 @@ const HouseholdDetails = () => {
 
                 {/* If the household already has lists, display them. Otherwise, show a default message */}
                 {householdDetail.shoppingLists.length ?
-                    <Row>
+                    <Row className="justify-content-center">
                     {householdDetail.shoppingLists.map(shopList => (
                         <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList} setHouseholdDetail={setHouseholdDetail}/></Col>
                     ))}

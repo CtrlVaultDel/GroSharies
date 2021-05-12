@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, UncontrolledTooltip } from 'reactstrap';
 
 // Icons
 import { FaRegEdit } from "react-icons/fa";
@@ -50,7 +50,13 @@ const EditHouseholdModal = ({ household }) => {
 
     return (
         <>
-            <Button size="sm" color="warning" onClick={toggle} ><FaRegEdit /></Button>
+            <Button id={"editHouseholdButton"+household.id} size="sm" color="warning" onClick={toggle} ><FaRegEdit /></Button>
+            <UncontrolledTooltip
+                placement="bottom"
+                target={"editHouseholdButton"+household.id}
+            >
+                Edit Household
+            </UncontrolledTooltip>
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setEditedHousehold(initialState)}>
                 <ModalHeader toggle={toggle}>Edit Household ({household.name})</ModalHeader>
                 <ModalBody>

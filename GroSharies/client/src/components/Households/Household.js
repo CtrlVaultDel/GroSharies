@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { Card, CardHeader, CardBody, CardFooter, Button, Row, Col } from "reactstrap";
+import { Card, CardHeader, CardBody, CardFooter, Button, Row, Col, UncontrolledTooltip } from "reactstrap";
 import { Link } from "react-router-dom";
 
 // Styles
 import "../../styles/index.css";
 
 // Icons
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaDoorOpen } from "react-icons/fa";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
@@ -19,7 +19,7 @@ import EditHouseholdModal from "./EditHouseholdModal";
 
 const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
-    const { deleteHousehold, acceptInvite, declineInvite } = useContext(HouseholdContext);
+    const { deleteHousehold, leaveHousehold, acceptInvite, declineInvite } = useContext(HouseholdContext);
 
     // Determines if the user is an Admin of the related household.
     // If they are, add an edit button to allow them to change its name.
@@ -34,7 +34,13 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
                     {/* Delete button for Household */}
                     <Col className="text-center">
-                        <Button size="sm" color="danger" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
+                        <Button id={"deleteHouseholdButton"+household.id} size="sm" color="danger" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
+                        <UncontrolledTooltip
+                            placement="bottom"
+                            target={"deleteHouseholdButton"+household.id}
+                        >
+                            Delete Household
+                        </UncontrolledTooltip>
                     </Col>
                 </>)
         };
@@ -43,9 +49,22 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
     const checkIfAccepted = () => {
         if(isAccepted){
             return (
+                <>
                 <Col className="text-center">
                     <HouseholdInvite household={household} />
                 </Col>
+                {userType !== 1 ? 
+                    <Col className="text-center">
+                        <Button id={"leaveHouseholdButton"+household.id} size="sm" color="danger" onClick={() => leaveWarning()}><FaDoorOpen /></Button>
+                        <UncontrolledTooltip
+                            placement="bottom"
+                            target={"leaveHouseholdButton"+household.id}
+                        >
+                            Leave Household
+                        </UncontrolledTooltip>
+                    </Col> 
+                    : <></>}
+                </>
             )
         }
         else{
@@ -53,12 +72,24 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                 <>
                     {/* Accept button for invitation */}
                     <Col className="text-center">
-                        <Button onClick={() => acceptInvite(household.id)} color="success">Accept Invite</Button>
+                        <Button id={"acceptInviteButton"+household.id} onClick={() => acceptInvite(household.id)} color="success">Accept Invite</Button>
+                        <UncontrolledTooltip
+                            placement="bottom"
+                            target={"acceptInviteButton"+household.id}
+                        >
+                            Accept Invite
+                        </UncontrolledTooltip>
                     </Col>
 
                     {/* Decline button for invitation */}
                     <Col className="text-center">
-                        <Button onClick={() => declineInvite(household.id)} color="danger">Decline Invite</Button>
+                        <Button id={"declineInviteButton"+household.id} onClick={() => declineInvite(household.id)} color="danger">Decline Invite</Button>
+                        <UncontrolledTooltip
+                            placement="bottom"
+                            target={"declineInviteButton"+household.id}
+                        >
+                            Decline Invite
+                        </UncontrolledTooltip>
                     </Col>
                 </>
             )
@@ -71,6 +102,13 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
             deleteHousehold(household.id);
         };
     };
+
+    const leaveWarning = () => {
+        const confirmBox = window.confirm(`Are you sure you wish to leave the ${household.name} household? This action is irreversable.`);
+        if (confirmBox){
+            leaveHousehold(household.id);
+        };
+    }
     
     return(
         <Card style={{minWidth:"220px"}} className="m-2 shadow postCard">

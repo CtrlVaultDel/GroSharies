@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, UncontrolledTooltip } from 'reactstrap';
 
 // Icons
 import { FaAddressBook } from "react-icons/fa";
@@ -78,7 +78,13 @@ const HouseholdInvite = ({household}) => {
 
     return (
         <>
-            <Button size="sm" color="success" onClick={toggle}><FaAddressBook /></Button>
+            <Button id={"inviteToHouseholdButton"+household.id} size="sm" color="success" onClick={toggle}><FaAddressBook /></Button>
+            <UncontrolledTooltip
+                placement="bottom"
+                target={"inviteToHouseholdButton"+household.id}
+            >
+                Invite to Household
+            </UncontrolledTooltip>
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setInvitation(initialState)}>
                 <ModalHeader toggle={toggle}>New Invitation for {household.name} Household</ModalHeader>
                 <ModalBody>

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, UncontrolledTooltip } from 'reactstrap';
 
 // Icons
 import { FaPlusCircle } from "react-icons/fa";
@@ -51,7 +51,19 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
 
     return (
         <>
-            <Button size="lg" style={{padding:"0", border: "none", background:"none", marginLeft:"6px", marginBottom:"10px"}} onClick={toggle} ><FaPlusCircle /></Button>
+            <Button 
+                id = "addShoppingListButton"
+                size="lg" 
+                style={{padding:"0", border: "none", background:"none", marginLeft:"6px", marginBottom:"10px"}} 
+                onClick={toggle} >
+                <FaPlusCircle />
+            </Button>
+            <UncontrolledTooltip
+                placement="right"
+                target="addShoppingListButton"
+            >
+                Add a Shopping List
+            </UncontrolledTooltip>
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setShoppingList(initialState)}>
                 <ModalHeader toggle={toggle}>New Shopping List</ModalHeader>
                 <ModalBody>
