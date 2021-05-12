@@ -27,7 +27,7 @@ const HouseholdPage = () => {
                 <AddHouseholdModal />
             </Row>
             <Container>
-                <Row>
+                <Row className="justify-content-center">
                     {households.map((h) => (
                         <Col 
                             key={h.household.id} 
