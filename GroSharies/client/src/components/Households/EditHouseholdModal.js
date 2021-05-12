@@ -52,7 +52,7 @@ const EditHouseholdModal = ({ household }) => {
         <>
             <Button size="sm" color="warning" onClick={toggle} ><FaRegEdit /></Button>
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setEditedHousehold(initialState)}>
-                <ModalHeader toggle={toggle}>Edit Household</ModalHeader>
+                <ModalHeader toggle={toggle}>Edit Household ({household.name})</ModalHeader>
                 <ModalBody>
                     <Form className="householdEditForm"onSubmit={(e) => {
                         e.preventDefault()

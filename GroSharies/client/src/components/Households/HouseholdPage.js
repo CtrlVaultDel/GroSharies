@@ -20,7 +20,6 @@ const HouseholdPage = () => {
         getHouseholds();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
     return (
         <>
             <Row className="justify-content-center" id="pageHeader">

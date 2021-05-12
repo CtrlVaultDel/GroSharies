@@ -22,7 +22,8 @@ export default function Header() {
     const { isLoggedIn, logout } = useContext(UserContext);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const currentEmail = JSON.parse(sessionStorage.getItem("user")).email;
+    let currentEmail = ""
+    if(isLoggedIn) currentEmail = JSON.parse(sessionStorage.getItem("user")).email;
 
     return (
         <Navbar light expand="md" id="navbar-header">
@@ -49,7 +50,7 @@ export default function Header() {
                 {isLoggedIn && (
                     <NavItem>
                         <NavLink tag={RRNavLink} to="/user">
-                            My Profile
+                            Profile
                         </NavLink>
                     </NavItem>
                 )}

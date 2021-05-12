@@ -38,13 +38,13 @@ const UserProfilePage = () => {
             </Row>
                 <Card style={{maxWidth:"300px", margin:"auto"}}>
                     {/* User's Full Name */}
-                    <CardHeader style={{justifyContent:"center"}}>
+                    <CardHeader style={{textAlign:"center"}}>
                         {userInfo.userInfo.firstName} {userInfo.userInfo.lastName}
                     </CardHeader>
                     <CardBody>
                         {/* User's Email */}
                         <Row style={{justifyContent:"center"}}>
-                            {userInfo.userInfo.email}
+                            email: {userInfo.userInfo.email}
                         </Row>
 
                         {/* # of Households the user is the part of */}

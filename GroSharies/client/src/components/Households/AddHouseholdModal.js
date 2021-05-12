@@ -48,7 +48,7 @@ const EditHouseholdModal = () => {
         <>
             <Button size="lg" style={{padding:"0", border: "none", background:"none", marginLeft:"10px", marginBottom:"10px"}} onClick={toggle} ><FaPlusCircle /></Button>
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setHousehold(initialState)}>
-                <ModalHeader toggle={toggle}>Add Household</ModalHeader>
+                <ModalHeader toggle={toggle}>Add a Household</ModalHeader>
                 <ModalBody>
                     <Form className="householdAddForm"onSubmit={(e) => {
                         e.preventDefault()
@@ -65,7 +65,7 @@ const EditHouseholdModal = () => {
                                 onChange={handleInput}
                                 required
                                 autoFocus
-                                placeholder="Item Name"
+                                placeholder="Household Name"
                                 value={household.name}
                             />
                         </FormGroup>
