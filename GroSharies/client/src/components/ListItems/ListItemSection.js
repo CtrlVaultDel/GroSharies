@@ -25,7 +25,7 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
 
                     // If listItems exist, display them on the DOM
                     <Card key={i.id} style={{backgroundColor: i.isChecked ? "#787878" : "#c2f0c6"}} >
-                        <CardBody>
+                        <CardBody style={{padding:"1rem"}}>
                             <ListItem 
                                 listItem = {i} setListItems = {setListItems}
                             />

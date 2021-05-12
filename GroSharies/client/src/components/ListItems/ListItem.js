@@ -1,6 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Button, Col, Row, Container } from "reactstrap";
 
+// Styles
+import "../../styles/listItem.css";
+
 // Icons
 import { FaCheckCircle } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
@@ -31,7 +34,7 @@ const ListItem = ({ listItem, setListItems }) => {
 
     return (
         <Row className="listItem">
-            <Col>
+            <Col id="listItemName">
                 <span style ={{textDecoration: listItem.isChecked ? "line-through" : ""}}>{listItem.name}</span>
             </Col>
             <Col className="text-right">

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Row } from "reactstrap";
+import { Card, CardHeader, CardBody, Row } from "reactstrap";
 
 // Context
 import { UserContext } from "../../providers/UserProvider";
@@ -23,35 +23,42 @@ const UserProfilePage = () => {
     //     })
     // }
 
+    const numHouseholds = () => {
+        if(userInfo.households.length === 1) return `You are in 1 household`;
+        return `You are in ${userInfo.households.length} households`;
+    }
+
     if(userInfo == null) return null;
 
     return (
-        <Container>
+        <>
             {/* Header */}
-            <Row className="justify-content-md-center">
-                <h2>Your Profile</h2>
+            <Row className="justify-content-center" id="pageHeader">
+                <h1>Your Profile</h1>
             </Row>
+                <Card style={{maxWidth:"300px", margin:"auto"}}>
+                    {/* User's Full Name */}
+                    <CardHeader style={{textAlign:"center"}}>
+                        {userInfo.userInfo.firstName} {userInfo.userInfo.lastName}
+                    </CardHeader>
+                    <CardBody>
+                        {/* User's Email */}
+                        <Row style={{justifyContent:"center"}}>
+                            email: {userInfo.userInfo.email}
+                        </Row>
 
-            {/* User's First Name */}
-            <Row className="justify-content-md-center">
-                {userInfo.userInfo.firstName}
-            </Row>
+                        {/* # of Households the user is the part of */}
+                        <Row style={{justifyContent:"center"}}>
+                            {userInfo.households.length ? numHouseholds() : `You are not in any households!`}
+                        </Row>
 
-            {/* User's Last Name */}
-            <Row className="justify-content-md-center">
-                {userInfo.userInfo.lastName}
-            </Row>
+                        {/* Purchases information */}
+                        <Row>
 
-            {/* User's Email */}
-            <Row className="justify-content-md-center">
-                {userInfo.userInfo.email}
-            </Row>
-
-            {/* # of Households the user is the part of */}
-            <Row className="justify-content-md-center">
-                {userInfo.households.length ? `Households you are part of: ${userInfo.households.length}` : `You are not in any households!`}
-            </Row>
-        </Container>
+                        </Row>
+                    </CardBody>
+                </Card>
+        </>
     );
 };
 

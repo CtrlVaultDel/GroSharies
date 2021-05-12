@@ -30,10 +30,15 @@ const HouseholdDetails = () => {
     
     return (
         <>
-            <Row className="justify-content-center" id="pageHeader">
-                <h1> Shopping Lists ({householdDetail.household.name})</h1>
-                <AddShoppingListModal householdId = {householdDetail.household.id} setHouseholdDetail = {setHouseholdDetail}/>
-            </Row>
+            <Col id="pageHeader">
+                <Row className="justify-content-center">
+                    <h1> Shopping Lists</h1>
+                    <AddShoppingListModal householdId = {householdDetail.household.id} setHouseholdDetail = {setHouseholdDetail}/>
+                </Row>
+                <Row className="justify-content-center">
+                    <h2>({householdDetail.household.name})</h2>
+                </Row>
+            </Col>
             <Container>
 
                 {/* If the household already has lists, display them. Otherwise, show a default message */}
