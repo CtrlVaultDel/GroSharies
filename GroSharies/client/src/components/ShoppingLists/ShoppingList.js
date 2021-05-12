@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody, Progress, CardHeader, CardFooter, Button, Row, Col } from "reactstrap";
+import { Card, CardBody, Progress, CardHeader, CardFooter, Button, Row, Col, UncontrolledTooltip } from "reactstrap";
 
 // Icons
 import { FaTrashAlt } from "react-icons/fa";
@@ -73,9 +73,19 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
                     </Col>
                     <Col className="text-center">
                         {/* Delete button for ShoppingList */}
-                        <Button size="sm" color="danger" onClick={() => deleteWarning()}>
-                            <FaTrashAlt />
+                        <Button
+                            id={"deleteShoppingListButton"+shoppingList.id} 
+                            size="sm" 
+                            color="danger" 
+                            onClick={() => deleteWarning()}>
+                                <FaTrashAlt />
                         </Button>
+                        <UncontrolledTooltip
+                            placement="bottom"
+                            target={"deleteShoppingListButton"+shoppingList.id}
+                        >
+                            Delete Shopping List
+                        </UncontrolledTooltip>
                     </Col>
                 </Row>
             </CardFooter>

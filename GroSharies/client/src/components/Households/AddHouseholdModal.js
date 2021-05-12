@@ -49,7 +49,8 @@ const EditHouseholdModal = () => {
             <Button 
                 id="addHouseholdButton"
                 size="lg" style={{padding:"0", border: "none", background:"none", marginLeft:"10px", marginBottom:"10px"}} 
-                onClick={toggle} ><FaPlusCircle />
+                onClick={toggle} >
+                <FaPlusCircle />
             </Button>
             <UncontrolledTooltip
                 placement="right"
