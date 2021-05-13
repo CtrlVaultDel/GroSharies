@@ -1,6 +1,9 @@
 # GroSharies
 An app built for families, roommates and friends to keep track of and share lists of groceries and other goods needed for the home!
 
+## Cloning the repository
+From a terminal window, in any directory you'd like, run: git clone git@github.com:CtrlVaultDel/GroSharies.git
+
 ## Setting Up Firebase
 GroSharies uses Firebase to handle authorization. Please follow the preceeding steps to set up a firebase project for the application
 1. Go to https://firebase.google.com/ and click "Get started"
@@ -51,21 +54,28 @@ Once the database has been selected, run it by clicking on the green play button
 
 
 ## General Information
-### Login Page
-This is the landing page when first opening the application. You can log in here or, if you need to register a new user you can access it via the navbar above or the "click me" link on the page itself.
 
-### Registration Page
-Fill out information here to register a new user and immediately log in with them
+### Technologies 
+#### Front-End
+* ReactJS
+* Firebase authentication
+* Reactstrap
+* Bootstrap
+* CSS
 
-### Households Page
-This page displays all households the current user is part of or a default message if they are not part of any household.
-When a user creates a new household they are considered its Admin.
-An Admin has the ability to edit the household name or delete the household (and in doing so, everything related to it)
-Members cannot delete a household but they can leave it
-Everyone has the ability to invite other users to a household they are part of, view the details of a household (by clicking the name) & add a new household
+#### Server-Side
+* .NET 5
+* ASP.NET Core
+* Microsoft SQL Server
 
-### ShoppingList Page
-This page displays all shopping lists associated with the household that was clicked. If no shopping list exist, a default message is displayed. Each shopping list card has a name (that directs the user to its details when clicked). All users have the ability to create a new shoppingList, edit or delete a pre-existing one.
+### Design
+* https://dbdiagram.io/
+* https://lucidchart.com
 
-### ShoppingList Details Page
-This page displays a "To-Get" list and Purchases table that all users have access to (create, edit, update, delete). There is also a simple pie chart at the bottom that updates as purchases are input. The chart takes all vendors and amounts paid at them and displays them based off their percentage of the total amount. Vendors with the same name will be added together (for instance: Sams, sams & SaMs will have their total costs added together into one vendor: sams) 
+### Entity Relationship Diagram (ERD) & Wireframe
+#### ERD
+![GroSharies-ERD](https://user-images.githubusercontent.com/69012106/118152429-4cf06f00-b3da-11eb-8d08-67c76e7b04d0.png)
+
+#### Wireframe
+![GroSharies-Wireframe1](https://user-images.githubusercontent.com/69012106/118153014-07807180-b3db-11eb-912e-8f15e147f5e2.png)
+![GroSharies-Wireframe2](https://user-images.githubusercontent.com/69012106/118153021-094a3500-b3db-11eb-828a-9aa3407d9cfc.png)
