@@ -45,7 +45,6 @@ const PurchaseChart = ({ purchases }) => {
         }
         dataToChart.push(obj)
     })
-    console.log(dataToChart)
     return <RadialChart
         data={dataToChart} 
         width={300} 
