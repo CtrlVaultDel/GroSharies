@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, UncontrolledTooltip } from 'reactstrap';
 
 // Icons
-import { FaAddressBook } from "react-icons/fa";
+import { BsPersonPlus } from "react-icons/bs";
 
 // Components
 import { HouseholdContext } from "../../providers/HouseholdProvider";
@@ -78,7 +78,7 @@ const HouseholdInvite = ({household}) => {
 
     return (
         <>
-            <Button id={"inviteToHouseholdButton"+household.id} size="sm" color="success" onClick={toggle}><FaAddressBook /></Button>
+            <Button id={"inviteToHouseholdButton"+household.id} size="sm" color="success" onClick={toggle}><BsPersonPlus /></Button>
             <UncontrolledTooltip
                 placement="bottom"
                 target={"inviteToHouseholdButton"+household.id}

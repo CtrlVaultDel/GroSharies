@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "../../styles/index.css";
 
 // Icons
-import { FaTrashAlt, FaDoorOpen } from "react-icons/fa";
+import { FaTrashAlt, FaDoorOpen, FaCheck, FaMinus } from "react-icons/fa";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
@@ -72,7 +72,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                 <>
                     {/* Accept button for invitation */}
                     <Col className="text-center">
-                        <Button id={"acceptInviteButton"+household.id} onClick={() => acceptInvite(household.id)} color="success">Accept Invite</Button>
+                        <Button id={"acceptInviteButton"+household.id} size="sm" onClick={() => acceptInvite(household.id)} color="success"><FaCheck/></Button>
                         <UncontrolledTooltip
                             placement="bottom"
                             target={"acceptInviteButton"+household.id}
@@ -83,7 +83,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
                     {/* Decline button for invitation */}
                     <Col className="text-center">
-                        <Button id={"declineInviteButton"+household.id} onClick={() => declineInvite(household.id)} color="danger">Decline Invite</Button>
+                        <Button id={"declineInviteButton"+household.id} onClick={() => declineInvite(household.id)} size="sm" color="danger"><FaMinus/></Button>
                         <UncontrolledTooltip
                             placement="bottom"
                             target={"declineInviteButton"+household.id}
