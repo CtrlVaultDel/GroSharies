@@ -80,6 +80,7 @@ const HouseholdInvite = ({household}) => {
         <>
             <Button id={"inviteToHouseholdButton"+household.id} size="sm" color="success" onClick={toggle}><BsPersonPlus /></Button>
             <UncontrolledTooltip
+                trigger="hover"
                 placement="bottom"
                 target={"inviteToHouseholdButton"+household.id}
             >

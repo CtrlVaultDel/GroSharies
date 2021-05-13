@@ -83,6 +83,7 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
                                 <FaTrashAlt />
                         </Button>
                         <UncontrolledTooltip
+                            trigger="hover"
                             placement="bottom"
                             target={"deleteShoppingListButton"+shoppingList.id}
                         >

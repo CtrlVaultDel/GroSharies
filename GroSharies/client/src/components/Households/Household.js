@@ -36,6 +36,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                     <Col className="text-center">
                         <Button id={"deleteHouseholdButton"+household.id} size="sm" color="danger" onClick={() => deleteWarning()}><FaTrashAlt /></Button>
                         <UncontrolledTooltip
+                            trigger="hover"
                             placement="bottom"
                             target={"deleteHouseholdButton"+household.id}
                         >
@@ -57,6 +58,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                     <Col className="text-center">
                         <Button id={"leaveHouseholdButton"+household.id} size="sm" color="danger" onClick={() => leaveWarning()}><FaDoorOpen /></Button>
                         <UncontrolledTooltip
+                            trigger="hover"
                             placement="bottom"
                             target={"leaveHouseholdButton"+household.id}
                         >
@@ -74,6 +76,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                     <Col className="text-center">
                         <Button id={"acceptInviteButton"+household.id} size="sm" onClick={() => acceptInvite(household.id)} color="success"><FaCheck/></Button>
                         <UncontrolledTooltip
+                            trigger="hover"
                             placement="bottom"
                             target={"acceptInviteButton"+household.id}
                         >
@@ -85,6 +88,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                     <Col className="text-center">
                         <Button id={"declineInviteButton"+household.id} onClick={() => declineInvite(household.id)} size="sm" color="danger"><FaMinus/></Button>
                         <UncontrolledTooltip
+                            trigger="hover"
                             placement="bottom"
                             target={"declineInviteButton"+household.id}
                         >

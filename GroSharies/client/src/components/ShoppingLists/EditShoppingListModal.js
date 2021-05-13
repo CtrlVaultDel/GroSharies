@@ -63,6 +63,7 @@ const EditShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
                     <FaRegEdit />
             </Button>
             <UncontrolledTooltip
+                trigger="hover"
                 placement="bottom"
                 target={"editShoppingListButton"+shoppingList.id}
             >

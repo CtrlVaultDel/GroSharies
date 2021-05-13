@@ -53,6 +53,7 @@ const EditHouseholdModal = () => {
                 <FaPlusCircle />
             </Button>
             <UncontrolledTooltip
+                trigger="hover"
                 placement="right"
                 target="addHouseholdButton"
             >

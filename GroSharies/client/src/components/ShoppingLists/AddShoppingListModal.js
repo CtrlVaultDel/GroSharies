@@ -59,6 +59,7 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
                 <FaPlusCircle />
             </Button>
             <UncontrolledTooltip
+                trigger="hover"
                 placement="right"
                 target="addShoppingListButton"
             >
