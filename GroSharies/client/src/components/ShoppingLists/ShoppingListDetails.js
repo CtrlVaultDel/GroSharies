@@ -83,7 +83,7 @@ const ShoppingListDetails = () => {
                     </Table>
                 </div>
                 {purchases.length? 
-                    <Row className="justify-content-center" style={{margin:"100px 0px"}}>
+                    <Row className="justify-content-center" style={{margin: "100px 0px"}}>
                         <PurchaseChart purchases={purchases} />
                     </Row>                    
                 : null}

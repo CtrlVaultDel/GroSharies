@@ -36,22 +36,22 @@ const PurchaseChart = ({ purchases }) => {
 
     combinedData.forEach(d => {
         let percentage = d[1]/totalValue*100
-        let label = `${d[0]} (${Math.round(percentage)}%)`
+        let label = `${d[0]} ($${d[1]})`
         let obj = {
             angle: percentage,
             label: label,
-            innerRadius: .70,
-            labelsAboveChildren: true
+            innerRadius: .80,        
         }
         dataToChart.push(obj)
     })
     return <RadialChart
         data={dataToChart} 
-        width={300} 
-        height={300}
+        width={400} 
+        height={400}
         showLabels={true}
         padAngle={.05}
         labelsRadiusMultiplier={1.10}
+        labelsStyle={{fontWeight: 700}}
     />
 }
 
