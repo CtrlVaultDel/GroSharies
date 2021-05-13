@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Table } from "reactstrap";
+import { Container, Table, Row } from "reactstrap";
 
 // Styles
 import "../../styles/index.css";
@@ -10,6 +10,7 @@ import "../../styles/shoppingList.css";
 import ListItemSection from "../ListItems/ListItemSection";
 import PurchaseRow from "../Purchases/PurchaseRow";
 import AddPurchaseModal from "../Purchases/AddPurchaseModal";
+import PurchaseChart from "../Purchases/PurchaseChart";
 
 // Context
 import {ShoppingListContext} from "../../providers/ShoppingListProvider";
@@ -81,6 +82,11 @@ const ShoppingListDetails = () => {
                         </tbody>
                     </Table>
                 </div>
+                {purchases.length? 
+                    <Row className="justify-content-center" style={{margin:"100px 0px"}}>
+                        <PurchaseChart purchases={purchases} />
+                    </Row>                    
+                : null}
             </Container>
         </>
     );
