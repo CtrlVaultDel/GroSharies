@@ -36,7 +36,7 @@ const PurchaseChart = ({ purchases }) => {
 
     combinedData.forEach(d => {
         let percentage = d[1]/totalValue*100
-        let label = `${d[0]} (${Math.round(percentage)})%`
+        let label = `${d[0]} (${Math.round(percentage)}%)`
         let obj = {
             angle: percentage,
             label: label,
