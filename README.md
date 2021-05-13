@@ -23,7 +23,7 @@ GroSharies uses Firebase to handle authorization. Please follow the preceeding s
   "ConnectionStrings": {
     "DefaultConnection": "server=localhost\\SQLExpress;database=GroSharies;integrated security=true;"
   },
-  **"FirebaseProjectId": "grosharies"**
+  "FirebaseProjectId": "YourIdHere"
 }
 ```
 8. Open up or go to Grosharies' client folder
