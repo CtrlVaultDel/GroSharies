@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Col, Row, Container } from "reactstrap";
+import { Button, Col, Container, Row } from "reactstrap";
 
 // Styles
 import "../../styles/listItem.css";

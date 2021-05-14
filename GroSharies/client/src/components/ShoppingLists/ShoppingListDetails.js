@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Table, Row } from "reactstrap";
+import { Container, Row, Table } from "reactstrap";
 
 // Styles
 import "../../styles/index.css";

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, InputGroup, InputGroupAddon, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input, InputGroup, InputGroupAddon, Label, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { FaRegEdit } from "react-icons/fa";
 
 // Components

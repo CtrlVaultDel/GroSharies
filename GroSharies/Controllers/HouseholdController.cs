@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using GroSharies.Models.DataModels;
-using GroSharies.Repositories;
-using System.Linq;
+﻿using GroSharies.Models.DataModels;
 using GroSharies.Models.DomainModels;
+using GroSharies.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace GroSharies.Controllers
 {
