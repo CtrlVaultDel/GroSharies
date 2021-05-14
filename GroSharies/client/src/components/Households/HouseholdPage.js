@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Container, Row, Col, Card } from "reactstrap";
+import { Card, Col, Container, Row } from "reactstrap";
 
 // Styles
 import "../../styles/index.css";

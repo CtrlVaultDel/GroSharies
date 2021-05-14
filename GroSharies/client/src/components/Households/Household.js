@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { Card, CardHeader, CardBody, CardFooter, Button, Row, Col, UncontrolledTooltip } from "reactstrap";
+import { Button, Col, Card, CardHeader, CardBody, CardFooter, Row, UncontrolledTooltip } from "reactstrap";
 import { Link } from "react-router-dom";
 
 // Styles
 import "../../styles/index.css";
 
 // Icons
-import { FaTrashAlt, FaDoorOpen, FaCheck, FaMinus } from "react-icons/fa";
+import { FaCheck, FaDoorOpen, FaMinus, FaTrashAlt } from "react-icons/fa";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";

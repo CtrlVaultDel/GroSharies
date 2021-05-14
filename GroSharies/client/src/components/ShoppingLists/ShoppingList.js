@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody, Progress, CardHeader, CardFooter, Button, Row, Col, UncontrolledTooltip } from "reactstrap";
+import { Button, Card, CardBody, CardHeader, CardFooter, Col, Progress, Row, UncontrolledTooltip } from "reactstrap";
 
 // Icons
 import { FaTrashAlt } from "react-icons/fa";
