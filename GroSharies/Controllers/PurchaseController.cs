@@ -2,7 +2,6 @@
 using GroSharies.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace GroSharies.Controllers
 {
