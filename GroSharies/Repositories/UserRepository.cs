@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using GroSharies.Models.DataModels;
+﻿using GroSharies.Models.DataModels;
 using GroSharies.Utils;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
-using GroSharies.Models.DomainModels;
 
 namespace GroSharies.Repositories
 {
@@ -26,21 +25,22 @@ namespace GroSharies.Repositories
 
                     User user = null;
 
-                    var reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        user = new User()
+                        if (reader.Read())
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            FirebaseId = DbUtils.GetString(reader, "FirebaseId"),
-                            Email = DbUtils.GetString(reader, "Email"),
-                            FirstName = DbUtils.GetString(reader, "FirstName"),
-                            LastName = DbUtils.GetString(reader, "LastName"),
-                        };
-                    }
-                    reader.Close();
+                            user = new User()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                FirebaseId = DbUtils.GetString(reader, "FirebaseId"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                            };
+                        }
 
-                    return user;
+                        return user;
+                    }
                 }
             }
         }
@@ -54,16 +54,18 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"SELECT Email FROM [User]";
 
-                    var reader = cmd.ExecuteReader();
-                    var emails = new List<string>();
-
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        string email = DbUtils.GetString(reader, "Email");
-                        emails.Add(email);
-                    }
+                        var emails = new List<string>();
 
-                    return emails;
+                        while (reader.Read())
+                        {
+                            string email = DbUtils.GetString(reader, "Email");
+                            emails.Add(email);
+                        }
+
+                        return emails;
+                    }
                 }
             }
         }
@@ -79,15 +81,17 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@Email", email);
 
-                    var reader = cmd.ExecuteReader();
-                    int userId = 0;
-
-                    if (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        userId = DbUtils.GetInt(reader, "Id");
+                        int userId = 0;
+
+                        if (reader.Read())
+                        {
+                            userId = DbUtils.GetInt(reader, "Id");
+                        }
+                        return userId;
+                        
                     }
-                    reader.Close();
-                    return userId;
                 }
             }
         }

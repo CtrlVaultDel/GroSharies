@@ -12,9 +12,9 @@ namespace GroSharies.Repositories
         List<string> GetEmailsByHousehold(int householdId);
         void AddAdmin(int householdId, int userId);
         void InviteMember(int householdId, int userId);
-        int CountHouseholdUsers(int householdId);
-        int CountHouseholdLists(int householdId);
         void AcceptInvite(int householdId, int userId);
         void DeclineInviteOrLeave(int householdId, int userId);
+        int CountHouseholdUsers(int householdId);
+        int CountHouseholdLists(int householdId);
     }
 }

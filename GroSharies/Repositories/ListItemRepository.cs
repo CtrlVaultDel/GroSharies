@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using GroSharies.Models.DataModels;
+﻿using GroSharies.Models.DataModels;
 using GroSharies.Utils;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace GroSharies.Repositories
@@ -24,23 +24,23 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@ShoppingListId", shoppingListId);
 
-                    var reader = cmd.ExecuteReader();
-
-                    var listItems = new List<ListItem>();
-
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        var listItem = new ListItem()
+                        var listItems = new List<ListItem>();
+
+                        while (reader.Read())
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            ShoppingListId = DbUtils.GetInt(reader, "ShoppingListId"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            IsChecked = DbUtils.GetBool(reader, "IsChecked")
-                        };
-                        listItems.Add(listItem);
+                            var listItem = new ListItem()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                ShoppingListId = DbUtils.GetInt(reader, "ShoppingListId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                IsChecked = DbUtils.GetBool(reader, "IsChecked")
+                            };
+                            listItems.Add(listItem);
+                        }
+                        return listItems;
                     }
-                    reader.Close();
-                    return listItems;
                 }
             }
         }

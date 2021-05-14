@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using GroSharies.Models.DataModels;
+﻿using GroSharies.Models.DataModels;
 using GroSharies.Utils;
-using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 
 namespace GroSharies.Repositories
 {
@@ -24,24 +24,24 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
 
-                    var reader = cmd.ExecuteReader();
-
-                    var shoppingLists = new List<ShoppingList>();
-
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        var shoppingList = new ShoppingList()
-                        {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
-                        };
-                        shoppingLists.Add(shoppingList);
-                    }
+                        var shoppingLists = new List<ShoppingList>();
 
-                    reader.Close();
-                    return shoppingLists;
+                        while (reader.Read())
+                        {
+                            var shoppingList = new ShoppingList()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
+                            };
+                            shoppingLists.Add(shoppingList);
+                        }
+
+                        return shoppingLists;
+                    }
                 }
             }
         }
@@ -61,22 +61,23 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@ShoppingListId", shoppingListId);
 
-                    var reader = cmd.ExecuteReader();
-
-                    ShoppingList shoppingList = null;
-
-                    if (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        shoppingList = new ShoppingList()
+                        ShoppingList shoppingList = null;
+
+                        if (reader.Read())
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
-                        };
+                            shoppingList = new ShoppingList()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
+                            };
+                        }
+
+                        return shoppingList;
                     }
-                    reader.Close();
-                    return shoppingList;
                 }
             }
         }

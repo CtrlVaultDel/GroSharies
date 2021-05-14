@@ -1,8 +1,8 @@
-﻿using GroSharies.Utils;
-using Microsoft.Extensions.Configuration;
-using GroSharies.Models.DataModels;
-using System.Collections.Generic;
+﻿using GroSharies.Models.DataModels;
 using GroSharies.Models.DomainModels;
+using GroSharies.Utils;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace GroSharies.Repositories
 {
@@ -29,29 +29,30 @@ namespace GroSharies.Repositories
 
                     var householdUserRelations = new List<HouseholdUserRelation>();
 
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        var relation = new HouseholdUserRelation()
+                        while (reader.Read())
                         {
-                            Household = new Household()
+                            var relation = new HouseholdUserRelation()
                             {
-                                Id = DbUtils.GetInt(reader, "HouseholdId"),
-                                Name = DbUtils.GetString(reader, "HouseholdName"),
-                            },
-                            Relation = new HouseholdUser()
-                            {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
-                                UserId = DbUtils.GetInt(reader, "UserId"),
-                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                                IsAccepted = DbUtils.GetBool(reader, "IsAccepted")
-                            }
-                        };
-                        householdUserRelations.Add(relation);
-                    }
-                    reader.Close();
+                                Household = new Household()
+                                {
+                                    Id = DbUtils.GetInt(reader, "HouseholdId"),
+                                    Name = DbUtils.GetString(reader, "HouseholdName"),
+                                },
+                                Relation = new HouseholdUser()
+                                {
+                                    Id = DbUtils.GetInt(reader, "Id"),
+                                    HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
+                                    UserId = DbUtils.GetInt(reader, "UserId"),
+                                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                    IsAccepted = DbUtils.GetBool(reader, "IsAccepted")
+                                }
+                            };
+                            householdUserRelations.Add(relation);
+                        }
 
+                    }
                     return householdUserRelations;
                 }
             }
@@ -71,23 +72,24 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
 
-                    var reader = cmd.ExecuteReader();
-
-                    var householdUsers = new List<HouseholdUser>();
-
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        var householdUser = new HouseholdUser()
+                        var householdUsers = new List<HouseholdUser>();
+
+                        while (reader.Read())
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
-                            UserId = DbUtils.GetInt(reader, "UserId"),
-                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                            IsAccepted = DbUtils.GetBool(reader, "IsAccepted")
-                        };
-                        householdUsers.Add(householdUser);
+                            var householdUser = new HouseholdUser()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
+                                UserId = DbUtils.GetInt(reader, "UserId"),
+                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                IsAccepted = DbUtils.GetBool(reader, "IsAccepted")
+                            };
+                            householdUsers.Add(householdUser);
+                        }
+                        return householdUsers;
                     }
-                    return householdUsers;
                 }
             }
         }
@@ -107,23 +109,23 @@ namespace GroSharies.Repositories
                     DbUtils.AddParameter(cmd, "@UserId", userId);
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
 
-                    var reader = cmd.ExecuteReader();
-
-                    HouseholdUser householdUser = null;
-
-                    if (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        householdUser = new HouseholdUser()
-                        {                         
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
-                            UserId = DbUtils.GetInt(reader, "UserId"),
-                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                            IsAccepted = DbUtils.GetBool(reader, "IsAccepted")                           
-                        };
-                    }                              
-                    reader.Close();
-                    return householdUser;
+                        HouseholdUser householdUser = null;
+
+                        if (reader.Read())
+                        {
+                            householdUser = new HouseholdUser()
+                            {                         
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                HouseholdId = DbUtils.GetInt(reader, "HouseholdId"),
+                                UserId = DbUtils.GetInt(reader, "UserId"),
+                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                IsAccepted = DbUtils.GetBool(reader, "IsAccepted")                           
+                            };
+                        }                              
+                        return householdUser;
+                    }
                 }
             }
         }
@@ -143,77 +145,17 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
 
-                    var reader = cmd.ExecuteReader();
-
-                    var allHouseholdEmails = new List<string>();
-
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        string email = DbUtils.GetString(reader, "Email");
-                        allHouseholdEmails.Add(email);
+                        var allHouseholdEmails = new List<string>();
+
+                        while (reader.Read())
+                        {
+                            string email = DbUtils.GetString(reader, "Email");
+                            allHouseholdEmails.Add(email);
+                        }
+                        return allHouseholdEmails;
                     }
-                    reader.Close();
-                    return allHouseholdEmails;
-                }
-            }
-        }
-
-        public int CountHouseholdUsers(int householdId)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                    SELECT HouseholdId,
-                    COUNT(HouseholdId) AS NumUsers
-                    FROM HouseholdUser
-                    WHERE HouseholdId = @HouseholdUserId
-                    GROUP BY HouseholdId";
-
-                    DbUtils.AddParameter(cmd, "@HouseholdUserId", householdId);
-
-                    var reader = cmd.ExecuteReader();
-
-                    int numUsers = 0;
-
-                    if (reader.Read())
-                    {
-                        numUsers = DbUtils.GetInt(reader, "NumUsers");
-                    }
-
-                    return numUsers;
-                }
-            }
-        }
-
-        public int CountHouseholdLists(int householdId)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                    SELECT HouseholdId,
-                    COUNT(HouseholdId) AS NumLists
-                    FROM ShoppingList
-                    WHERE HouseholdId = @HouseholdUserId
-                    GROUP BY HouseholdId";
-
-                    DbUtils.AddParameter(cmd, "@HouseholdUserId", householdId);
-
-                    var reader = cmd.ExecuteReader();
-
-                    int numLists = 0;
-
-                    if (reader.Read())
-                    {
-                        numLists = DbUtils.GetInt(reader, "NumLists");
-                    }
-
-                    return numLists;
                 }
             }
         }
@@ -293,6 +235,67 @@ namespace GroSharies.Repositories
                     DbUtils.AddParameter(cmd, "@UserId", userId);
 
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public int CountHouseholdUsers(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT HouseholdId,
+                    COUNT(HouseholdId) AS NumUsers
+                    FROM HouseholdUser
+                    WHERE HouseholdId = @HouseholdUserId
+                    GROUP BY HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdUserId", householdId);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        int numUsers = 0;
+
+                        if (reader.Read())
+                        {
+                            numUsers = DbUtils.GetInt(reader, "NumUsers");
+                        }
+                        return numUsers;
+                    }
+                }
+            }
+        }
+
+        public int CountHouseholdLists(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT HouseholdId,
+                    COUNT(HouseholdId) AS NumLists
+                    FROM ShoppingList
+                    WHERE HouseholdId = @HouseholdUserId
+                    GROUP BY HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdUserId", householdId);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        int numLists = 0;
+
+                        if (reader.Read())
+                        {
+                            numLists = DbUtils.GetInt(reader, "NumLists");
+                        }
+
+                        return numLists;
+                    }
                 }
             }
         }

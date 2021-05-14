@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GroSharies.Models.DataModels;
 using GroSharies.Models.DomainModels;
-using GroSharies.Models.DataModels;
 using GroSharies.Utils;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace GroSharies.Repositories
@@ -28,29 +28,29 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@ShoppingListId", shoppingListId);
 
-                    var reader = cmd.ExecuteReader();
-
-                    var purchases = new List<PurchaseDetail>();
-
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        var purchaseDetail = new PurchaseDetail()
+                        var purchases = new List<PurchaseDetail>();
+
+                        while (reader.Read())
                         {
-                            Purchase = new Purchase()
+                            var purchaseDetail = new PurchaseDetail()
                             {
-                                Id = DbUtils.GetInt(reader, "PurchaseId"),
-                                ShoppingListId = DbUtils.GetInt(reader, "ShoppingListId"),
-                                UserId = DbUtils.GetInt(reader, "UserId"),
-                                Vendor = DbUtils.GetString(reader, "Vendor"),
-                                PurchaseDate = DbUtils.GetDateTime(reader, "PurchaseDate"),
-                                TotalCost = DbUtils.GetDecimal(reader, "TotalCost")
-                            },
-                            Buyer = DbUtils.GetString(reader, "FullName")
-                        };
-                        purchases.Add(purchaseDetail);
+                                Purchase = new Purchase()
+                                {
+                                    Id = DbUtils.GetInt(reader, "PurchaseId"),
+                                    ShoppingListId = DbUtils.GetInt(reader, "ShoppingListId"),
+                                    UserId = DbUtils.GetInt(reader, "UserId"),
+                                    Vendor = DbUtils.GetString(reader, "Vendor"),
+                                    PurchaseDate = DbUtils.GetDateTime(reader, "PurchaseDate"),
+                                    TotalCost = DbUtils.GetDecimal(reader, "TotalCost")
+                                },
+                                Buyer = DbUtils.GetString(reader, "FullName")
+                            };
+                            purchases.Add(purchaseDetail);
+                        }
+                        return purchases;
                     }
-                    reader.Close();
-                    return purchases;
                 }
             }
         }
@@ -71,25 +71,25 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@UserId", userId);
 
-                    var reader = cmd.ExecuteReader();
-
-                    var purchases = new List<Purchase>();
-
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        var purchase = new Purchase()
-                        {                            
-                            Id = DbUtils.GetInt(reader, "PurchaseId"),
-                            ShoppingListId = DbUtils.GetInt(reader, "ShoppingListId"),
-                            UserId = DbUtils.GetInt(reader, "UserId"),
-                            Vendor = DbUtils.GetString(reader, "Vendor"),
-                            PurchaseDate = DbUtils.GetDateTime(reader, "PurchaseDate"),
-                            TotalCost = DbUtils.GetDecimal(reader, "TotalCost")              
-                        };
-                        purchases.Add(purchase);
+                        var purchases = new List<Purchase>();
+
+                        while (reader.Read())
+                        {
+                            var purchase = new Purchase()
+                            {                            
+                                Id = DbUtils.GetInt(reader, "PurchaseId"),
+                                ShoppingListId = DbUtils.GetInt(reader, "ShoppingListId"),
+                                UserId = DbUtils.GetInt(reader, "UserId"),
+                                Vendor = DbUtils.GetString(reader, "Vendor"),
+                                PurchaseDate = DbUtils.GetDateTime(reader, "PurchaseDate"),
+                                TotalCost = DbUtils.GetDecimal(reader, "TotalCost")              
+                            };
+                            purchases.Add(purchase);
+                        }
+                        return purchases;
                     }
-                    reader.Close();
-                    return purchases;
                 }
             }
         }
