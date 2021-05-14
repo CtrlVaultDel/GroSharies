@@ -44,7 +44,7 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
                 completeItems++;
             }
         })
-        return (completeItems/totalItems)*100
+        return Math.round((completeItems/totalItems)*100,2)
     }
 
     if(!listItems) return null
