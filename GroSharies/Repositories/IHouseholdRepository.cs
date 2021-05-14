@@ -1,5 +1,4 @@
 ﻿using GroSharies.Models.DataModels;
-using GroSharies.Models.DomainModels;
 using System.Collections.Generic;
 
 namespace GroSharies.Repositories

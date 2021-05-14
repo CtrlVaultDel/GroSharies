@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using GroSharies.Models.DataModels;
+﻿using GroSharies.Models.DataModels;
 using GroSharies.Utils;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace GroSharies.Repositories
@@ -27,19 +27,21 @@ namespace GroSharies.Repositories
 
                     var userHouseholds = new List<Household>();
 
-                    var reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        var household = new Household()
-                        {                          
-                            Id = DbUtils.GetInt(reader, "HouseholdId"),
-                            Name = DbUtils.GetString(reader, "HouseholdName")                                                     
-                        };
-                        userHouseholds.Add(household);
-                    }
-                    reader.Close();
+                        while (reader.Read())
+                        {
+                            var household = new Household()
+                            {
+                                Id = DbUtils.GetInt(reader, "HouseholdId"),
+                                Name = DbUtils.GetString(reader, "HouseholdName")
+                            };
+                            userHouseholds.Add(household);
+                        }
 
-                    return userHouseholds;
+                        return userHouseholds;
+                    }
+
                 }
             }
         }
@@ -59,20 +61,21 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
 
-                    var reader = cmd.ExecuteReader();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        Household household = null;
 
-                    Household household = null;
-
-                    if (reader.Read())
-                    {                     
-                        household = new Household()
-                        {                         
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            Name = DbUtils.GetString(reader, "Name")                                              
-                        }; 
+                        if (reader.Read())
+                        {                     
+                            household = new Household()
+                            {                         
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Name = DbUtils.GetString(reader, "Name")                                              
+                            }; 
+                        }
+                        return household;
                     }
-                    reader.Close();
-                    return household;
+
                 }
             }
         }
