@@ -4,7 +4,6 @@ import { Card, CardBody } from "reactstrap";
 // Styles
 import "../../styles/shoppingList.css";
 
-
 // Components
 import AddListItem from "./AddListItem";
 import ListItem from "./ListItem";

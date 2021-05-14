@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Card, Row, Col } from "reactstrap";
+
+import { Card, Col, Container, Row  } from "reactstrap";
 
 // Styles
 import "../../styles/index.css";
