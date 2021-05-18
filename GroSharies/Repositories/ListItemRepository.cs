@@ -65,6 +65,44 @@ namespace GroSharies.Repositories
             }
         }
 
+        public void CheckAll(ListItem listItem)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE ListItem
+                        SET IsChecked = 'true'
+                        WHERE ShoppingListId = @ShoppingListId";
+
+                    DbUtils.AddParameter(cmd, "ShoppingListId", listItem.ShoppingListId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UnCheckAll(ListItem listItem)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE ListItem
+                        SET IsChecked = 'false'
+                        WHERE ShoppingListId = @ShoppingListId";
+
+                    DbUtils.AddParameter(cmd, "ShoppingListId", listItem.ShoppingListId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void Add(ListItem listItem)
         {
             using (var conn = Connection)
