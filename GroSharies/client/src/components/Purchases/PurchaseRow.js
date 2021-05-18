@@ -1,19 +1,15 @@
-import React, { useContext } from "react";
-import { Button, Row } from "reactstrap";
-
-// Icons
-import { FaTrashAlt } from "react-icons/fa";
+import React from "react";
+import { Row } from "reactstrap";
 
 // Components
 import EditPurchaseModal from "./EditPurchaseModal";
 
 // Context
-import { PurchaseContext } from "../../providers/PurchaseProvider";
+import DeletePurchaseModal from "./DeletePurchaseModal";
 // =========================== IMPORTS END ===========================
 
 
 const PurchaseRow = ({ purchaseDetail, shoppingList, setPurchases }) => {
-    const { deletePurchase } = useContext(PurchaseContext);
     const date = new Date(purchaseDetail.purchase.purchaseDate)
 
     const formatter = new Intl.NumberFormat('en-US', {
@@ -21,17 +17,6 @@ const PurchaseRow = ({ purchaseDetail, shoppingList, setPurchases }) => {
         currency: 'USD',
         minimumFractionDigits: 2
       })
-
-      const deleteWarning = () => {
-        const confirmBox = window.confirm(`
-            Are you sure you wish to delete the $${purchaseDetail.purchase.totalCost} purchase 
-            from ${purchaseDetail.purchase.vendor}? This action is irreversable.`
-        );
-        if (confirmBox){
-            deletePurchase(purchaseDetail.purchase)
-            .then(setPurchases);
-        };
-    };
 
     return(
        <tr>
@@ -42,9 +27,7 @@ const PurchaseRow = ({ purchaseDetail, shoppingList, setPurchases }) => {
            <td >
                <Row className="justify-content-center" size="sm">
                     <EditPurchaseModal shoppingList = {shoppingList} priorPurchase = {purchaseDetail} setPurchases = {setPurchases} />
-                    <Button size="sm" className="ml-3" color="danger" onClick={deleteWarning}>
-                        <FaTrashAlt />
-                    </Button>
+                    <DeletePurchaseModal purchase = {purchaseDetail.purchase} setPurchases = {setPurchases} />
                </Row>
             </td>
        </tr>

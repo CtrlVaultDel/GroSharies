@@ -1,40 +1,40 @@
 import React, { useState, useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledTooltip } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 // Icons
 import { FaTrashAlt } from "react-icons/fa";
 
 // Context
-import { HouseholdContext } from "../../providers/HouseholdProvider";
+import { PurchaseContext } from "../../providers/PurchaseProvider";
 
 // =========================== IMPORTS END ===========================
 
-const DeleteHouseholdModal = ({ household }) => {
-    const { deleteHousehold } = useContext(HouseholdContext);
+const DeletePurchaseModal = ({ purchase, setPurchases }) => {
+    const { deletePurchase } = useContext(PurchaseContext);
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
 
+    const handleDelete = () => {
+        deletePurchase(purchase)
+        .then(setPurchases)
+    };
+
     return (
         <>
             <Button 
-                id={"deleteHouseholdButton"+household.id} 
+                style = {{marginLeft: 10}}
                 size="sm" 
                 color="danger" 
                 onClick={toggle}>
                     <FaTrashAlt />
             </Button>
-            <UncontrolledTooltip
-                trigger="hover"
-                placement="bottom"
-                target={"deleteHouseholdButton"+household.id}>
-                Delete Household
-            </UncontrolledTooltip>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Delete a Household</ModalHeader>
+                <ModalHeader toggle={toggle}>
+                    Delete a Purchase
+                </ModalHeader>
                 <ModalBody>
-                    Are you sure you want to delete "{household.name}"? 
-                    All Shopping Lists associated with this household will also be deleted.           
+                    Do you want to delete this ${purchase.totalCost} purchase from {purchase.vendor}?
                 </ModalBody>
                 <ModalFooter style={{display:"block"}}>
 
@@ -51,9 +51,9 @@ const DeleteHouseholdModal = ({ household }) => {
                         color="danger"
                         className="float-right"
                         onClick={() => {
-                            deleteHousehold(household.id);
+                            handleDelete();
                             toggle()}}>
-                        Delete "{household.name}"
+                        Delete Purchase
                     </Button>
                 </ModalFooter>
             </Modal>
@@ -61,4 +61,4 @@ const DeleteHouseholdModal = ({ household }) => {
     );
 }
 
-export default DeleteHouseholdModal;
+export default DeletePurchaseModal;

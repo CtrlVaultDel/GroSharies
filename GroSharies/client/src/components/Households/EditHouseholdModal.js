@@ -50,7 +50,12 @@ const EditHouseholdModal = ({ household }) => {
 
     return (
         <>
-            <Button id={"editHouseholdButton"+household.id} size="sm" color="warning" onClick={toggle} ><FaRegEdit /></Button>
+            <Button 
+                id={"editHouseholdButton"+household.id} 
+                size="sm" color="warning" 
+                onClick={toggle}>
+                    <FaRegEdit />
+            </Button>
             <UncontrolledTooltip
                 trigger="hover"
                 placement="bottom"

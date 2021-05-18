@@ -48,10 +48,12 @@ const EditHouseholdModal = () => {
         <>
             <Button 
                 id="addHouseholdButton"
-                size="lg" style={{padding:"0", border: "none", background:"none", marginLeft:"10px", marginBottom:"10px"}} 
-                onClick={toggle} >
+                size="lg" 
+                style={{padding:"0", border: "none", background:"none", marginLeft:"10px", marginBottom:"10px"}} 
+                onClick={toggle}>
                 <FaPlusCircle />
             </Button>
+
             <UncontrolledTooltip
                 trigger="hover"
                 placement="right"
@@ -59,13 +61,17 @@ const EditHouseholdModal = () => {
             >
                 Add a Household
             </UncontrolledTooltip>
-            <Modal isOpen={modal} toggle={toggle} onClosed={() => setHousehold(initialState)}>
+            <Modal 
+                isOpen={modal} 
+                toggle={toggle} 
+                onClosed={() => setHousehold(initialState)}>
                 <ModalHeader toggle={toggle}>Add a Household</ModalHeader>
                 <ModalBody>
-                    <Form className="householdAddForm"onSubmit={(e) => {
-                        e.preventDefault()
-                        handleSave()
-                    }}>
+                    <Form 
+                        className="householdAddForm"
+                        onSubmit={(e) => {
+                            e.preventDefault()
+                            handleSave()}}>
 
                         {/* Name Input */}
                         <FormGroup>

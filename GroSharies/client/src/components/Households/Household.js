@@ -48,6 +48,8 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                     <Col className="text-center">
                         <HouseholdInvite household={household} />
                     </Col>
+
+                    {/* If the user is NOT an Admmin, display the leave household button */}
                     {userType !== 1 ? 
                         <Col className="text-center">
                             <Button 
@@ -64,7 +66,8 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                                 Leave Household
                             </UncontrolledTooltip>
                         </Col> 
-                        : <></>
+                        : 
+                        <></>
                     }
                 </>
             )
@@ -74,7 +77,11 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                 <>
                     {/* Accept button for invitation */}
                     <Col className="text-center">
-                        <Button id={"acceptInviteButton"+household.id} size="sm" onClick={() => acceptInvite(household.id)} color="success"><FaCheck/></Button>
+                        <Button 
+                            id={"acceptInviteButton"+household.id} 
+                            size="sm" 
+                            onClick={() => acceptInvite(household.id)} 
+                            color="success"><FaCheck/></Button>
                         <UncontrolledTooltip
                             trigger="hover"
                             placement="bottom"
@@ -86,7 +93,11 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
                     {/* Decline button for invitation */}
                     <Col className="text-center">
-                        <Button id={"declineInviteButton"+household.id} onClick={() => declineInvite(household.id)} size="sm" color="danger"><FaMinus/></Button>
+                        <Button 
+                            id={"declineInviteButton"+household.id} 
+                            onClick={() => declineInvite(household.id)} 
+                            size="sm" 
+                            color="danger"><FaMinus/></Button>
                         <UncontrolledTooltip
                             trigger="hover"
                             placement="bottom"
