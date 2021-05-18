@@ -2,43 +2,42 @@ import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledTooltip } from 'reactstrap';
 
 // Icons
-import { FaTrashAlt } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // =========================== IMPORTS END ===========================
 
-const DeleteHouseholdModal = ({ household }) => {
-    const { deleteHousehold } = useContext(HouseholdContext);
+const DeclineInviteModal = ({ household }) => {
+    const { declineInvite } = useContext(HouseholdContext);
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
-    const handleDelete = () => {
-        deleteHousehold(household.id);
+    const handleDecline = () => {
+        declineInvite(household.id);
         toggle();
     };
 
     return (
         <>
-            <Button 
-                id={"deleteHouseholdButton"+household.id} 
+           <Button 
+                id={"declineInviteButton"+household.id} 
+                onClick={toggle}
                 size="sm" 
-                color="danger" 
-                onClick={toggle}>
-                    <FaTrashAlt />
+                color="danger">
+                    <FaMinus/>
             </Button>
             <UncontrolledTooltip
                 trigger="hover"
                 placement="bottom"
-                target={"deleteHouseholdButton"+household.id}>
-                Delete Household
+                target={"declineInviteButton"+household.id}>
+                Decline Invite
             </UncontrolledTooltip>
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Delete a Household</ModalHeader>
+                <ModalHeader toggle={toggle}> Decline Invitation</ModalHeader>
                 <ModalBody>
-                    Are you sure you want to delete "{household.name}"? 
-                    All Shopping Lists associated with this household will also be deleted.           
+                    Decline invite to {household.name}?         
                 </ModalBody>
                 <ModalFooter style={{display:"block"}}>
 
@@ -54,8 +53,8 @@ const DeleteHouseholdModal = ({ household }) => {
                     <Button
                         color="danger"
                         className="float-right"
-                        onClick={handleDelete}>
-                        Delete "{household.name}"
+                        onClick={handleDecline}>
+                        Decline Invitation
                     </Button>
                 </ModalFooter>
             </Modal>
@@ -63,4 +62,4 @@ const DeleteHouseholdModal = ({ household }) => {
     );
 }
 
-export default DeleteHouseholdModal;
+export default DeclineInviteModal;

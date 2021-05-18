@@ -76,6 +76,11 @@ const HouseholdInvite = ({household}) => {
         toggle();
     };
 
+    const handleCancel = () => {
+        setInvitation(initialState)
+        toggle();
+    };
+
     return (
         <>
             <Button id={"inviteToHouseholdButton"+household.id} size="sm" color="success" onClick={toggle}><BsPersonPlus /></Button>
@@ -112,10 +117,8 @@ const HouseholdInvite = ({household}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={() => {
-                                toggle();
-                                setInvitation(initialState)
-                            }}>Cancel
+                            onClick={handleCancel}>
+                                Cancel
                         </Button>
 
                         {/* Save Button */}

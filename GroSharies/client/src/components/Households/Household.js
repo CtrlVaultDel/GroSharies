@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "../../styles/index.css";
 
 // Icons
-import { FaCheck, FaDoorOpen, FaMinus } from "react-icons/fa";
+import { FaCheck, FaDoorOpen } from "react-icons/fa";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
@@ -15,12 +15,13 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 import HouseholdInvite from "./HouseholdInvite";
 import EditHouseholdModal from "./EditHouseholdModal";
 import DeleteHouseholdModal from "./DeleteHouseholdModal";
+import DeclineInviteModal from "./DeclineInviteModal";
 // =========================== IMPORTS END ===========================
 
 
 const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
-    const { leaveHousehold, acceptInvite, declineInvite } = useContext(HouseholdContext);
+    const { leaveHousehold, acceptInvite } = useContext(HouseholdContext);
 
     // Determines if the user is an Admin of the related household.
     // If they are, add an edit button to allow them to change its name.
@@ -37,7 +38,8 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                     <Col className="text-center">
                         <DeleteHouseholdModal household={household}/>
                     </Col>
-                </>)
+                </>
+            )
         };
     };
 
@@ -93,18 +95,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
 
                     {/* Decline button for invitation */}
                     <Col className="text-center">
-                        <Button 
-                            id={"declineInviteButton"+household.id} 
-                            onClick={() => declineInvite(household.id)} 
-                            size="sm" 
-                            color="danger"><FaMinus/></Button>
-                        <UncontrolledTooltip
-                            trigger="hover"
-                            placement="bottom"
-                            target={"declineInviteButton"+household.id}
-                        >
-                            Decline Invite
-                        </UncontrolledTooltip>
+                        <DeclineInviteModal household = {household}/>
                     </Col>
                 </>
             )

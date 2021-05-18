@@ -12,7 +12,6 @@ import { ShoppingListContext } from "../../providers/ShoppingListProvider";
 const DeleteShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
     const { deleteShoppingList } = useContext(ShoppingListContext);
     const [modal, setModal] = useState(false);
-
     const toggle = () => setModal(!modal);
 
     const handleDelete = () => {

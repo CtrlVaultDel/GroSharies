@@ -20,6 +20,7 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
 
     const [shoppingList, setShoppingList] = useState(initialState);
     const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
     
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
@@ -47,7 +48,10 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
         })
     };
 
-    const toggle = () => setModal(!modal);
+    const handleCancel = () => {
+        setShoppingList(initialState);
+        toggle();
+    };
 
     return (
         <>
@@ -90,11 +94,7 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={
-                                () =>{
-                                toggle();
-                                setShoppingList(initialState)
-                            }}>
+                            onClick={handleCancel}>
                             Cancel
                         </Button>
 

@@ -7,6 +7,7 @@ import { FaRegEdit } from "react-icons/fa";
 const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
     
     const initialState = {
         id: listItem.id,
@@ -45,8 +46,6 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
         })
     };
 
-    const toggle = () => setModal(!modal);
-
     return (
         <>
             <Button className="ml-2" color="warning" onClick={toggle} ><FaRegEdit /></Button>
@@ -76,7 +75,7 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={() =>toggle()}>
+                            onClick={toggle}>
                             Cancel
                         </Button>
 

@@ -20,6 +20,7 @@ const EditHouseholdModal = ({ household }) => {
 
     const [editedHousehold, setEditedHousehold] = useState(initialState);
     const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
     
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
@@ -46,7 +47,10 @@ const EditHouseholdModal = ({ household }) => {
         })
     };
 
-    const toggle = () => setModal(!modal);
+    const handleCancel = () => {
+        setEditedHousehold(initialState);
+        toggle();
+    };
 
     return (
         <>
@@ -66,10 +70,10 @@ const EditHouseholdModal = ({ household }) => {
             <Modal isOpen={modal} toggle={toggle} onClosed={() => setEditedHousehold(initialState)}>
                 <ModalHeader toggle={toggle}>Edit Household ({household.name})</ModalHeader>
                 <ModalBody>
-                    <Form className="householdEditForm"onSubmit={(e) => {
-                        e.preventDefault()
-                        handleUpdate()
-                    }}>
+                    <Form className="householdEditForm" onSubmit = {event => {
+                        event.preventDefault();
+                        handleUpdate();
+                        }}>
 
                         {/* Name Input */}
                         <FormGroup>
@@ -89,11 +93,7 @@ const EditHouseholdModal = ({ household }) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={
-                                () =>{
-                                toggle();
-                                setEditedHousehold(initialState)
-                            }}>
+                            onClick={handleCancel}>
                             Cancel
                         </Button>
 
@@ -101,11 +101,10 @@ const EditHouseholdModal = ({ household }) => {
                         <Button
                             className="btn btn-success float-right"
                             disabled={isLoading}
-                            onClick={(event) => {
-                            event.preventDefault();
-                            handleUpdate();
-                            }}
-                        >
+                            onClick={event => {
+                                event.preventDefault();
+                                handleUpdate()
+                                }}>
                             Update Household
                         </Button>
                     </Form>

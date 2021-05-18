@@ -11,6 +11,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
     const { updatePurchase } = useContext(PurchaseContext);
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
     
     const priorDate = new Date(priorPurchase.purchase.purchaseDate).toLocaleDateString('en-CA');
     
@@ -56,8 +57,6 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
             setIsLoading(false);
         })
     };
-
-    const toggle = () => setModal(!modal);
 
     return (
         <>
@@ -123,7 +122,7 @@ const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={()=>toggle()}>
+                            onClick={toggle}>
                                 Cancel
                         </Button>
 

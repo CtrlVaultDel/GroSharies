@@ -12,7 +12,6 @@ import { PurchaseContext } from "../../providers/PurchaseProvider";
 const DeletePurchaseModal = ({ purchase, setPurchases }) => {
     const { deletePurchase } = useContext(PurchaseContext);
     const [modal, setModal] = useState(false);
-
     const toggle = () => setModal(!modal);
 
     const handleDelete = () => {
