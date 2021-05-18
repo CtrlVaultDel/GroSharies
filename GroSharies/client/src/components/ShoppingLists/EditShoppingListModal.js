@@ -22,7 +22,8 @@ const EditShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
 
     const [editedShoppingList, setEditedShoppingList] = useState(initialState);
     const [modal, setModal] = useState(false);
-    
+    const toggle = () => setModal(!modal);
+
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
         const newShoppingList = { ...editedShoppingList };
@@ -51,7 +52,10 @@ const EditShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
         })
     };
 
-    const toggle = () => setModal(!modal);
+    const handleCancel = () => {
+        setEditedShoppingList(initialState)
+        toggle();
+    }
 
     return (
         <>
@@ -94,11 +98,7 @@ const EditShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={
-                                () =>{
-                                toggle();
-                                setEditedShoppingList(initialState)
-                            }}>
+                            onClick={handleCancel}>
                             Cancel
                         </Button>
 

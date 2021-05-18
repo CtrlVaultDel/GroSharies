@@ -17,6 +17,7 @@ const EditHouseholdModal = () => {
 
     const [household, setHousehold] = useState(initialState);
     const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
     
     // Handles updating the state of newListItem as the user updates the form
     const handleInput = e => {
@@ -42,7 +43,10 @@ const EditHouseholdModal = () => {
         })
     };
 
-    const toggle = () => setModal(!modal);
+    const handleCancel = () => {
+        setHousehold(initialState);
+        toggle();
+    }
 
     return (
         <>
@@ -91,11 +95,7 @@ const EditHouseholdModal = () => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={
-                                () =>{
-                                toggle();
-                                setHousehold(initialState)
-                            }}>
+                            onClick={handleCancel}>
                             Cancel
                         </Button>
 

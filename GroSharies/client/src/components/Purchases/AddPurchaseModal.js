@@ -10,6 +10,7 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
     const { savePurchase } = useContext(PurchaseContext);
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
+    const toggle = () => setModal(!modal);
     
     const currentDate = new Date().toLocaleDateString('en-CA');
 
@@ -54,8 +55,6 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
             setPurchase(initialState)
         })
     };
-
-    const toggle = () => setModal(!modal);
 
     return (
         <div>
@@ -114,7 +113,7 @@ const AddPurchaseModal = ({shoppingList, setPurchases}) => {
                         {/* Cancel Button */}
                         <Button 
                             color="secondary" 
-                            onClick={() =>toggle()}>
+                            onClick={toggle}>
                                 Cancel
                         </Button>
 
