@@ -5,36 +5,45 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledTooltip
 import { FaTrashAlt } from "react-icons/fa";
 
 // Context
-import { HouseholdContext } from "../../providers/HouseholdProvider";
+import { ShoppingListContext } from "../../providers/ShoppingListProvider";
 
 // =========================== IMPORTS END ===========================
 
-const DeleteHouseholdModal = ({ household }) => {
-    const { deleteHousehold } = useContext(HouseholdContext);
+const DeleteShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
+    const { deleteShoppingList } = useContext(ShoppingListContext);
     const [modal, setModal] = useState(false);
 
     const toggle = () => setModal(!modal);
 
+    const handleDelete = () => {
+        deleteShoppingList(shoppingList)
+        .then(setHouseholdDetail);
+    };
+
     return (
         <>
+            {/* Delete button that appears below a shoppingList Card */}
             <Button 
-                id={"deleteHouseholdButton"+household.id} 
+                id={"deleteShoppingListButton"+shoppingList.id} 
                 size="sm" 
                 color="danger" 
                 onClick={toggle}>
                     <FaTrashAlt />
             </Button>
+
+            {/* Displays a small tooltip below the button above while hovering over it */}
             <UncontrolledTooltip
                 trigger="hover"
                 placement="bottom"
-                target={"deleteHouseholdButton"+household.id}>
-                Delete Household
+                target={"deleteShoppingListButton"+shoppingList.id}>
+                Delete ShoppingList
             </UncontrolledTooltip>
+
             <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Delete a Household</ModalHeader>
+                <ModalHeader toggle={toggle}>Delete a ShoppingList</ModalHeader>
                 <ModalBody>
-                    Are you sure you want to delete "{household.name}"? 
-                    All Shopping Lists associated with this household will also be deleted.           
+                    Are you sure you want to delete "{shoppingList.name}"? 
+                    All "To-Get" Items and Purchases associated with the list will also be deleted.          
                 </ModalBody>
                 <ModalFooter style={{display:"block"}}>
 
@@ -51,15 +60,15 @@ const DeleteHouseholdModal = ({ household }) => {
                         color="danger"
                         className="float-right"
                         onClick={() => {
-                            deleteHousehold(household.id);
+                            handleDelete();
                             toggle();
                         }}>
-                        Delete "{household.name}"
+                        Delete "{shoppingList.name}"
                     </Button>
                 </ModalFooter>
             </Modal>
         </>
     );
-}
+};
 
-export default DeleteHouseholdModal;
+export default DeleteShoppingListModal;
