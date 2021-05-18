@@ -55,6 +55,24 @@ namespace GroSharies.Controllers
             return NoContent();
         }
 
+        [HttpPut("check-all/{shoppingListId}")]
+        public IActionResult CheckAll(ListItem listItem)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            return NoContent();
+        }
+
+        [HttpPut("uncheck-all/{shoppingListId}")]
+        public IActionResult UnCheckAll(ListItem listItem)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            return NoContent();
+        }
+
         [HttpPut("{listItemId}")]
         public IActionResult Update(ListItem listItem)
         {
