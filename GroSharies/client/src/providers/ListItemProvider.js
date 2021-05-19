@@ -54,7 +54,7 @@ export function ListItemProvider(props) {
 
     const checkAll = shoppingListId => {
         return getToken()
-        .then(token => fetch(`apiUrl/check-all/${shoppingListId}`, {
+        .then(token => fetch(`${apiUrl}/check-all/${shoppingListId}`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -64,9 +64,9 @@ export function ListItemProvider(props) {
         .then(() => getListItems(shoppingListId))
     };
 
-    const unCheckAll = shoppingListId => {
+    const uncheckAll = shoppingListId => {
         return getToken()
-        .then(token => fetch(`apiUrl/uncheck-all/${shoppingListId}`, {
+        .then(token => fetch(`${apiUrl}/uncheck-all/${shoppingListId}`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -82,8 +82,7 @@ export function ListItemProvider(props) {
         .then(token => fetch(`${apiUrl}/${listItem.id}`, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(listItem)
         }))
@@ -109,7 +108,7 @@ export function ListItemProvider(props) {
                 saveListItem,
                 toggleListItem,
                 checkAll,
-                unCheckAll,
+                uncheckAll,
                 updateListItem,
                 deleteListItem
             }}

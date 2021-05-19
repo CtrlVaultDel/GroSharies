@@ -1,23 +1,76 @@
-import React from "react";
-import { Card, CardBody } from "reactstrap";
+import React, { useContext } from "react";
+import { Button, Card, CardBody, Row, UncontrolledTooltip } from "reactstrap";
 
 // Styles
 import "../../styles/shoppingList.css";
 
+// Icons
+import { FaCheckCircle } from "react-icons/fa";
+
 // Components
 import AddListItem from "./AddListItem";
 import ListItem from "./ListItem";
+
+// Context
+import { ListItemContext } from "../../providers/ListItemProvider";
 // =========================== IMPORTS END ===========================
 
 
 const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
+    const { checkAll, uncheckAll } = useContext(ListItemContext);
     return (
         <>
             <h4 className="text-center">To Get List</h4>
-
             {/* Add listItem button */}
-            <AddListItem shoppingListId = {shoppingListId} setListItems = {setListItems}/>
-
+            <Row style={{margin:"0"}}>
+                <div>
+                    <AddListItem shoppingListId = {shoppingListId} setListItems = {setListItems}/>
+                </div>
+                {listItems.length ? 
+                <>
+                    {/* Check all button */}
+                    <div>
+                        <Button 
+                            id="checkAllButton" 
+                            style={{border:"solid black 1px"}} 
+                            color="success"
+                            onClick ={() => {
+                                checkAll(shoppingListId)
+                                .then(setListItems)}}>
+                                <FaCheckCircle />
+                        </Button>
+                        <UncontrolledTooltip
+                            trigger="hover"
+                            placement="bottom"
+                            target="checkAllButton">
+                            Check All
+                        </UncontrolledTooltip>
+                    </div>
+                    
+                    {/* Uncheck All button */}
+                    <div>
+                        <Button 
+                            id="uncheckAllButton" 
+                            style={{border:"solid black 1px"}} 
+                            color="info"
+                            onClick ={() => {
+                                uncheckAll(shoppingListId)
+                                .then(setListItems)}}>
+                                <FaCheckCircle />
+                        </Button>
+                        <UncontrolledTooltip
+                            trigger="hover"
+                            placement="bottom"
+                            target="uncheckAllButton">
+                            Uncheck All
+                        </UncontrolledTooltip>
+                    </div>
+                </>
+                :
+                <></>      
+            }
+            </Row>
+            
             {/* List of all items */}
             <div className="overflow">           
                 {listItems.length? listItems.map(i => 

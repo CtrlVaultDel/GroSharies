@@ -56,19 +56,23 @@ namespace GroSharies.Controllers
         }
 
         [HttpPut("check-all/{shoppingListId}")]
-        public IActionResult CheckAll(ListItem listItem)
+        public IActionResult CheckAll(int shoppingListId)
         {
             var user = GetCurrentUser();
             if (user == null) return NotFound();
+
+            _listItemRepository.CheckAll(shoppingListId);
 
             return NoContent();
         }
 
         [HttpPut("uncheck-all/{shoppingListId}")]
-        public IActionResult UnCheckAll(ListItem listItem)
+        public IActionResult UnCheckAll(int shoppingListId)
         {
             var user = GetCurrentUser();
             if (user == null) return NotFound();
+
+            _listItemRepository.UnCheckAll(shoppingListId);
 
             return NoContent();
         }
