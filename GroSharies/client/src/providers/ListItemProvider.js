@@ -52,6 +52,30 @@ export function ListItemProvider(props) {
         .then(() => getListItems(listItem.shoppingListId))
     }
 
+    const checkAll = shoppingListId => {
+        return getToken()
+        .then(token => fetch(`apiUrl/check-all/${shoppingListId}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }))
+        .then(() => getListItems(shoppingListId))
+    };
+
+    const unCheckAll = shoppingListId => {
+        return getToken()
+        .then(token => fetch(`apiUrl/uncheck-all/${shoppingListId}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }))
+        .then(() => getListItems(shoppingListId))
+    };
+
     // Updates a pre-existing listItem object in the database
     const updateListItem = listItem => {
         return getToken()
@@ -84,6 +108,8 @@ export function ListItemProvider(props) {
                 getListItems,
                 saveListItem,
                 toggleListItem,
+                checkAll,
+                unCheckAll,
                 updateListItem,
                 deleteListItem
             }}
