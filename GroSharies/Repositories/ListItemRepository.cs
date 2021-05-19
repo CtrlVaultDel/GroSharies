@@ -65,7 +65,7 @@ namespace GroSharies.Repositories
             }
         }
 
-        public void CheckAll(ListItem listItem)
+        public void CheckAll(int shoppingListId)
         {
             using (var conn = Connection)
             {
@@ -77,14 +77,14 @@ namespace GroSharies.Repositories
                         SET IsChecked = 'true'
                         WHERE ShoppingListId = @ShoppingListId";
 
-                    DbUtils.AddParameter(cmd, "ShoppingListId", listItem.ShoppingListId);
+                    DbUtils.AddParameter(cmd, "ShoppingListId", shoppingListId);
 
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public void UnCheckAll(ListItem listItem)
+        public void UnCheckAll(int shoppingListId)
         {
             using (var conn = Connection)
             {
@@ -96,7 +96,7 @@ namespace GroSharies.Repositories
                         SET IsChecked = 'false'
                         WHERE ShoppingListId = @ShoppingListId";
 
-                    DbUtils.AddParameter(cmd, "ShoppingListId", listItem.ShoppingListId);
+                    DbUtils.AddParameter(cmd, "ShoppingListId", shoppingListId);
 
                     cmd.ExecuteNonQuery();
                 }

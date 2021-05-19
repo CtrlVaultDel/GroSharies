@@ -7,8 +7,8 @@ namespace GroSharies.Repositories
     {
         List<ListItem> GetAllById(int shoppingListId);
         void Toggle(ListItem listItem);
-        void CheckAll(ListItem listItem);
-        void UnCheckAll(ListItem listItem);
+        void CheckAll(int shoppingListId);
+        void UnCheckAll(int shoppingListId);
         void Add(ListItem listItem);
         void Update(ListItem listItem);
         void Delete(int listItem);
