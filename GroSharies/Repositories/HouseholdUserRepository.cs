@@ -130,6 +130,46 @@ namespace GroSharies.Repositories
             }
         }
 
+        public List<UserDetail> GetUserDetailsByHousehold(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT 
+                    hu.Id AS HouseholdUserId,
+                    CONCAT(u.FirstName,' ', u.LastName) AS FullName,
+                    ut.Name AS Role
+                    FROM HouseholdUser hu
+                    JOIN [User] u ON u.Id = hu.UserId
+                    JOIN UserType ut ON ut.Id = hu.UserTypeId
+                    WHERE hu.HouseholdId = @HouseholdId";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var userDetails = new List<UserDetail>();
+
+                        if (reader.Read())
+                        {
+                            var userDetail = new UserDetail()
+                            {
+                                HouseholdUserId = DbUtils.GetInt(reader, "HouseholdUserId"),
+                                FullName = DbUtils.GetString(reader, "FullName"),
+                                UserType = DbUtils.GetString(reader, "Role")
+                            };
+
+                            userDetails.Add(userDetail);
+                        }
+                        return userDetails;
+                    }
+                }
+            }
+        }
+
         public List<string> GetEmailsByHousehold(int householdId)
         {
             using (var conn = Connection)
