@@ -145,7 +145,8 @@ namespace GroSharies.Repositories
                     FROM HouseholdUser hu
                     JOIN [User] u ON u.Id = hu.UserId
                     JOIN UserType ut ON ut.Id = hu.UserTypeId
-                    WHERE hu.HouseholdId = @HouseholdId";
+                    WHERE hu.HouseholdId = @HouseholdId
+                    ORDER BY ut.Id, u.FirstName";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
 

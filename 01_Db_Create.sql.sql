@@ -87,3 +87,4 @@ GO
 
 INSERT INTO UserType ([Name]) VALUES ('Admin');
 INSERT INTO UserType ([Name]) VALUES ('Member');
+INSERT INTO UserType ([Name]) VALUES ('Invited');
