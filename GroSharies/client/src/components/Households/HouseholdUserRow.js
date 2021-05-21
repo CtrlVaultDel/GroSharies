@@ -8,10 +8,11 @@ const HouseholdUserRow = ({ user, userType }) => {
     return(
         <tr>
             <td>{user.fullName}</td>
-            <td>{user.userType}</td>
-            {userType === 1 && user.userType !== 1 ?
-                <td>
+            <td style={{textAlign:"center"}}>{user.userType}</td>
+            {userType === 1 && user.userType !== "Admin" ?
+                <td style={{textAlign:"center"}}>
                     <Button 
+                        color="danger"
                         size="sm">
                         <GiBootKick />
                     </Button>

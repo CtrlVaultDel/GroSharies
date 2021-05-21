@@ -24,23 +24,23 @@ const HouseholdUsersModal = ({ users, numUsers, userType, householdName }) => {
                 <ModalBody>
                     <Table bordered hover>
                         <thead>
-                            <tr>
-                                <td>User</td>
-                                <td>Role</td>
+                            <tr style={{background:"gray"}}>
+                                <th>User</th>
+                                <th style={{textAlign:"center"}}>Role</th>
                                 {userType === 1 ? 
-                                    <td>Kick</td>
+                                    <th style={{textAlign:"center"}}>Kick</th>
                                     :
                                     <></>
                                 }
                             </tr>
                         </thead>
                         <tbody>
-                            {users.forEach(user => {
+                            {users.map(user => (
                                 <HouseholdUserRow 
                                     key = {user.householdUserId} 
                                     user = {user}
                                     userType = {userType}/>
-                            })}
+                            ))}
                         </tbody>
                     </Table>          
                 </ModalBody>
