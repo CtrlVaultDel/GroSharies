@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Button, Col, Card, CardHeader, CardBody, CardFooter, Row, UncontrolledTooltip } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Styles
 import "../../styles/index.css";
@@ -19,8 +19,9 @@ import DeclineInviteModal from "./DeclineInviteModal";
 // =========================== IMPORTS END ===========================
 
 
-const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
+const Household = ({ household, userType, isAccepted, numLists, numUsers, users }) => {
 
+    const history = useHistory();
     const { leaveHousehold, acceptInvite } = useContext(HouseholdContext);
 
     // Determines if the user is an Admin of the related household.
@@ -119,14 +120,17 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
                 {/* Users Button */}
                 <Button 
                     color="info" 
-                    style={{marginRight:"5px"}}>
+                    style={{marginRight:"5px"}}
+                    //onClick={()=> <HouseholdUsersModal />}
+                    >
                         Users: {numUsers}
                 </Button>
 
                 {/* Shopping Lists Button */}
                 <Button 
                     color="info" 
-                    style={{marginLeft:"5px"}}>
+                    style={{marginLeft:"5px"}}
+                    onClick={() => history.push(`household/${household.id}`)}>
                         Lists: {numLists}
                 </Button>       
             </CardBody>  
