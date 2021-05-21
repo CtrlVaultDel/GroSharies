@@ -6,6 +6,7 @@ import "../../styles/shoppingList.css";
 
 // Icons
 import { FaCheckCircle } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
 
 // Components
 import AddListItem from "./AddListItem";
@@ -58,7 +59,7 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
                                 onClick ={() => {
                                     uncheckAll(shoppingListId)
                                     .then(setListItems)}}>
-                                    <FaCheckCircle />
+                                    <FaCircle />
                             </Button>
                             <UncontrolledTooltip
                                 trigger="hover"
