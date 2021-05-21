@@ -231,7 +231,7 @@ namespace GroSharies.Repositories
                     cmd.CommandText = @"
                         INSERT INTO HouseholdUser (HouseholdId, UserId, UserTypeId, IsAccepted)
                         OUTPUT INSERTED.ID
-                        VALUES (@HouseholdId, @UserId, 2, 0)";
+                        VALUES (@HouseholdId, @UserId, 3, 0)";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
                     DbUtils.AddParameter(cmd, "@UserId", userId);
@@ -250,7 +250,7 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         UPDATE HouseholdUser 
-                        SET IsAccepted = 1
+                        SET IsAccepted = 1, UserTypeId = 3
                         WHERE HouseholdId = @HouseholdId AND UserId = @UserId";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
