@@ -154,7 +154,7 @@ namespace GroSharies.Repositories
                     {
                         var userDetails = new List<UserDetail>();
 
-                        if (reader.Read())
+                        while (reader.Read())
                         {
                             var userDetail = new UserDetail()
                             {
