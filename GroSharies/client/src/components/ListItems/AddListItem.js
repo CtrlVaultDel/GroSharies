@@ -51,8 +51,7 @@ const AddListItem = ({ shoppingListId, setListItems}) => {
     return(
         <Form className="listItemForm" onSubmit={(e) => {
             e.preventDefault()
-            handleSave()
-        }}>
+            handleSave()}}>
             <InputGroup className="text-center">          
                 <Input 
                     autoComplete="off"

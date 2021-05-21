@@ -6,6 +6,7 @@ import "../../styles/listItem.css";
 
 // Icons
 import { FaCheckCircle } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 
 // Context
@@ -41,7 +42,7 @@ const ListItem = ({ listItem, setListItems }) => {
                 <Container className="float-right">
                     {/* Change the toggle button based off whether or not the item is already checked off */}
                     {listItem.isChecked ? 
-                        <Button color="info" disabled={isLoading} onClick={toggleEvent}><FaCheckCircle /></Button> 
+                        <Button color="info" disabled={isLoading} onClick={toggleEvent}><FaCircle /></Button> 
                         :
                         <Button color="success" disabled={isLoading} onClick={toggleEvent}><FaCheckCircle /></Button>
                     }
