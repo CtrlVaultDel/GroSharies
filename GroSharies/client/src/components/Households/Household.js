@@ -114,13 +114,21 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
             <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>
-            <CardBody>
-                <Row>
-                    Users: {numUsers}
-                </Row>  
-                <Row>
-                    Lists: {numLists}       
-                </Row>   
+            <CardBody style={{textAlign:"center"}}>
+
+                {/* Users Button */}
+                <Button 
+                    color="info" 
+                    style={{marginRight:"5px"}}>
+                        Users: {numUsers}
+                </Button>
+
+                {/* Shopping Lists Button */}
+                <Button 
+                    color="info" 
+                    style={{marginLeft:"5px"}}>
+                        Lists: {numLists}
+                </Button>       
             </CardBody>  
             <CardFooter>
                 <Row>

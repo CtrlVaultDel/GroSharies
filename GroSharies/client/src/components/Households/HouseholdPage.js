@@ -39,6 +39,7 @@ const HouseholdPage = () => {
                                     isAccepted = {h.relation.isAccepted}
                                     numLists = {h.numLists}
                                     numUsers = {h.numUsers}
+                                    users = {h.userDetails}
                                 />
                         </Col>
                     ))
