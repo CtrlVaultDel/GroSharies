@@ -69,7 +69,11 @@ const ShoppingListDetails = () => {
                         <tbody>
                             {/* If any purchases exist, use the PurchaseRow component to inject them into the table */}
                             {purchases.length? purchases.map(p => (
-                                <PurchaseRow key = {p.purchase.id} purchaseDetail = {p} shoppingList = {shoppingList} setPurchases = {setPurchases} />)
+                                <PurchaseRow 
+                                    key = {p.purchase.id} 
+                                    purchaseDetail = {p} 
+                                    shoppingList = {shoppingList} 
+                                    setPurchases = {setPurchases} />)
                                 )
                                     : <tr>
                                         <td>N/A</td>

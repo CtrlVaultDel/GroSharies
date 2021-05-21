@@ -13,6 +13,7 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // Components
 import HouseholdInvite from "./HouseholdInvite";
+import HouseholdUsersModal from "./HouseholdUsersModal";
 import EditHouseholdModal from "./EditHouseholdModal";
 import DeleteHouseholdModal from "./DeleteHouseholdModal";
 import DeclineInviteModal from "./DeclineInviteModal";
@@ -118,13 +119,11 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers, users 
             <CardBody style={{textAlign:"center"}}>
 
                 {/* Users Button */}
-                <Button 
-                    color="info" 
-                    style={{marginRight:"5px"}}
-                    //onClick={()=> <HouseholdUsersModal />}
-                    >
-                        Users: {numUsers}
-                </Button>
+                <HouseholdUsersModal 
+                    users = {users} 
+                    numUsers = {numUsers} 
+                    userType = {userType}
+                    householdName = {household.name}/>
 
                 {/* Shopping Lists Button */}
                 <Button 

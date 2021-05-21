@@ -9,7 +9,7 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // =========================== IMPORTS END ===========================
 
-const EditHouseholdModal = () => {
+const AddHouseholdModal = () => {
     const { saveHousehold } = useContext(HouseholdContext);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -117,4 +117,4 @@ const EditHouseholdModal = () => {
     );
 }
 
-export default EditHouseholdModal;
+export default AddHouseholdModal;

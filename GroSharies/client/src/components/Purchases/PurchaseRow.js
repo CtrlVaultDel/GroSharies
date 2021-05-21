@@ -24,7 +24,7 @@ const PurchaseRow = ({ purchaseDetail, shoppingList, setPurchases }) => {
            <td>{purchaseDetail.buyer}</td>
            <td>{purchaseDetail.purchase.vendor}</td>
            <td>{formatter.format(purchaseDetail.purchase.totalCost)}</td>
-           <td >
+           <td>
                <Row className="justify-content-center" size="sm">
                     <EditPurchaseModal shoppingList = {shoppingList} priorPurchase = {purchaseDetail} setPurchases = {setPurchases} />
                     <DeletePurchaseModal purchase = {purchaseDetail.purchase} setPurchases = {setPurchases} />
