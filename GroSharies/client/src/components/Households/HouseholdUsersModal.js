@@ -22,27 +22,36 @@ const HouseholdUsersModal = ({ users, numUsers, userType, householdName }) => {
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>{householdName} Users</ModalHeader>
                 <ModalBody>
-                    <Table bordered hover>
-                        <thead>
-                            <tr style={{background:"gray"}}>
-                                <th>User</th>
-                                <th style={{textAlign:"center"}}>Role</th>
-                                {userType === 1 ? 
-                                    <th style={{textAlign:"center"}}>Kick</th>
-                                    :
-                                    <></>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {users.map(user => (
-                                <HouseholdUserRow 
-                                    key = {user.householdUserId} 
-                                    user = {user}
-                                    userType = {userType}/>
-                            ))}
-                        </tbody>
-                    </Table>          
+
+                    {/* Invitation Section */}
+                    <div>
+                        
+                    </div>
+
+                    {/* Table of current and invited members */}
+                    <div>
+                        <Table bordered hover>
+                            <thead>
+                                <tr style={{background:"gray"}}>
+                                    <th>User</th>
+                                    <th style={{textAlign:"center"}}>Role</th>
+                                    {userType === 1 ? 
+                                        <th style={{textAlign:"center"}}>Kick</th>
+                                        :
+                                        <></>
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {users.map(user => (
+                                    <HouseholdUserRow 
+                                        key = {user.householdUserId} 
+                                        user = {user}
+                                        userType = {userType}/>
+                                ))}
+                            </tbody>
+                        </Table>          
+                    </div>
                 </ModalBody>
             </Modal>
         </>

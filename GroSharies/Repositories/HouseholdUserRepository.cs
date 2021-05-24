@@ -280,6 +280,24 @@ namespace GroSharies.Repositories
             }
         }
 
+        public void KickUser(int householdUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE HouseholdUser
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", householdUserId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public int CountHouseholdUsers(int householdId)
         {
             using (var conn = Connection)

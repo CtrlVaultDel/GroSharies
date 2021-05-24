@@ -117,21 +117,26 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers, users 
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>
             <CardBody style={{textAlign:"center"}}>
+                {isAccepted ? 
+                    <>
+                        <HouseholdUsersModal 
+                            users = {users} 
+                            numUsers = {numUsers} 
+                            userType = {userType}
+                            householdName = {household.name}/>
 
-                {/* Users Button */}
-                <HouseholdUsersModal 
-                    users = {users} 
-                    numUsers = {numUsers} 
-                    userType = {userType}
-                    householdName = {household.name}/>
-
-                {/* Shopping Lists Button */}
-                <Button 
-                    color="info" 
-                    style={{marginLeft:"5px"}}
-                    onClick={() => history.push(`household/${household.id}`)}>
-                        Lists: {numLists}
-                </Button>       
+                        <Button 
+                            color="info" 
+                            style={{marginLeft:"5px"}}
+                            onClick={() => history.push(`household/${household.id}`)}>
+                                Lists: {numLists}
+                        </Button>  
+                    </>
+                    :
+                    <>
+                        To see users & lists, please accept the invitation below.
+                    </>
+                }                 
             </CardBody>  
             <CardFooter>
                 <Row>

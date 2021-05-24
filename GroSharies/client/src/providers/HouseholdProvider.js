@@ -127,6 +127,18 @@ export function HouseholdProvider(props) {
         .then(getHouseholds)
     }
 
+    const kickUser = householdUserId => {
+        return getToken()
+        .then(token => fetch(`api/householdUser/kick/${householdUserId}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }))
+        .then(getHouseholds)
+    }
+
     const getEmailsByHousehold = householdId => {
         return getToken()
         .then(token => fetch(`/api/householdUser/${householdId}`, {
@@ -151,6 +163,7 @@ export function HouseholdProvider(props) {
                 inviteUser,
                 declineInvite,
                 acceptInvite,
+                kickUser,
                 getEmailsByHousehold
             }}
         >
