@@ -250,7 +250,7 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         UPDATE HouseholdUser 
-                        SET IsAccepted = 1, UserTypeId = 3
+                        SET IsAccepted = 1, UserTypeId = 2
                         WHERE HouseholdId = @HouseholdId AND UserId = @UserId";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
