@@ -16,10 +16,8 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 const HouseholdPage = () => {
     const { households, getHouseholds } = useContext(HouseholdContext);
 
-    useEffect(() => {
-        getHouseholds();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(getHouseholds, [])
 
     return (
         <>
@@ -39,6 +37,7 @@ const HouseholdPage = () => {
                                     isAccepted = {h.relation.isAccepted}
                                     numLists = {h.numLists}
                                     numUsers = {h.numUsers}
+                                    users = {h.userDetails}
                                 />
                         </Col>
                     ))

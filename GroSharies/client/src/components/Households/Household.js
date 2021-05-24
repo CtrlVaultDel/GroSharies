@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Button, Col, Card, CardHeader, CardBody, CardFooter, Row, UncontrolledTooltip } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Styles
 import "../../styles/index.css";
@@ -13,14 +13,16 @@ import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // Components
 import HouseholdInvite from "./HouseholdInvite";
+import HouseholdUsersModal from "./HouseholdUsersModal";
 import EditHouseholdModal from "./EditHouseholdModal";
 import DeleteHouseholdModal from "./DeleteHouseholdModal";
 import DeclineInviteModal from "./DeclineInviteModal";
 // =========================== IMPORTS END ===========================
 
 
-const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
+const Household = ({ household, userType, isAccepted, numLists, numUsers, users }) => {
 
+    const history = useHistory();
     const { leaveHousehold, acceptInvite } = useContext(HouseholdContext);
 
     // Determines if the user is an Admin of the related household.
@@ -114,13 +116,27 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers }) => {
             <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>
-            <CardBody>
-                <Row>
-                    Users: {numUsers}
-                </Row>  
-                <Row>
-                    Lists: {numLists}       
-                </Row>   
+            <CardBody style={{textAlign:"center"}}>
+                {isAccepted ? 
+                    <>
+                        <HouseholdUsersModal 
+                            users = {users} 
+                            numUsers = {numUsers} 
+                            userType = {userType}
+                            householdName = {household.name}/>
+
+                        <Button 
+                            color="info" 
+                            style={{marginLeft:"5px"}}
+                            onClick={() => history.push(`household/${household.id}`)}>
+                                Lists: {numLists}
+                        </Button>  
+                    </>
+                    :
+                    <>
+                        To see users & lists, please accept the invitation below.
+                    </>
+                }                 
             </CardBody>  
             <CardFooter>
                 <Row>

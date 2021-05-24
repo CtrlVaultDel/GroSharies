@@ -130,6 +130,47 @@ namespace GroSharies.Repositories
             }
         }
 
+        public List<UserDetail> GetUserDetailsByHousehold(int householdId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT 
+                    hu.Id AS HouseholdUserId,
+                    CONCAT(u.FirstName,' ', u.LastName) AS FullName,
+                    ut.Name AS Role
+                    FROM HouseholdUser hu
+                    JOIN [User] u ON u.Id = hu.UserId
+                    JOIN UserType ut ON ut.Id = hu.UserTypeId
+                    WHERE hu.HouseholdId = @HouseholdId
+                    ORDER BY ut.Id, u.FirstName";
+
+                    DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        var userDetails = new List<UserDetail>();
+
+                        while (reader.Read())
+                        {
+                            var userDetail = new UserDetail()
+                            {
+                                HouseholdUserId = DbUtils.GetInt(reader, "HouseholdUserId"),
+                                FullName = DbUtils.GetString(reader, "FullName"),
+                                UserType = DbUtils.GetString(reader, "Role")
+                            };
+
+                            userDetails.Add(userDetail);
+                        }
+                        return userDetails;
+                    }
+                }
+            }
+        }
+
         public List<string> GetEmailsByHousehold(int householdId)
         {
             using (var conn = Connection)
@@ -190,7 +231,7 @@ namespace GroSharies.Repositories
                     cmd.CommandText = @"
                         INSERT INTO HouseholdUser (HouseholdId, UserId, UserTypeId, IsAccepted)
                         OUTPUT INSERTED.ID
-                        VALUES (@HouseholdId, @UserId, 2, 0)";
+                        VALUES (@HouseholdId, @UserId, 3, 0)";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
                     DbUtils.AddParameter(cmd, "@UserId", userId);
@@ -209,7 +250,7 @@ namespace GroSharies.Repositories
                 {
                     cmd.CommandText = @"
                         UPDATE HouseholdUser 
-                        SET IsAccepted = 1
+                        SET IsAccepted = 1, UserTypeId = 3
                         WHERE HouseholdId = @HouseholdId AND UserId = @UserId";
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
@@ -233,6 +274,24 @@ namespace GroSharies.Repositories
 
                     DbUtils.AddParameter(cmd, "@HouseholdId", householdId);
                     DbUtils.AddParameter(cmd, "@UserId", userId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void KickUser(int householdUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE HouseholdUser
+                        WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", householdUserId);
 
                     cmd.ExecuteNonQuery();
                 }

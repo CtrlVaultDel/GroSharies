@@ -74,5 +74,15 @@ namespace GroSharies.Controllers
             return NoContent();
         }
 
+        [HttpDelete("kick/{householdUserId}")]
+        public IActionResult KickUser(int householdUserId)
+        {
+            var user = GetCurrentUser();
+            if (user == null) return NotFound();
+
+            _householdUserRepository.KickUser(householdUserId);
+
+            return NoContent();
+        }
     }
 }

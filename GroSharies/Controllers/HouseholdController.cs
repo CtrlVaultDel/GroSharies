@@ -35,6 +35,7 @@ namespace GroSharies.Controllers
 
             foreach (var hur in userHouseholds)
             {
+                hur.UserDetails = _householdUserRepository.GetUserDetailsByHousehold(hur.Household.Id);
                 hur.NumUsers = _householdUserRepository.CountHouseholdUsers(hur.Household.Id);
                 hur.NumLists = _householdUserRepository.CountHouseholdLists(hur.Household.Id);
             }
