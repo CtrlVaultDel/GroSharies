@@ -82,7 +82,8 @@ export function ListItemProvider(props) {
         .then(token => fetch(`${apiUrl}/${listItem.id}`, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(listItem)
         }))

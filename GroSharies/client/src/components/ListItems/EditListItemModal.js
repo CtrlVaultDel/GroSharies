@@ -28,7 +28,7 @@ const EditListItemModal = ({ updateListItem, listItem, setListItems}) => {
     // Called when the user submits the new purchase form
     const handleUpdate = () => {
         if(newListItem.name === "") return window.alert("Please enter an name");
-
+        
         // Disables the save button until finished
         setIsLoading(true);
 
