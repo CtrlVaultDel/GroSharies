@@ -4,6 +4,9 @@ import { Button, Modal, ModalHeader, ModalBody, Table} from 'reactstrap';
 // Components
 import HouseholdUserRow from "./HouseholdUserRow";
 
+// Styles
+import "../../styles/household.css";
+
 // =========================== IMPORTS END ===========================
 
 const HouseholdUsersModal = ({ users, numUsers, userType, householdName }) => {
@@ -14,7 +17,7 @@ const HouseholdUsersModal = ({ users, numUsers, userType, householdName }) => {
         <>
             <Button 
                 color="info" 
-                style={{marginRight:"5px"}}
+                id="householdUserModalButton"
                 onClick={toggle}>
                 Users: {numUsers}
             </Button>
@@ -32,11 +35,11 @@ const HouseholdUsersModal = ({ users, numUsers, userType, householdName }) => {
                     <div>
                         <Table bordered hover>
                             <thead>
-                                <tr style={{background:"gray"}}>
+                                <tr id="householdUserModalTable">
                                     <th>User</th>
-                                    <th style={{textAlign:"center"}}>Role</th>
+                                    <th className="centerText">Role</th>
                                     {userType === 1 ? 
-                                        <th style={{textAlign:"center"}}>Kick</th>
+                                        <th className="centerText">Kick</th>
                                         :
                                         <></>
                                     }

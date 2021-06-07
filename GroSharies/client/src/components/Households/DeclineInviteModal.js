@@ -7,6 +7,9 @@ import { FaMinus } from "react-icons/fa";
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 
+// Styles
+import "../../styles/household.css";
+
 // =========================== IMPORTS END ===========================
 
 const DeclineInviteModal = ({ household }) => {
@@ -39,7 +42,7 @@ const DeclineInviteModal = ({ household }) => {
                 <ModalBody>
                     Decline invite to {household.name}?         
                 </ModalBody>
-                <ModalFooter style={{display:"block"}}>
+                <ModalFooter id="householdModalFooter">
 
                     {/* Cancel Button */}
                     <Button 

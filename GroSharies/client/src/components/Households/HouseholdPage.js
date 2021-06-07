@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Card, Col, Container, Row } from "reactstrap";
 
 // Styles
-import "../../styles/index.css";
+import "../../styles/household.css";
 
 // Components
 import Household from "./Household";
@@ -42,7 +42,7 @@ const HouseholdPage = () => {
                         </Col>
                     ))
                     :
-                    <Card style={{padding:"10px", maxWidth:"200px"}} className="shadow postCard">
+                    <Card id="householdBasicCard" className="shadow postCard">
                         <div>You are not in any households yet!</div>
                         <div>Click the plus button above to create a new one or ask someone to invite you to theirs!</div>
                     </Card>

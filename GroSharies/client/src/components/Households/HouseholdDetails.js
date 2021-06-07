@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Card, Col, Container, Row  } from "reactstrap";
 
 // Styles
-import "../../styles/index.css";
+import "../../styles/household.css";
 
 // Components
 import ShoppingList from "../ShoppingLists/ShoppingList";
@@ -49,7 +49,7 @@ const HouseholdDetails = () => {
                             <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList} setHouseholdDetail={setHouseholdDetail}/></Col>
                         ))
                         : 
-                        <Card style={{padding:"10px", maxWidth:"200px"}} className="shadow postCard">
+                        <Card id="householdBasicCard" className="shadow postCard">
                             <div>You don't have any Shopping Lists yet!</div>
                             <div>Click the plus button above to create a new one!</div>
                         </Card>   

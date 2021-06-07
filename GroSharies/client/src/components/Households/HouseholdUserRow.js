@@ -7,6 +7,12 @@ import { GiBootKick } from "react-icons/gi";
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 
+// Styles
+import "../../styles/household.css";
+
+// =========================== IMPORTS END ===========================
+
+
 const HouseholdUserRow = ({ user, userType }) => {
     const { kickUser } = useContext(HouseholdContext);
 
@@ -20,9 +26,9 @@ const HouseholdUserRow = ({ user, userType }) => {
     return(
         <tr>
             <td>{user.fullName}</td>
-            <td style={{textAlign:"center"}}>{user.userType}</td>
+            <td className="centerText">{user.userType}</td>
             {userType === 1 && user.userType !== "Admin" ?
-                <td style={{textAlign:"center"}}>
+                <td className="centerText">
                     <Button 
                         color="danger"
                         size="sm"

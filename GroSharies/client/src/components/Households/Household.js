@@ -3,7 +3,7 @@ import { Button, Col, Card, CardHeader, CardBody, CardFooter, Row, UncontrolledT
 import { Link, useHistory } from "react-router-dom";
 
 // Styles
-import "../../styles/index.css";
+import "../../styles/household.css";
 
 // Icons
 import { FaCheck, FaDoorOpen } from "react-icons/fa";
@@ -112,11 +112,11 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers, users 
     }
     
     return(
-        <Card style={{minWidth:"220px"}} className="m-2 shadow postCard">
+        <Card id="householdCard" className="m-2 shadow postCard">
             <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>
-            <CardBody style={{textAlign:"center"}}>
+            <CardBody className="centerText">
                 {isAccepted ? 
                     <>
                         <HouseholdUsersModal 
@@ -126,8 +126,8 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers, users 
                             householdName = {household.name}/>
 
                         <Button 
+                            id="householdCardButton"
                             color="info" 
-                            style={{marginLeft:"5px"}}
                             onClick={() => history.push(`household/${household.id}`)}>
                                 Lists: {numLists}
                         </Button>  
