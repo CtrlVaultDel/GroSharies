@@ -26,9 +26,9 @@ const HouseholdUserRow = ({ user, userType }) => {
     return(
         <tr>
             <td>{user.fullName}</td>
-            <td className="centerText">{user.userType}</td>
+            <td className="text-center">{user.userType}</td>
             {userType === 1 && user.userType !== "Admin" ?
-                <td className="centerText">
+                <td className="text-center">
                     <Button 
                         color="danger"
                         size="sm"

@@ -3,3 +3,29 @@
 	font-weight: 400;
 	margin: auto 0;
 }
+
+#listItemSectionRow {
+	justify-content: center;
+	margin: 10px;
+}
+
+#checkAllButton {
+	border: solid black 1px;
+	margin-right: "10px";
+}
+
+#uncheckAllButton {
+	border: solid black 1px;
+	margin-right: "10px";
+}
+
+#listItemCardBody {
+	padding: 1rem;
+}
+
+.overflow {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 500px;
+	margin-bottom: 15px;
+}

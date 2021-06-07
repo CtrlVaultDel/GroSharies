@@ -1,8 +1,8 @@
+// React
 import React, { useContext } from "react";
-import { Button, Card, CardBody, Row, UncontrolledTooltip } from "reactstrap";
 
-// Styles
-import "../../styles/shoppingList.css";
+// Reactstrap
+import { Button, Card, CardBody, Row, UncontrolledTooltip } from "reactstrap";
 
 // Icons
 import { FaCheckCircle } from "react-icons/fa";
@@ -14,6 +14,10 @@ import ListItem from "./ListItem";
 
 // Context
 import { ListItemContext } from "../../providers/ListItemProvider";
+
+// Styles
+import "../../styles/listItem.css";
+
 // =========================== IMPORTS END ===========================
 
 
@@ -22,13 +26,12 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
     return (
         <>
             {listItems.length ?
-                    <Row style={{justifyContent:"center", margin:"10px"}}> 
+                    <Row id="listItemSectionRow">
                         <div>
                             {/* Check all list items */}
                             <Button 
                                 size="sm"
                                 id="checkAllButton" 
-                                style={{border:"solid black 1px", marginRight:"10px"}} 
                                 color="success"
                                 onClick ={() => {
                                     checkAll(shoppingListId)
@@ -54,7 +57,6 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
                             <Button 
                                 size="sm"
                                 id="uncheckAllButton" 
-                                style={{border:"solid black 1px", marginLeft:"10px"}} 
                                 color="info"
                                 onClick ={() => {
                                     uncheckAll(shoppingListId)
@@ -84,7 +86,7 @@ const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
 
                     // If listItems exist, display them on the DOM
                     <Card key={i.id} style={{backgroundColor: i.isChecked ? "#787878" : "#c2f0c6"}} >
-                        <CardBody style={{padding:"1rem"}}>
+                        <CardBody id="listItemCardBody">
                             <ListItem 
                                 listItem = {i} setListItems = {setListItems}
                             />
