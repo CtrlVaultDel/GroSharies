@@ -1,22 +1,19 @@
+// React
 import React, { useState, useContext } from "react";
+
+// React Router DOM
 import { NavLink as RRNavLink } from "react-router-dom";
-import {
-Collapse,
-Navbar,
-NavbarToggler,
-NavbarBrand,
-Nav,
-NavItem,
-NavLink,
-} from "reactstrap";
+
+// Reactstrap
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+
+// Context
+import { UserContext } from "../providers/UserProvider";
 
 // Styling
 import "../styles/navbar.css";
 
-// Context
-import { UserContext } from "../providers/UserProvider";
 // =========================== IMPORTS END ===========================
-
 
 export default function Header() {
     const { isLoggedIn, logout } = useContext(UserContext);

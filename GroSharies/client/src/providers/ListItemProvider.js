@@ -1,10 +1,13 @@
+// React
 import React, { createContext, useContext } from "react";
+
+// Firebase
 import "firebase/auth";
 
 // Context
 import { UserContext } from "./UserProvider";
-// =========================== IMPORTS END ===========================
 
+// =========================== IMPORTS END ===========================
 
 export const ListItemContext = createContext();
 

@@ -1,10 +1,17 @@
+// React
 import React, { useState, useEffect, createContext } from "react";
+
+// React Router DOM
 import { useHistory } from "react-router-dom";
+
+// Reactstrap
 import { Spinner } from "reactstrap";
+
+// Firebase
 import firebase from "firebase/app";
 import "firebase/auth";
-// =========================== IMPORTS END ===========================
 
+// =========================== IMPORTS END ===========================
 
 export const UserContext = createContext();
 
