@@ -54,19 +54,21 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
                 <Link to={`/shoppingList/${shoppingList.id}`}>{shoppingList.name}</Link>
             </CardHeader>
             <CardBody>
-                <div className="text-center">{completeItems} of {totalItems} complete</div>
-                    <Progress multi>
-                        <Progress 
-                            animated bar color="success" 
-                            value={(percentageComplete).toString()}>
-                                {percentageComplete}%
-                        </Progress>
-                        <Progress 
-                            animated bar color="danger" 
-                            value={(100-percentageComplete).toString()}>
-                                {100-percentageComplete}%
-                        </Progress>
-                    </Progress>                     
+                <Link to={`/shoppingList/${shoppingList.id}`}>
+                    <div className="text-center">{completeItems} of {totalItems} complete</div>
+                </Link> 
+                <Progress multi>
+                    <Progress 
+                        animated bar color="success" 
+                        value={(percentageComplete).toString()}>
+                            {percentageComplete}%
+                    </Progress>
+                    <Progress 
+                        animated bar color="danger" 
+                        value={(100-percentageComplete).toString()}>
+                            {100-percentageComplete}%
+                    </Progress>
+                </Progress>                    
             </CardBody>
 
             <CardFooter>

@@ -54,8 +54,10 @@ const HouseholdDetails = () => {
                         ))
                         : 
                         <Card id="householdBasicCard" className="shadow postCard">
-                            <div>You don't have any Shopping Lists yet!</div>
-                            <div>Click the plus button above to create a new one!</div>
+                            <div>
+                                You don't have any Shopping Lists yet!<br />
+                                Click the plus button above to create a new one!
+                            </div>
                         </Card>   
                     }   
                 </Row> 

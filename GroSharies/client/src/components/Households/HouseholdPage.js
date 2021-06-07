@@ -47,8 +47,10 @@ const HouseholdPage = () => {
                     ))
                     :
                     <Card id="householdBasicCard" className="shadow postCard">
-                        <div>You are not in any households yet!</div>
-                        <div>Click the plus button above to create a new one or ask someone to invite you to theirs!</div>
+                        <div>
+                            You are not in any households yet!<br />
+                            Click the plus button above to create a new one or ask someone to invite you to theirs!
+                        </div>
                     </Card>
                 }
                 </Row>
