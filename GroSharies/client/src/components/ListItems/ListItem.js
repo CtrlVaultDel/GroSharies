@@ -1,19 +1,23 @@
+// React
 import React, { useContext, useState } from "react";
+
+// Reactstrap
 import { Button, Col, Container, Row } from "reactstrap";
 
-// Styles
-import "../../styles/listItem.css";
+// Components
+import EditListItemModal from "./EditListItemModal";
+
+// Context
+import { ListItemContext } from "../../providers/ListItemProvider";
 
 // Icons
 import { FaCheckCircle } from "react-icons/fa";
 import { FaCircle } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 
-// Context
-import { ListItemContext } from "../../providers/ListItemProvider";
+// Styles
+import "../../styles/listItem.css";
 
-// Components
-import EditListItemModal from "./EditListItemModal";
 // =========================== IMPORTS END ===========================
 
 

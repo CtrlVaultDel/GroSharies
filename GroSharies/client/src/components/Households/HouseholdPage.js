@@ -1,8 +1,8 @@
+// React
 import React, { useContext, useEffect } from "react";
-import { Card, Col, Container, Row } from "reactstrap";
 
-// Styles
-import "../../styles/household.css";
+// Reactstrap
+import { Card, Col, Container, Row } from "reactstrap";
 
 // Components
 import Household from "./Household";
@@ -10,6 +10,10 @@ import AddHouseholdModal from "./AddHouseholdModal";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Styles
+import "../../styles/household.css";
+
 // =========================== IMPORTS END ===========================
 
 

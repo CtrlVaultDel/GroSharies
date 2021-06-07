@@ -4,10 +4,6 @@ import React, { useContext } from "react";
 // Reactstrap
 import { Button, Card, CardBody, Row, UncontrolledTooltip } from "reactstrap";
 
-// Icons
-import { FaCheckCircle } from "react-icons/fa";
-import { FaCircle } from "react-icons/fa";
-
 // Components
 import AddListItem from "./AddListItem";
 import ListItem from "./ListItem";
@@ -15,11 +11,14 @@ import ListItem from "./ListItem";
 // Context
 import { ListItemContext } from "../../providers/ListItemProvider";
 
+// Icons
+import { FaCheckCircle } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
+
 // Styles
 import "../../styles/listItem.css";
 
 // =========================== IMPORTS END ===========================
-
 
 const ListItemSection = ({ shoppingListId, listItems, setListItems }) => {
     const { checkAll, uncheckAll } = useContext(ListItemContext);

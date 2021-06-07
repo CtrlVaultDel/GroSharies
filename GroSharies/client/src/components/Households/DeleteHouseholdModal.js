@@ -1,11 +1,14 @@
+// React
 import React, { useState, useContext } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledTooltip } from 'reactstrap';
 
-// Icons
-import { FaTrashAlt } from "react-icons/fa";
+// Reactstrap
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledTooltip } from 'reactstrap';
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Icons
+import { FaTrashAlt } from "react-icons/fa";
 
 // Styles
 import "../../styles/household.css";

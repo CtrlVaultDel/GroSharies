@@ -2,23 +2,23 @@ import React, { useContext } from "react";
 import { Button, Col, Card, CardHeader, CardBody, CardFooter, Row, UncontrolledTooltip } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 
-// Styles
-import "../../styles/household.css";
-
-// Icons
-import { FaCheck, FaDoorOpen } from "react-icons/fa";
-
-// Context
-import { HouseholdContext } from "../../providers/HouseholdProvider";
-
 // Components
 import HouseholdInvite from "./HouseholdInvite";
 import HouseholdUsersModal from "./HouseholdUsersModal";
 import EditHouseholdModal from "./EditHouseholdModal";
 import DeleteHouseholdModal from "./DeleteHouseholdModal";
 import DeclineInviteModal from "./DeclineInviteModal";
-// =========================== IMPORTS END ===========================
 
+// Context
+import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Icons
+import { FaCheck, FaDoorOpen } from "react-icons/fa";
+
+// Styles
+import "../../styles/household.css";
+
+// =========================== IMPORTS END ===========================
 
 const Household = ({ household, userType, isAccepted, numLists, numUsers, users }) => {
 

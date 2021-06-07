@@ -1,10 +1,11 @@
+// React
 import React, { useContext, useEffect, useState } from "react";
+
+// React Router DOM
 import { useParams } from "react-router-dom";
 
+// Reactstrap
 import { Card, Col, Container, Row  } from "reactstrap";
-
-// Styles
-import "../../styles/household.css";
 
 // Components
 import ShoppingList from "../ShoppingLists/ShoppingList";
@@ -12,8 +13,11 @@ import AddShoppingListModal from "../ShoppingLists/AddShoppingListModal";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
-// =========================== IMPORTS END ===========================
 
+// Styles
+import "../../styles/household.css";
+
+// =========================== IMPORTS END ===========================
 
 const HouseholdDetails = () => {
     const { getHouseholdDetail } = useContext(HouseholdContext);

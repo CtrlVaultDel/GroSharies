@@ -1,17 +1,19 @@
+// React
 import React, { useContext } from "react";
-import { Button } from "reactstrap";
 
-// Icons
-import { GiBootKick } from "react-icons/gi";
+// Reactstrap
+import { Button } from "reactstrap";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Icons
+import { GiBootKick } from "react-icons/gi";
 
 // Styles
 import "../../styles/household.css";
 
 // =========================== IMPORTS END ===========================
-
 
 const HouseholdUserRow = ({ user, userType }) => {
     const { kickUser } = useContext(HouseholdContext);

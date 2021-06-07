@@ -1,10 +1,13 @@
+// React
 import React, { useState, useContext } from 'react';
+
+// Reactstrap
 import { Button, Form, FormGroup, Input, InputGroup, InputGroupAddon, Label, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 // Components
 import { PurchaseContext } from "../../providers/PurchaseProvider";
-// =========================== IMPORTS END ===========================
 
+// =========================== IMPORTS END ===========================
 
 const AddPurchaseModal = ({shoppingList, setPurchases}) => {
     const { savePurchase } = useContext(PurchaseContext);

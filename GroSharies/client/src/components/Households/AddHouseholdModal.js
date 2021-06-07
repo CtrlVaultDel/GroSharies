@@ -1,11 +1,14 @@
+// React
 import React, { useState, useContext } from 'react';
-import { Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
 
-// Icons
-import { FaPlusCircle } from "react-icons/fa";
+// Reactstrap
+import { Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Icons
+import { FaPlusCircle } from "react-icons/fa";
 
 // Styles
 import "../../styles/household.css";
