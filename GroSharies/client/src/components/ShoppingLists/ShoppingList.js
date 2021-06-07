@@ -1,15 +1,22 @@
+// React
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Card, CardBody, CardHeader, CardFooter, Col, Progress, Row } from "reactstrap";
 
-// Context
-import { ListItemContext } from "../../providers/ListItemProvider";
+// React Router DOM
+import { Link } from "react-router-dom";
+
+// Reactstrap
+import { Card, CardBody, CardHeader, CardFooter, Col, Progress, Row } from "reactstrap";
 
 // Components
 import EditShoppingListModal from "./EditShoppingListModal";
 import DeleteShoppingListModal from "./DeleteShoppingListModal";
-// =========================== IMPORTS END ===========================
 
+// Context
+import { ListItemContext } from "../../providers/ListItemProvider";
+
+import "../../styles/shoppingList.css";
+
+// =========================== IMPORTS END ===========================
 
 const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
     const { getListItems } = useContext(ListItemContext);
@@ -40,7 +47,7 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
     let percentageComplete = completionRate();
 
     return (
-        <Card style={{minWidth:"220px"}} className="m-2 shadow postCard">
+        <Card id="shoppingListCard" className="m-2 shadow postCard">
 
             {/* Header & Link to ShoppingList Detail */}
             <CardHeader className="text-center">

@@ -1,11 +1,16 @@
+// React
 import React, { useState, useContext } from 'react';
+
+// Reactstrap
 import { Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
+
+// Context
+import { ShoppingListContext } from "../../providers/ShoppingListProvider";
 
 // Icons
 import { FaPlusCircle } from "react-icons/fa";
 
-// Context
-import { ShoppingListContext } from "../../providers/ShoppingListProvider";
+import "../../styles/shoppingList.css";
 
 // =========================== IMPORTS END ===========================
 
@@ -58,7 +63,6 @@ const AddShoppingListModal = ({ householdId, setHouseholdDetail }) => {
             <Button 
                 id = "addShoppingListButton"
                 size="lg" 
-                style={{padding:"0", border: "none", background:"none", marginLeft:"6px", marginBottom:"10px"}} 
                 onClick={toggle} >
                 <FaPlusCircle />
             </Button>

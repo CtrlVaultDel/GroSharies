@@ -40,9 +40,9 @@ const HouseholdUsersModal = ({ users, numUsers, userType, householdName }) => {
                             <thead>
                                 <tr id="householdUserModalTable">
                                     <th>User</th>
-                                    <th className="centerText">Role</th>
+                                    <th className="text-center">Role</th>
                                     {userType === 1 ? 
-                                        <th className="centerText">Kick</th>
+                                        <th className="text-center">Kick</th>
                                         :
                                         <></>
                                     }

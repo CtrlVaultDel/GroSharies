@@ -11,12 +11,12 @@
 
 #checkAllButton {
 	border: solid black 1px;
-	margin-right: "10px";
+	margin-right: 10px;
 }
 
 #uncheckAllButton {
 	border: solid black 1px;
-	margin-right: "10px";
+	margin-left: 10px;
 }
 
 #listItemCardBody {

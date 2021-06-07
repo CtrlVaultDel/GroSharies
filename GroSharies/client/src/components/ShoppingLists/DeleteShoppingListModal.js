@@ -1,11 +1,16 @@
+// React
 import React, { useState, useContext } from 'react';
+
+// Reactstrap
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledTooltip } from 'reactstrap';
+
+// Context
+import { ShoppingListContext } from "../../providers/ShoppingListProvider";
 
 // Icons
 import { FaTrashAlt } from "react-icons/fa";
 
-// Context
-import { ShoppingListContext } from "../../providers/ShoppingListProvider";
+import "../../styles/shoppingList.css";
 
 // =========================== IMPORTS END ===========================
 
@@ -44,7 +49,7 @@ const DeleteShoppingListModal = ({ shoppingList, setHouseholdDetail }) => {
                     Are you sure you want to delete "{shoppingList.name}"? 
                     All "To-Get" Items and Purchases associated with the list will also be deleted.          
                 </ModalBody>
-                <ModalFooter style={{display:"block"}}>
+                <ModalFooter id="deleteShoppingListModalFooter">
 
                     {/* Cancel Button */}
                     <Button 

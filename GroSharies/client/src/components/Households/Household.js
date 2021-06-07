@@ -116,7 +116,7 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers, users 
             <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>
-            <CardBody className="centerText">
+            <CardBody className="text-center">
                 {isAccepted ? 
                     <>
                         <HouseholdUsersModal 
