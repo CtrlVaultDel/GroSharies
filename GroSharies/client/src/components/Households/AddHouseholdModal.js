@@ -1,11 +1,17 @@
+// React
 import React, { useState, useContext } from 'react';
+
+// Reactstrap
 import { Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
+
+// Context
+import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // Icons
 import { FaPlusCircle } from "react-icons/fa";
 
-// Context
-import { HouseholdContext } from "../../providers/HouseholdProvider";
+// Styles
+import "../../styles/household.css";
 
 // =========================== IMPORTS END ===========================
 
@@ -52,8 +58,7 @@ const AddHouseholdModal = () => {
         <>
             <Button 
                 id="addHouseholdButton"
-                size="lg" 
-                style={{padding:"0", border: "none", background:"none", marginLeft:"10px", marginBottom:"10px"}} 
+                size="lg"  
                 onClick={toggle}>
                 <FaPlusCircle />
             </Button>

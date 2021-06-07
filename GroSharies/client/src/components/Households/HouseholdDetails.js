@@ -1,10 +1,11 @@
+// React
 import React, { useContext, useEffect, useState } from "react";
+
+// React Router DOM
 import { useParams } from "react-router-dom";
 
+// Reactstrap
 import { Card, Col, Container, Row  } from "reactstrap";
-
-// Styles
-import "../../styles/index.css";
 
 // Components
 import ShoppingList from "../ShoppingLists/ShoppingList";
@@ -12,8 +13,11 @@ import AddShoppingListModal from "../ShoppingLists/AddShoppingListModal";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
-// =========================== IMPORTS END ===========================
 
+// Styles
+import "../../styles/household.css";
+
+// =========================== IMPORTS END ===========================
 
 const HouseholdDetails = () => {
     const { getHouseholdDetail } = useContext(HouseholdContext);
@@ -49,9 +53,11 @@ const HouseholdDetails = () => {
                             <Col key={shopList.id} md="4"><ShoppingList shoppingList={shopList} setHouseholdDetail={setHouseholdDetail}/></Col>
                         ))
                         : 
-                        <Card style={{padding:"10px", maxWidth:"200px"}} className="shadow postCard">
-                            <div>You don't have any Shopping Lists yet!</div>
-                            <div>Click the plus button above to create a new one!</div>
+                        <Card id="householdBasicCard" className="shadow postCard">
+                            <div>
+                                You don't have any Shopping Lists yet!<br />
+                                Click the plus button above to create a new one!
+                            </div>
                         </Card>   
                     }   
                 </Row> 

@@ -1,15 +1,22 @@
+// React
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Card, CardBody, CardHeader, CardFooter, Col, Progress, Row } from "reactstrap";
 
-// Context
-import { ListItemContext } from "../../providers/ListItemProvider";
+// React Router DOM
+import { Link } from "react-router-dom";
+
+// Reactstrap
+import { Card, CardBody, CardHeader, CardFooter, Col, Progress, Row } from "reactstrap";
 
 // Components
 import EditShoppingListModal from "./EditShoppingListModal";
 import DeleteShoppingListModal from "./DeleteShoppingListModal";
-// =========================== IMPORTS END ===========================
 
+// Context
+import { ListItemContext } from "../../providers/ListItemProvider";
+
+import "../../styles/shoppingList.css";
+
+// =========================== IMPORTS END ===========================
 
 const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
     const { getListItems } = useContext(ListItemContext);
@@ -40,26 +47,28 @@ const ShoppingList = ({ shoppingList, setHouseholdDetail }) => {
     let percentageComplete = completionRate();
 
     return (
-        <Card style={{minWidth:"220px"}} className="m-2 shadow postCard">
+        <Card id="shoppingListCard" className="m-2 shadow postCard">
 
             {/* Header & Link to ShoppingList Detail */}
             <CardHeader className="text-center">
                 <Link to={`/shoppingList/${shoppingList.id}`}>{shoppingList.name}</Link>
             </CardHeader>
             <CardBody>
-                <div className="text-center">{completeItems} of {totalItems} complete</div>
-                    <Progress multi>
-                        <Progress 
-                            animated bar color="success" 
-                            value={(percentageComplete).toString()}>
-                                {percentageComplete}%
-                        </Progress>
-                        <Progress 
-                            animated bar color="danger" 
-                            value={(100-percentageComplete).toString()}>
-                                {100-percentageComplete}%
-                        </Progress>
-                    </Progress>                     
+                <Link to={`/shoppingList/${shoppingList.id}`}>
+                    <div className="text-center">{completeItems} of {totalItems} complete</div>
+                </Link> 
+                <Progress multi>
+                    <Progress 
+                        animated bar color="success" 
+                        value={(percentageComplete).toString()}>
+                            {percentageComplete}%
+                    </Progress>
+                    <Progress 
+                        animated bar color="danger" 
+                        value={(100-percentageComplete).toString()}>
+                            {100-percentageComplete}%
+                    </Progress>
+                </Progress>                    
             </CardBody>
 
             <CardFooter>

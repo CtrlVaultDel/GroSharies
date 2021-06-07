@@ -1,4 +1,7 @@
+// React
 import React from "react";
+
+// Reactstrap
 import { Row } from "reactstrap";
 
 // Components
@@ -6,8 +9,8 @@ import EditPurchaseModal from "./EditPurchaseModal";
 
 // Context
 import DeletePurchaseModal from "./DeletePurchaseModal";
-// =========================== IMPORTS END ===========================
 
+// =========================== IMPORTS END ===========================
 
 const PurchaseRow = ({ purchaseDetail, shoppingList, setPurchases }) => {
     const date = new Date(purchaseDetail.purchase.purchaseDate)

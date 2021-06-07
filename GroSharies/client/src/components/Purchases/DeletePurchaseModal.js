@@ -1,4 +1,7 @@
+// React
 import React, { useState, useContext } from 'react';
+
+// Reactstrap
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 // Icons
@@ -6,6 +9,9 @@ import { FaTrashAlt } from "react-icons/fa";
 
 // Context
 import { PurchaseContext } from "../../providers/PurchaseProvider";
+
+// Styles
+import "../../styles/purchase.css";
 
 // =========================== IMPORTS END ===========================
 
@@ -21,8 +27,8 @@ const DeletePurchaseModal = ({ purchase, setPurchases }) => {
 
     return (
         <>
-            <Button 
-                style = {{marginLeft: 10}}
+            <Button
+                id="deletePurchaseModalButton"
                 size="sm" 
                 color="danger" 
                 onClick={toggle}>
@@ -35,7 +41,7 @@ const DeletePurchaseModal = ({ purchase, setPurchases }) => {
                 <ModalBody>
                     Do you want to delete this ${purchase.totalCost} purchase from {purchase.vendor}?
                 </ModalBody>
-                <ModalFooter style={{display:"block"}}>
+                <ModalFooter id="purchaseModalFooter">
 
                     {/* Cancel Button */}
                     <Button 

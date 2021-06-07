@@ -2,23 +2,23 @@ import React, { useContext } from "react";
 import { Button, Col, Card, CardHeader, CardBody, CardFooter, Row, UncontrolledTooltip } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 
-// Styles
-import "../../styles/index.css";
-
-// Icons
-import { FaCheck, FaDoorOpen } from "react-icons/fa";
-
-// Context
-import { HouseholdContext } from "../../providers/HouseholdProvider";
-
 // Components
 import HouseholdInvite from "./HouseholdInvite";
 import HouseholdUsersModal from "./HouseholdUsersModal";
 import EditHouseholdModal from "./EditHouseholdModal";
 import DeleteHouseholdModal from "./DeleteHouseholdModal";
 import DeclineInviteModal from "./DeclineInviteModal";
-// =========================== IMPORTS END ===========================
 
+// Context
+import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Icons
+import { FaCheck, FaDoorOpen } from "react-icons/fa";
+
+// Styles
+import "../../styles/household.css";
+
+// =========================== IMPORTS END ===========================
 
 const Household = ({ household, userType, isAccepted, numLists, numUsers, users }) => {
 
@@ -112,11 +112,11 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers, users 
     }
     
     return(
-        <Card style={{minWidth:"220px"}} className="m-2 shadow postCard">
+        <Card id="householdCard" className="m-2 shadow postCard">
             <CardHeader className="text-center">
                 <Link to={`household/${household.id}`}>{household.name}</Link>
             </CardHeader>
-            <CardBody style={{textAlign:"center"}}>
+            <CardBody className="text-center">
                 {isAccepted ? 
                     <>
                         <HouseholdUsersModal 
@@ -126,8 +126,8 @@ const Household = ({ household, userType, isAccepted, numLists, numUsers, users 
                             householdName = {household.name}/>
 
                         <Button 
+                            id="householdCardButton"
                             color="info" 
-                            style={{marginLeft:"5px"}}
                             onClick={() => history.push(`household/${household.id}`)}>
                                 Lists: {numLists}
                         </Button>  

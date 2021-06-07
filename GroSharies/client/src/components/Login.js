@@ -4,6 +4,9 @@ import { useHistory, Link } from "react-router-dom";
 
 // Context
 import { UserContext } from "../providers/UserProvider";
+
+// Styles
+import "../styles/login.css";
 // =========================== IMPORTS END ===========================
 
 
@@ -22,7 +25,7 @@ import { UserContext } from "../providers/UserProvider";
     };
 
     return (
-    <Container style={{width: "300px"}} className="text-center ">
+    <Container id="loginContainer">
         <Card>
             <Form onSubmit={loginSubmit}>
                 <FormGroup>

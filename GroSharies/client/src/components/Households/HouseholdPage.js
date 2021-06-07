@@ -1,8 +1,8 @@
+// React
 import React, { useContext, useEffect } from "react";
-import { Card, Col, Container, Row } from "reactstrap";
 
-// Styles
-import "../../styles/index.css";
+// Reactstrap
+import { Card, Col, Container, Row } from "reactstrap";
 
 // Components
 import Household from "./Household";
@@ -10,6 +10,10 @@ import AddHouseholdModal from "./AddHouseholdModal";
 
 // Context
 import { HouseholdContext } from "../../providers/HouseholdProvider";
+
+// Styles
+import "../../styles/household.css";
+
 // =========================== IMPORTS END ===========================
 
 
@@ -42,9 +46,11 @@ const HouseholdPage = () => {
                         </Col>
                     ))
                     :
-                    <Card style={{padding:"10px", maxWidth:"200px"}} className="shadow postCard">
-                        <div>You are not in any households yet!</div>
-                        <div>Click the plus button above to create a new one or ask someone to invite you to theirs!</div>
+                    <Card id="householdBasicCard" className="shadow postCard">
+                        <div>
+                            You are not in any households yet!<br />
+                            Click the plus button above to create a new one or ask someone to invite you to theirs!
+                        </div>
                     </Card>
                 }
                 </Row>

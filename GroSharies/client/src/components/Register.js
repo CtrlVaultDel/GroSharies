@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 
 // Context
 import { UserContext } from "../providers/UserProvider";
+
+// Styles
+import "../styles/register.css";
 // =========================== IMPORTS END ===========================
 
 
@@ -29,7 +32,7 @@ export default function Register() {
     };
 
     return (
-    <Container style={{width: "300px"}} className="text-center ">
+    <Container id="registrationContainer">
         <Card>
             <Form onSubmit={registerClick}>
                 <FormGroup>

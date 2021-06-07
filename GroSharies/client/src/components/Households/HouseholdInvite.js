@@ -1,12 +1,16 @@
+// React
 import React, { useEffect, useState, useContext } from 'react';
-import { Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
 
-// Icons
-import { BsPersonPlus } from "react-icons/bs";
+// Reactstrap
+import { Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, UncontrolledTooltip } from 'reactstrap';
 
 // Components
 import { HouseholdContext } from "../../providers/HouseholdProvider";
 import { UserContext } from "../../providers/UserProvider";
+
+// Icons
+import { BsPersonPlus } from "react-icons/bs";
+
 // =========================== IMPORTS END ===========================
 
 const HouseholdInvite = ({household}) => {

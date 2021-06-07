@@ -1,0 +1,31 @@
+#addHouseholdButton {
+	padding: 0;
+	border: none;
+	background: none;
+	margin: 0 0 10px 10px;
+}
+
+#householdModalFooter {
+	display: block;
+}
+
+#householdCard {
+	min-width: 220px;
+}
+
+#householdCardButton {
+	margin-left: 15px;
+}
+
+#householdBasicCard {
+	padding: 10px;
+	max-width: 200px;
+}
+
+#householdUserModalButton {
+	margin-right: 5px;
+}
+
+#householdUserModalTable {
+	background: gray;
+}

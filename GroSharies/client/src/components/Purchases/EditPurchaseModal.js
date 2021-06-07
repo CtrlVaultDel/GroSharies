@@ -1,11 +1,16 @@
+// React
 import React, { useState, useContext } from 'react';
+
+// Reactstrap
 import { Button, Form, FormGroup, Input, InputGroup, InputGroupAddon, Label, Modal, ModalHeader, ModalBody } from 'reactstrap';
-import { FaRegEdit } from "react-icons/fa";
 
 // Components
 import { PurchaseContext } from "../../providers/PurchaseProvider";
-// =========================== IMPORTS END ===========================
 
+// Icons
+import { FaRegEdit } from "react-icons/fa";
+
+// =========================== IMPORTS END ===========================
 
 const EditPurchaseModal = ({ shoppingList, priorPurchase, setPurchases}) => {
     const { updatePurchase } = useContext(PurchaseContext);

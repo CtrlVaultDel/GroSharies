@@ -1,3 +1,22 @@
+#addShoppingListButton {
+	padding: 0px;
+	border: none;
+	background: none;
+	margin: 0 0 10px 6px;
+}
+
+#deleteShoppingListModalFooter {
+	display: block;
+}
+
+#shoppingListCard {
+	min-width: 220px;
+}
+
+#shoppingListRow {
+	margin: 100px 0;
+}
+
 .overflow {
 	overflow-y: auto;
 	overflow-x: hidden;

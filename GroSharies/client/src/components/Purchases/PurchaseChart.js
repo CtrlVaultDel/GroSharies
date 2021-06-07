@@ -1,5 +1,10 @@
+// React
 import React from "react";
+
+// React VIS
 import { RadialChart } from 'react-vis';
+
+// =========================== IMPORTS END ===========================
 
 const PurchaseChart = ({ purchases }) => {
     let data = [];

@@ -1,11 +1,17 @@
+// React
 import React, { useState, useContext } from 'react';
+
+// Reactstrap
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, UncontrolledTooltip } from 'reactstrap';
+
+// Context
+import { HouseholdContext } from "../../providers/HouseholdProvider";
 
 // Icons
 import { FaTrashAlt } from "react-icons/fa";
 
-// Context
-import { HouseholdContext } from "../../providers/HouseholdProvider";
+// Styles
+import "../../styles/household.css";
 
 // =========================== IMPORTS END ===========================
 
@@ -40,7 +46,7 @@ const DeleteHouseholdModal = ({ household }) => {
                     Are you sure you want to delete "{household.name}"? 
                     All Shopping Lists associated with this household will also be deleted.           
                 </ModalBody>
-                <ModalFooter style={{display:"block"}}>
+                <ModalFooter id="householdModalFooter">
 
                     {/* Cancel Button */}
                     <Button 

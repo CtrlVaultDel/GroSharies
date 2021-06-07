@@ -1,10 +1,11 @@
+// React
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Row, Table } from "reactstrap";
 
-// Styles
-import "../../styles/index.css";
-import "../../styles/shoppingList.css";
+// React Router DOM
+import { useParams } from "react-router-dom";
+
+// Reactstrap
+import { Container, Row, Table } from "reactstrap";
 
 // Components
 import ListItemSection from "../ListItems/ListItemSection";
@@ -14,8 +15,11 @@ import PurchaseChart from "../Purchases/PurchaseChart";
 
 // Context
 import {ShoppingListContext} from "../../providers/ShoppingListProvider";
-// =========================== IMPORTS END ===========================
 
+//Styles
+import "../../styles/shoppingList.css";
+
+// =========================== IMPORTS END ===========================
 
 const ShoppingListDetails = () => {
     const [shoppingList, setShoppingList] = useState([]);
@@ -87,7 +91,7 @@ const ShoppingListDetails = () => {
                     </Table>
                 </div>
                 {purchases.length? 
-                    <Row className="justify-content-center" style={{margin: "100px 0px"}}>
+                    <Row id="shoppingListRow" className="justify-content-center">
                         <PurchaseChart purchases={purchases} />
                     </Row>                    
                 : null}
