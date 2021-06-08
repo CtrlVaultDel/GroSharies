@@ -24,7 +24,6 @@ namespace GroSharies.Controllers
             var user = GetCurrentUser();
             if (user == null) return NotFound();
 
-            // If all tests pass, update the Household Name
             var householdUsers = _householdUserRepository.GetEmailsByHousehold(householdId);
 
             return Ok(householdUsers);
