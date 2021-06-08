@@ -1,14 +1,19 @@
+// React
 import React, { useState, useContext } from "react";
-import { Button, Container, Card, Form, FormGroup, Label, Input } from 'reactstrap';
+
+// React Router DOM
 import { useHistory } from "react-router-dom";
+
+// Reactstrap
+import { Button, Container, Card, Form, FormGroup, Label, Input } from 'reactstrap';
 
 // Context
 import { UserContext } from "../providers/UserProvider";
 
 // Styles
 import "../styles/register.css";
-// =========================== IMPORTS END ===========================
 
+// =========================== IMPORTS END ===========================
 
 export default function Register() {
     const history = useHistory();

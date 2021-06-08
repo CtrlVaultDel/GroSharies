@@ -1,6 +1,13 @@
+// React
 import React, { useContext } from "react";
+
+// React Router DOM
 import { Switch, Route, Redirect } from "react-router-dom";
+
+// Context
 import { UserContext } from "../providers/UserProvider";
+
+// Login & Registration Components
 import Login from "./Login";
 import Register from "./Register";
 
@@ -20,11 +27,13 @@ export default function ApplicationViews() {
     return (
         <main>
             <Switch>
-                {/* -----------------LOGIN & REGISTRATION PAGES---------------- */}
+                {/* --------------------------DEFAULT-------------------------- */}
                 <Route path="/" exact>
                     {isLoggedIn ? <Redirect to="/household"/> : <Redirect to="/login" />}
                 </Route>
 
+
+                {/* -----------------LOGIN & REGISTRATION PAGES---------------- */}
                 {/* Login Page */}
                 <Route path="/login">
                     <Login />

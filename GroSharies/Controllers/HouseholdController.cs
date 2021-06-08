@@ -24,6 +24,7 @@ namespace GroSharies.Controllers
             _shoppingListRepository = shoppingListRepository;
         }
 
+        // Get information about all of the current user's households
         [HttpGet]
         public IActionResult GetAllByUserId()
         {
@@ -33,6 +34,8 @@ namespace GroSharies.Controllers
             // Get the Id and Name of each Household the user is in and return it
             var userHouseholds = _householdUserRepository.GetAllByUserId(user.Id);
 
+            // For each Household User Relation, add a list of users and their roles along with the 
+            // Number of users and lists associated with the household
             foreach (var hur in userHouseholds)
             {
                 hur.UserDetails = _householdUserRepository.GetUserDetailsByHousehold(hur.Household.Id);
@@ -42,6 +45,7 @@ namespace GroSharies.Controllers
             return Ok(userHouseholds);
         }
 
+        // Get details for a specific household
         [HttpGet("{householdId}")]
         public IActionResult GetById(int householdId)
         {
